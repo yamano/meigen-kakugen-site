@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>利用規約 | 名言・格言集</title>
+    <!-- Tailwind CSS CDNをロード -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts (UI用のInter, 名言用のNoto Serif JP) -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Noto+Serif+JP:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9; /* Slate 100 */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .main-container {
+            max-width: 48rem;
+            width: 100%;
+            min-height: calc(100vh - 150px); /* フッターのためのスペースを確保 */
+        }
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.25rem;
+            border-bottom: 2px solid #e5e7eb; /* gray-200 */
+            color: #1f2937; /* gray-800 */
+        }
+        p, li {
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+            color: #4b5563; /* gray-600 */
+        }
+        ul {
+            list-style-type: disc;
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+        footer {
+            margin-top: auto;
+            width: 100%;
+            max-width: 48rem;
+            padding-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-container bg-white p-8 sm:p-12 rounded-2xl shadow-xl mb-4">
+    
+    <h1 class="text-3xl font-bold text-center mb-8 text-indigo-600 border-b-2 border-indigo-100 pb-2">
+        利用規約
+    </h1>
+
+    <p>当サイト「名言・格言集」は、訪問者様に対して、ランダムな名言・格言を提供するサービスです。本サービスをご利用になる際には、以下の利用規約にご同意いただく必要があります。</p>
+
+    <!-- サービス内容 -->
+    <h2 id="service">サービス内容</h2>
+    <p>当サイトは、著作権切れ、または一般に広く知られた名言・格言をデータベース化し、ランダムに表示するサービスを提供します。コンテンツの提供は、予告なく変更または終了することがあります。</p>
+
+    <!-- 著作権と引用について -->
+    <h2 id="copyright">著作権と引用について</h2>
+    <ul>
+        <li>当サイトに掲載されている名言・格言の原文の著作権は、原著作者に帰属します。</li>
+        <li>当サイトが表示する名言・格言は、著作権の切れたもの、または公共の利益のために提供されている情報に基づいています。</li>
+        <li>当サイトのレイアウト、デザイン、プログラム等の著作権は当サイト運営者に帰属します。</li>
+    </ul>
+
+    <!-- 禁止事項 -->
+    <h2 id="prohibition">禁止事項</h2>
+    <p>訪問者様は、当サイトの利用にあたり、以下の行為を行ってはならないものとします。</p>
+    <ul>
+        <li>当サイトのコンテンツを、営利目的で複製、販売、出版すること。</li>
+        <li>当サイトの運営を妨害する行為、またはその恐れのある行為。</li>
+        <li>公序良俗に反する行為、またはその恐れのある行為。</li>
+    </ul>
+
+    <!-- 免責事項 -->
+    <h2 id="disclaimer">免責事項</h2>
+    <p>当サイトは、掲載内容の正確性について一切を保証するものではありません。当サイトをご利用になったことにより生じたいかなる損害についても、当サイト運営者は一切の責任を負いかねます。ご自身の判断と責任においてご利用ください。</p>
+
+    <!-- 規約の変更 -->
+    <h2 id="change">規約の変更</h2>
+    <p>本規約は、必要に応じて予告なく変更することがあります。変更後の規約は、当サイトに掲載された時点から効力を生じるものとします。</p>
+
+    <!-- 制定日 -->
+    <h2 id="established">制定日</h2>
+    <p>制定日：2025年11月16日</p>
+</div>
+
+<footer>
+    <div class="text-sm text-gray-500 space-x-4">
+        <!-- **重要**: リンク先は index.html, privacy.html に設定済みです -->
+        <a href="index.html" class="hover:underline text-indigo-600">トップページ</a>
+        <a href="privacy.html" class="hover:underline text-indigo-600">プライバシーポリシー</a>
+        <span class="text-gray-400">|</span>
+        <!-- Amazonアソシエイトの規約に基づく表示 -->
+        <span class="text-gray-500">当サイトはAmazon.co.jpアソシエイトに参加しています。</span>
+    </div>
+</footer>
+
+</body>
+</html>
+
