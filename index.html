@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>名言・格言集 - 今日のインスピレーション</title>
+    
+    <!-- Tailwind CSS CDNをロード -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts (UI用のInter, 名言用のNoto Serif JP) -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Noto+Serif+JP:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9; /* Slate 100 */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .main-container {
+            max-width: 48rem; /* 幅を広げ、より多くの情報を表示 */
+            width: 100%;
+        }
+
+        /* 名言用のフォントを適用 */
+        #quote-text {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.5rem; /* 24px */
+            line-height: 2.25rem; /* 36px */
+            font-weight: 400;
+            min-height: 100px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        /* 著者用のフォント */
+        #quote-author {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem; /* 16px */
+        }
+
+        /* フッターを下に固定 */
+        footer {
+            margin-top: auto;
+            width: 100%;
+            max-width: 48rem;
+            padding-top: 20px;
+            text-align: center;
+        }
+    </style>
+    
+    <!-- ======================================================================= -->
+    <!-- ========= 広告コードの挿入場所 1: AdSense認証スクリプト (HEAD内) ========= -->
+    <!-- 【AdSense認証コード】 -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6721819057047925"
+     crossorigin="anonymous"></script>
+    <!-- ======================================================================= -->
+
+</head>
+<body>
+
+<div class="main-container bg-white p-8 sm:p-12 rounded-2xl shadow-xl mb-4">
+    
+    <h1 class="text-3xl font-bold text-center mb-8 text-indigo-600">
+        名言・格言集
+    </h1>
+    
+    <!-- 名言表示エリア -->
+    <div class="mb-8 min-h-[150px]">
+        <blockquote class="relative">
+            <!-- 引用符（左） -->
+            <span class="absolute -left-4 -top-6 text-8xl text-gray-200 opacity-50 select-none">“</span>
+            
+            <p id="quote-text" class="mb-4 text-gray-800 transition-opacity duration-300">
+                新しい名言を生成ボタンを押して、今日のインスピレーションを見つけましょう。
+            </p>
+            
+            <!-- 引用符（右） -->
+            <span class="absolute -right-4 -bottom-10 text-8xl text-gray-200 opacity-50 select-none">”</span>
+        </blockquote>
+        
+        <p id="quote-author" class="text-right text-gray-600 font-medium mt-4 pr-4 transition-opacity duration-300">
+            — ジェネレーター
+        </p>
+    </div>
+    
+    <!-- 操作ボタン -->
+    <button id="generate-btn" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-full transition-all duration-300 transform hover:scale-[1.03] shadow-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+        新しい名言を生成
+    </button>
+
+    <!-- Amazonリンク表示エリア -->
+    <div id="amazon-link-area" class="mt-8 pt-4 border-t border-gray-200 text-center hidden">
+        <p class="text-sm text-gray-500 mb-3">この著者の関連書籍を探す：</p>
+        <!-- リンクはJavaScriptで動的に挿入されます -->
+    </div>
+    
+    <!-- ======================================================================= -->
+    <!-- ========= 広告コードの挿入場所 2: ボトムバナー広告 (BODY内) ========= -->
+    <div class="mx-auto max-w-md mt-8 p-3 bg-gray-50 border border-gray-200 rounded-lg text-center shadow-inner">
+        <p class="text-xs font-bold text-gray-500 mb-2">【広告枠】</p>
+        
+        <!-- 【AdSense広告ユニットコード: 名言格言下部バナー】 -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-6721819057047925"
+             data-ad-slot="3484248774"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+    <!-- ======================================================================= -->
+
+</div>
+
+<footer>
+    <div class="text-sm text-gray-500 space-x-4">
+        <!-- **重要**: リンク先は privacy.html, terms.html に設定済みです -->
+        <a href="privacy.html" class="hover:underline text-indigo-600">プライバシーポリシー</a>
+        <a href="terms.html" class="hover:underline text-indigo-600">利用規約</a>
+        <span class="text-gray-400">|</span>
+        <!-- Amazonアソシエイトの規約に基づく表示 -->
+        <span class="text-gray-500">当サイトはAmazon.co.jpアソシエイトに参加しています。</span>
+    </div>
+</footer>
+
+<script>
+    // ===================================
+    // 1. 名言データの配列 (著作権に配慮した公知の言葉を中心に)
+    // ===================================
+    const quotes = [
+        { quote: "道は近きにあり、而もこれを遠きに求む。", author: "孟子" },
+        { quote: "失敗とは、より賢くやり直すための良い機会である。", author: "ヘンリー・フォード" },
+        { quote: "我々の最大の弱点は諦めることにある。成功する最も確実な方法は、常にもう一回だけ試してみることだ。", author: "トーマス・エジソン" },
+        { quote: "今日という日は、残りの人生の最初の日である。", author: "チャールズ・ディードリッヒ" },
+        { quote: "幸福は、すでに出来上がっているものではない。それは自らの行動によってもたらされる。", author: "ダライ・ラマ14世" },
+        { quote: "夢見ることができれば、それは実現できる。", author: "ウォルト・ディズニー" },
+        { quote: "自分自身を信じてみるだけでいい。きっと、生きる道が見えてくる。", author: "ゲーテ" },
+        { quote: "人生は自転車に乗るようなものだ。倒れないようにするには、走り続けなければならない。", author: "アルベルト・アインシュタイン" },
+        { quote: "小さなことを積み重ねることが、とんでもないところへ行くただひとつの道だ。", author: "イチロー" },
+        { quote: "他人と比較して、他人が自分より優れていたとしても、それは恥ではない。しかし、去年の自分より今年の自分が優れていないのは、大いに恥である。", author: "ジョン・ラボック" },
+        { quote: "努力は必ず報われる。もし報われないのなら、それはまだ努力と呼べない。", author: "野村克也" },
+        { quote: "人生は一冊の書物のようなものだ。愚か者はパラパラとめくり、賢い者は熟読する。", author: "アガサ・クリスティ" },
+        { quote: "人間は考える葦である。", author: "ブレーズ・パスカル" },
+        { quote: "天才とは努力の別名である。", author: "羽生善治" },
+        { quote: "未来とは、今である。未来に備える最善の方法は、今を最高の瞬間として生きることだ。", author: "デイル・カーネギー" },
+        { quote: "最も大切なことは、人生を楽しむこと。幸せを感じること。", author: "オードリー・ヘップバーン" },
+        { quote: "過去を悔やむより、未来を恐れるより、今を生きなさい。", author: "マザー・テレサ" },
+        { quote: "どんなに遠くへ行く時も、最初の一歩は自分の足元から始まる。", author: "老子" },
+        { quote: "もし今日が人生最後の日だとしたら、今からやろうとしていることをやりたいだろうか？", author: "スティーブ・ジョブズ" },
+        { quote: "困難に打ち勝つために、最も必要なのは一時の勇気ではなく、日々の習慣である。", author: "アリストテレス (意訳)" },
+        { quote: "学ぶことをやめたら、立ち止まったことになる。", author: "山本五十六" },
+        { quote: "人を信じよ、しかしその百倍も自らを信じよ。", author: "手塚治虫" },
+        { quote: "知識の追求は、人生における最も素晴らしい冒険だ。", author: "アルバート・シュバイツァー" },
+        { quote: "成功の反対は失敗ではない。何もしないことだ。", author: "ブライアン・トレーシー" },
+        { quote: "希望は、目覚めている人間が見る夢だ。", author: "アリストテレス" },
+        { quote: "何かを始めるためには、やめることからはじめなければならない。", author: "ピーター・ドラッカー" },
+        { quote: "人生とは、今日一日のことである。", author: "稲盛和夫" },
+        { quote: "人生に失敗がないと、人生を失敗する。", author: "斎藤茂太" },
+        { quote: "最も速く進むものは、一人で進むものだ。最も遠くまで行くものは、皆で進むものだ。", author: "アフリカの諺" },
+        { quote: "流行は廃れるが、スタイルは永遠。", author: "ココ・シャネル" },
+        { quote: "天才とは、１％のひらめきと、９９％の努力である。", author: "トーマス・エジソン" },
+        { quote: "自分の生きる人生を愛せ。自分の愛する人生を生きろ。", author: "ボブ・マーリー" },
+        { quote: "未来を予測する最善の方法は、それを創り出すことだ。", author: "ピーター・ドラッカー" },
+        { quote: "想像力は知識よりも重要である。", author: "アルベルト・アインシュタイン" },
+        { quote: "人生とは、あなたが計画を立てている間に起こるものだ。", author: "ジョン・レノン" },
+        { quote: "人の価値は、その人が得たものではなく、その人が与えたもので測られる。", author: "アルベルト・アインシュタイン" },
+        { quote: "すべての夢は、それを実現しようと試みる勇気があるなら叶う。", author: "ウォルト・ディズニー" },
+        { quote: "最高の復讐は、素晴らしい成功を収めることだ。", author: "フランク・シナトラ" },
+        { quote: "人生にリハーサルはない。", author: "チャールズ・チャップリン" },
+        { quote: "天は人の上に人をつくらず、人の下に人をつくらず。", author: "福沢諭吉" },
+        { quote: "迷ったときには、より困難な道を選べ。", author: "アボット・ローレンス・ロウエル" },
+        { quote: "本当に大切なものは目に見えない。", author: "アントワーヌ・ド・サン＝テグジュペリ" },
+        { quote: "もし飛びたければ、手放さなければならないものがいくつかある。", author: "オノ・ヨーコ" },
+        { quote: "一番大切なことは、一番大切なことを一番大切にすることだ。", author: "スティーブン・コヴィー" },
+        { quote: "真の富とは、どれだけ持っているかではなく、どれだけ与えられるかだ。", author: "ブッダ" },
+        { quote: "学ぶのは簡単だ。だが、身につけた知識や習慣を捨てるのは難しい。", author: "ソクラテス" },
+        { quote: "行動する前に十分考える時間をとろう。しかし、行動する時が来たら、考えるのをやめて進め。", author: "ナポレオン・ボナパルト" },
+        { quote: "私は特別なことは何もしていない。ただ、人よりも長く問題と向き合っていただけだ。", author: "アルベルト・アインシュタイン" },
+        { quote: "過去は変えられないが、未来は今変えられる。", author: "ジェームズ・ディーン" },
+        { quote: "成功とは、熱意を失わずに失敗から失敗へと渡り歩く能力である。", author: "ウィンストン・チャーチル" },
+        { quote: "他人の意見で、自分の内側の声がかき消されないようにしなさい。", author: "スティーブ・ジョブズ" },
+        { quote: "幸せになる秘訣は、自分がしたいことをすることではなく、しなければならないことをすることに幸せを見出すことだ。", author: "ジェームス・M・バリ" },
+        { quote: "生きるとは、自分自身と闘うことだ。", author: "太宰治" },
+        { quote: "世の中に、無駄なものなんて何一つないよ。", author: "さくらももこ" },
+        { quote: "すべては実験である。", author: "野口英世" },
+        { quote: "逆境こそ、真の友を知る最高の試練である。", author: "シェイクスピア" },
+        { quote: "人生は短い。だからこそ、自分の信じた道を貫くべきだ。", author: "宮沢賢治" },
+        { quote: "人生で最も重要なことは、いかに生きるべきかを学ぶことだ。", author: "セネカ" },
+        { quote: "すべてを変える必要はない。必要なのは、考え方を変えることだけだ。", author: "ジグ・ジグラー" },
+        { quote: "目標は達成するためにあるのではなく、方向性を示すためにある。", author: "ブルース・リー" },
+        { quote: "賢者は、自分で考えていることを言う。愚者は、言おうと思っていることを自分で考えていると思う。", author: "プラトン" }
+    ];
+
+    // ===================================
+    // 2. DOM要素の取得
+    // ===================================
+    const quoteTextElement = document.getElementById('quote-text');
+    const quoteAuthorElement = document.getElementById('quote-author');
+    const generateBtn = document.getElementById('generate-btn');
+    const amazonLinkArea = document.getElementById('amazon-link-area');
+
+    // ===================================
+    // 3. ロジック関数
+    // ===================================
+
+    /**
+     * quotes配列からランダムに一つの名言オブジェクトを取得する
+     * @returns {object} { quote: "...", author: "..." }
+     */
+    function getRandomQuote() {
+        const randomIndex = Math.floor(Math.random() * quotes.length);
+        return quotes[randomIndex];
+    }
+
+    /**
+     * Amazonの検索リンクを生成し、表示エリアを更新する
+     * @param {string} authorName - 著者の名前
+     */
+    function updateAmazonLink(authorName) {
+        // Amazon Japanの検索URLを生成
+        // 【トラッキングIDを組み込み済み: yamano32010e-22】
+        const affiliateTag = 'yamano32010e-22'; 
+        const searchUrl = `https://www.amazon.co.jp/s?k=${encodeURIComponent(authorName)}&tag=${affiliateTag}`; 
+        
+        amazonLinkArea.innerHTML = `
+            <p class="text-sm text-gray-500 mb-3">この著者の関連書籍を探す：</p>
+            <a href="${searchUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-4 rounded-full transition duration-200 shadow-md">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h3.28a1 1 0 01.948.684L12.01 9a1 1 0 00.9.692h4.301a1 1 0 110 2h-4.301a1 1 0 00-.9-.692L7.232 4H4a1 1 0 01-1-1zm14 10a1 1 0 00-1 1v2a1 1 0 102 0v-2a1 1 0 00-1-1z" clip-rule="evenodd" />
+                    <path d="M11 6a3 3 0 11-6 0 3 3 0 016 0zm-3 7a4 4 0 00-4 4v2a1 1 0 102 0v-2a2 2 0 012-2h4a2 2 0 012 2v2a1 1 0 102 0v-2a4 4 0 00-4-4H8z" />
+                </svg>
+                <span>${authorName} の本を Amazon で検索</span>
+            </a>
+        `;
+        amazonLinkArea.classList.remove('hidden');
+    }
+
+    /**
+     * 取得した名言をHTMLに表示する
+     */
+    function displayQuote() {
+        const { quote, author } = getRandomQuote();
+        
+        // フェードアウト
+        quoteTextElement.style.opacity = 0;
+        quoteAuthorElement.style.opacity = 0;
+        amazonLinkArea.style.opacity = 0;
+
+        // 0.3秒（CSSのduration）待ってからテキストを入れ替え、フェードイン
+        setTimeout(() => {
+            quoteTextElement.textContent = quote;
+            quoteAuthorElement.textContent = `— ${author}`;
+            
+            // Amazonリンクの更新
+            updateAmazonLink(author);
+
+            quoteTextElement.style.opacity = 1;
+            quoteAuthorElement.style.opacity = 1;
+            amazonLinkArea.style.opacity = 1;
+        }, 300);
+    }
+
+    // ===================================
+    // 4. イベントリスナーと初期化
+    // ===================================
+
+    // ボタンクリックで新しい名言を表示
+    generateBtn.addEventListener('click', displayQuote);
+
+    // ページロード時に最初の名言を表示
+    document.addEventListener('DOMContentLoaded', displayQuote);
+
+</script>
+
+</body>
+</html>
+
