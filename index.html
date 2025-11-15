@@ -62,6 +62,22 @@
     <!-- 【AdSense認証コード】 -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6721819057047925"
      crossorigin="anonymous"></script>
+     
+    <!-- 【Google CMP 同意管理コード】: AdSenseコードの後に配置 -->
+    <script async src="https://fundingchoicesmessages.google.com/i/pub-6721819057047925?cmp_v=2" nonce=""></script>
+    <script>
+        (function() {
+            function handleGmpu() {
+                if (!window.frames['__gmpuframe']) {
+                    var iframe = document.createElement('iframe');
+                    iframe.style.display = 'none';
+                    iframe.name = '__gmpuframe';
+                    document.body.appendChild(iframe);
+                }
+            }
+            handleGmpu();
+        })();
+    </script>
     <!-- ======================================================================= -->
 
 </head>
@@ -93,8 +109,9 @@
     </div>
     
     <!-- 操作ボタン -->
+    <!-- ボタンをクリックするとページ全体がリロードされ、新しい広告と名言が表示されるロジックに変更 -->
     <button id="generate-btn" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-full transition-all duration-300 transform hover:scale-[1.03] shadow-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
-        新しい名言を生成
+        新しい名言を生成 (ページリロード)
     </button>
 
     <!-- Amazonリンク表示エリア -->
@@ -250,6 +267,7 @@
      * 取得した名言をHTMLに表示する
      */
     function displayQuote() {
+        // ページ全体のリロードにより、この関数は常に新しい名言を表示する
         const { quote, author } = getRandomQuote();
         
         // フェードアウト
@@ -272,11 +290,14 @@
     }
 
     // ===================================
-    // 4. イベントリスナーと初期化
+    // 4. イベントリスナーと初期化 (重要: ボタンはリロードを実行)
     // ===================================
 
-    // ボタンクリックで新しい名言を表示
-    generateBtn.addEventListener('click', displayQuote);
+    // ボタンクリックでページ全体をリロードするように変更し、広告インプレッション数を最大化
+    generateBtn.addEventListener('click', function() {
+        // window.location.reload() を実行し、新しい広告と名言を読み込む
+        window.location.reload(); 
+    });
 
     // ページロード時に最初の名言を表示
     document.addEventListener('DOMContentLoaded', displayQuote);
