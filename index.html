@@ -87,6 +87,21 @@
         #explanation-area {
             min-height: 150px; 
         }
+
+        /* 広告コンテナのスタイル：ポリシー違反にならないよう、目立ちすぎないようにしつつ、視認性を確保 */
+        .ad-unit-container {
+            margin-top: 24px; 
+            margin-bottom: 24px;
+            padding: 12px 0; /* 上下のパディングを確保 */
+            text-align: center;
+            border-top: 1px dashed #e5e7eb; 
+            border-bottom: 1px dashed #e5e7eb;
+        }
+        
+        /* 広告とインタラクティブ要素の距離を確保（最低30px） */
+        #generate-btn {
+            margin-top: 32px; 
+        }
     </style>
     
     <!-- 広告コードの挿入場所 1: AdSense認証スクリプト (HEAD内) -->
@@ -139,6 +154,21 @@
     <h1 class="text-3xl font-bold text-center mb-4 text-indigo-600">
         日替わり 名言・格言集
     </h1>
+
+    <!-- 広告コードの挿入場所 2: トップバナー広告 (ファーストビュー内) -->
+    <div id="ad-container-top" class="ad-unit-container">
+        <p class="text-xs font-bold text-gray-400 mb-2">【スポンサーリンク】</p>
+        <!-- AdSense広告ユニットコード: 名言集_トップバナー (正式なID: 2834631640) -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-6721819057047925"
+             data-ad-slot="2834631640" 
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
     
     <!-- 現在のフィルタリング状態を表示するエリア -->
     <div id="filter-status" class="text-center mb-6 min-h-[30px]">
@@ -173,7 +203,7 @@
     </div>
     
     <!-- 操作ボタンエリア -->
-    <div class="flex flex-col sm:flex-row gap-4 mt-6 w-full">
+    <div class="flex flex-col sm:flex-row gap-4 mt-8 w-full">
         <!-- 名言表示ボタン -->
         <button id="generate-btn" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-full transition-all duration-300 transform hover:scale-[1.03] shadow-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 relative">
             <span id="button-text">今日の教訓を見る</span>
@@ -204,24 +234,26 @@
             <!-- 著者リンクとテーマ別リンクがここに入る -->
         </div>
     </div>
-    
-    <!-- 広告コードの挿入場所 2: ボトムバナー広告 (BODY内) -->
-    <div class="mx-auto max-w-md mt-8 p-3 bg-gray-50 border border-gray-200 rounded-lg text-center shadow-inner min-h-[100px]">
-        <p class="text-xs font-bold text-gray-500 mb-2">【広告枠】</p>
-        
-        <!-- AdSense広告ユニットコード: 名言格言下部バナー -->
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-6721819057047925"
-             data-ad-slot="3484248774"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
 
 </div>
+
+<!-- 広告コードの挿入場所 3: 記事下/コンテンツ間広告 -->
+<!-- ユーザーが解説を読み終わった後に配置することで、次のアクションに移る前に広告を表示 -->
+<div id="ad-container-bottom" class="main-container ad-unit-container">
+    <p class="text-xs font-bold text-gray-400 mb-2">【関連コンテンツ】</p>
+    
+    <!-- AdSense広告ユニットコード: 名言格言下部バナー (正式なID: 3484248774) -->
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-6721819057047925"
+         data-ad-slot="3484248774"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</div>
+<!-- /広告コードの挿入場所 3 -->
 
 <!-- 静的で高品質なコンテンツの追加 -->
 <div class="main-container bg-white p-8 sm:p-12 rounded-2xl shadow-xl mt-4">
@@ -604,6 +636,21 @@
         if (!currentFilterTag) {
             showNotification('今日の教訓を表示しました！');
         }
+
+        // ----------------------------------------------------
+        // 【ポリシー準拠】広告ユニットの動的な再ロード処理を追加
+        // ----------------------------------------------------
+        // すべての .adsbygoogle 要素を対象に広告を再ロードします
+        const ads = document.querySelectorAll('.adsbygoogle');
+        ads.forEach(ad => {
+            if (typeof window.adsbygoogle !== 'undefined') {
+                // 広告ユニットの中身をクリアし、新しい広告をロードする準備をする
+                ad.innerHTML = '';
+                // 広告を再プッシュして新しい広告を表示（動的コンテンツ更新）
+                (window.adsbygoogle = window.adsbygoogle || []).push({});
+            }
+        });
+        // ----------------------------------------------------
     }
     
     /**
@@ -669,7 +716,7 @@
             }
         }
         
-        // フィルタリング後のリストから名言を再表示
+        // フィルタリング後のリストから名言を再表示 (この中に広告再ロード処理が含まれる)
         displayRandomQuote();
         showNotification(message);
     }
