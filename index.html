@@ -55,15 +55,32 @@
             padding-top: 20px;
             text-align: center;
         }
+
+        /* トランジションのカスタムクラス */
+        .fade-in {
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        /* 通知ボックスのスタイル */
+        #notification-box {
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        /* モーダルのアニメーション */
+        .modal-enter-active, .modal-leave-active {
+            transition: opacity 0.3s;
+        }
+        .modal-enter-from, .modal-leave-to {
+            opacity: 0;
+        }
     </style>
     
     <!-- ======================================================================= -->
     <!-- ========= 広告コードの挿入場所 1: AdSense認証スクリプト (HEAD内) ========= -->
-    <!-- 【AdSense認証コード】 -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6721819057047925"
      crossorigin="anonymous"></script>
      
-    <!-- 【Google CMP 同意管理コード】: AdSenseコードの後に配置 -->
+    <!-- 【Google CMP 同意管理コード】 -->
     <script async src="https://fundingchoicesmessages.google.com/i/pub-6721819057047925?cmp_v=2" nonce=""></script>
     <script>
         (function() {
@@ -95,7 +112,7 @@
             <!-- 引用符（左） -->
             <span class="absolute -left-4 -top-6 text-8xl text-gray-200 opacity-50 select-none">“</span>
             
-            <p id="quote-text" class="mb-4 text-gray-800 transition-opacity duration-300">
+            <p id="quote-text" class="mb-4 text-gray-800 fade-in">
                 新しい名言を生成ボタンを押して、今日のインスピレーションを見つけましょう。
             </p>
             
@@ -103,21 +120,47 @@
             <span class="absolute -right-4 -bottom-10 text-8xl text-gray-200 opacity-50 select-none">”</span>
         </blockquote>
         
-        <p id="quote-author" class="text-right text-gray-600 font-medium mt-4 pr-4 transition-opacity duration-300">
+        <!-- タグ表示エリア -->
+        <div id="tags-container" class="flex justify-center flex-wrap gap-2 mt-4 fade-in min-h-[28px]">
+            <!-- タグバッジがJavaScriptで挿入される -->
+        </div>
+
+        <p id="quote-author" class="text-right text-gray-600 font-medium mt-4 pr-4 fade-in">
             — ジェネレーター
         </p>
     </div>
     
+    <!-- LLMによる解説エリア -->
+    <div class="mt-4 pt-4 border-t border-gray-200">
+        <h2 class="text-xl font-semibold text-gray-700 mb-3 text-center">名言の解説</h2>
+        
+        <!-- 解説ローディング/表示エリア -->
+        <div id="explanation-area" class="bg-gray-50 p-4 rounded-xl shadow-inner min-h-[100px] flex flex-col justify-center items-center">
+            <p id="explanation-text" class="text-gray-700 text-sm leading-relaxed text-center">
+                <!-- 解説テキストがここに挿入されます -->
+            </p>
+        </div>
+    </div>
+    
     <!-- 操作ボタン -->
-    <!-- ボタンをクリックするとページ全体がリロードされ、新しい広告と名言が表示されるロジックに変更 -->
-    <button id="generate-btn" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-full transition-all duration-300 transform hover:scale-[1.03] shadow-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
-        新しい名言を生成 (ページリロード)
-    </button>
+    <div class="flex flex-col sm:flex-row gap-4 mt-6 w-full">
+        <!-- ページリロードボタン -->
+        <button id="generate-btn" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-full transition-all duration-300 transform hover:scale-[1.03] shadow-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+            新しい名言を生成
+        </button>
+        <!-- シェアボタン -->
+        <button id="share-btn" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-6 rounded-full transition-all duration-300 transform hover:scale-[1.03] shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50">
+            名言をシェア
+        </button>
+    </div>
 
     <!-- Amazonリンク表示エリア -->
-    <div id="amazon-link-area" class="mt-8 pt-4 border-t border-gray-200 text-center hidden">
-        <p class="text-sm text-gray-500 mb-3">この著者の関連書籍を探す：</p>
+    <div id="recommendation-area" class="mt-8 pt-4 border-t border-gray-200 text-center hidden fade-in">
+        <p class="text-sm font-semibold text-gray-600 mb-3">今日のインスピレーションをさらに深める：</p>
         <!-- リンクはJavaScriptで動的に挿入されます -->
+        <div id="recommendation-links" class="flex flex-wrap justify-center gap-2">
+            <!-- 著者リンクとテーマ別リンクがここに入る -->
+        </div>
     </div>
     
     <!-- ======================================================================= -->
@@ -151,89 +194,154 @@
     </div>
 </footer>
 
+<!-- 1. 通知ボックス (画面下中央に固定表示) -->
+<div id="notification-box" class="fixed bottom-5 left-1/2 transform -translate-x-1/2 p-3 bg-gray-900 text-white text-sm rounded-lg shadow-2xl opacity-0 transition-opacity duration-300 pointer-events-none z-50">
+    <span id="notification-message"></span>
+</div>
+
+<!-- 2. 共有モーダル (画面中央に表示) -->
+<div id="share-modal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-40 modal-leave-to" style="display: none;">
+    <div class="bg-white p-6 rounded-2xl shadow-2xl max-w-sm w-full mx-4 transform transition-all">
+        <h3 class="text-xl font-bold text-gray-800 mb-4 text-center">名言を共有する</h3>
+        
+        <!-- モーダル内で共有テキストをプレビュー -->
+        <div class="bg-indigo-50 p-3 rounded-lg text-sm text-gray-700 mb-4 border border-indigo-200">
+            <p id="modal-quote-preview" class="font-medium italic"></p>
+        </div>
+
+        <div class="flex flex-col gap-3">
+            <!-- Twitter 共有ボタン (JS制御に変更) -->
+            <button id="share-twitter-btn" class="flex items-center justify-center gap-3 bg-blue-400 hover:bg-blue-500 text-white font-bold py-3 rounded-full transition duration-200 transform hover:scale-[1.02] shadow-md">
+                <!-- Twitter Icon (Inline SVG) -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.901 1.153h3.586l-8.73 10.04h10.89l-14.61 9.92h-3.66l8.89-10.22h-10.89z"/></svg>
+                Twitter (X) でシェア
+            </button>
+
+            <!-- LINE 共有ボタン (JS制御に変更) -->
+            <button id="share-line-btn" class="flex items-center justify-center gap-3 bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-full transition duration-200 transform hover:scale-[1.02] shadow-md">
+                <!-- LINE Icon (Inline SVG Placeholder) -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11.96 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm4.332 17.618h-8.583c-.341 0-.616-.275-.616-.615v-8.583c0-.341.275-.616.616-.616h8.583c.341 0 .615.275.615.616v8.583c0 .341-.274.615-.615.615z"/></svg>
+                LINE でシェア
+            </button>
+
+            <!-- テキストコピーボタン -->
+            <button id="copy-text-btn" class="flex items-center justify-center gap-3 bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 rounded-full transition duration-200 transform hover:scale-[1.02] shadow-md">
+                <!-- Copy Icon (Inline SVG) -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                テキストをコピー
+            </button>
+        </div>
+
+        <button id="close-modal-btn" class="mt-4 w-full text-sm text-gray-500 hover:text-gray-800 transition duration-200">
+            閉じる
+        </button>
+    </div>
+</div>
+
 <script>
     // ===================================
-    // 1. 名言データの配列 (著作権に配慮した公知の言葉を中心に)
+    // 1. 名言データの配列 (静的コンテンツ)
     // ===================================
+    // （前回の名言データ配列を省略 - 変更なし）
     const quotes = [
-        { quote: "道は近きにあり、而もこれを遠きに求む。", author: "孟子" },
-        { quote: "失敗とは、より賢くやり直すための良い機会である。", author: "ヘンリー・フォード" },
-        { quote: "我々の最大の弱点は諦めることにある。成功する最も確実な方法は、常にもう一回だけ試してみることだ。", author: "トーマス・エジソン" },
-        { quote: "今日という日は、残りの人生の最初の日である。", author: "チャールズ・ディードリッヒ" },
-        { quote: "幸福は、すでに出来上がっているものではない。それは自らの行動によってもたらされる。", author: "ダライ・ラマ14世" },
-        { quote: "夢見ることができれば、それは実現できる。", author: "ウォルト・ディズニー" },
-        { quote: "自分自身を信じてみるだけでいい。きっと、生きる道が見えてくる。", author: "ゲーテ" },
-        { quote: "人生は自転車に乗るようなものだ。倒れないようにするには、走り続けなければならない。", author: "アルベルト・アインシュタイン" },
-        { quote: "小さなことを積み重ねることが、とんでもないところへ行くただひとつの道だ。", author: "イチロー" },
-        { quote: "他人と比較して、他人が自分より優れていたとしても、それは恥ではない。しかし、去年の自分より今年の自分が優れていないのは、大いに恥である。", author: "ジョン・ラボック" },
-        { quote: "努力は必ず報われる。もし報われないのなら、それはまだ努力と呼べない。", author: "野村克也" },
-        { quote: "人生は一冊の書物のようなものだ。愚か者はパラパラとめくり、賢い者は熟読する。", author: "アガサ・クリスティ" },
-        { quote: "人間は考える葦である。", author: "ブレーズ・パスカル" },
-        { quote: "天才とは努力の別名である。", author: "羽生善治" },
-        { quote: "未来とは、今である。未来に備える最善の方法は、今を最高の瞬間として生きることだ。", author: "デイル・カーネギー" },
-        { quote: "最も大切なことは、人生を楽しむこと。幸せを感じること。", author: "オードリー・ヘップバーン" },
-        { quote: "過去を悔やむより、未来を恐れるより、今を生きなさい。", author: "マザー・テレサ" },
-        { quote: "どんなに遠くへ行く時も、最初の一歩は自分の足元から始まる。", author: "老子" },
-        { quote: "もし今日が人生最後の日だとしたら、今からやろうとしていることをやりたいだろうか？", author: "スティーブ・ジョブズ" },
-        { quote: "困難に打ち勝つために、最も必要なのは一時の勇気ではなく、日々の習慣である。", author: "アリストテレス (意訳)" },
-        { quote: "学ぶことをやめたら、立ち止まったことになる。", author: "山本五十六" },
-        { quote: "人を信じよ、しかしその百倍も自らを信じよ。", author: "手塚治虫" },
-        { quote: "知識の追求は、人生における最も素晴らしい冒険だ。", author: "アルバート・シュバイツァー" },
-        { quote: "成功の反対は失敗ではない。何もしないことだ。", author: "ブライアン・トレーシー" },
-        { quote: "希望は、目覚めている人間が見る夢だ。", author: "アリストテレス" },
-        { quote: "何かを始めるためには、やめることからはじめなければならない。", author: "ピーター・ドラッカー" },
-        { quote: "人生とは、今日一日のことである。", author: "稲盛和夫" },
-        { quote: "人生に失敗がないと、人生を失敗する。", author: "斎藤茂太" },
-        { quote: "最も速く進むものは、一人で進むものだ。最も遠くまで行くものは、皆で進むものだ。", author: "アフリカの諺" },
-        { quote: "流行は廃れるが、スタイルは永遠。", author: "ココ・シャネル" },
-        { quote: "天才とは、１％のひらめきと、９９％の努力である。", author: "トーマス・エジソン" },
-        { quote: "自分の生きる人生を愛せ。自分の愛する人生を生きろ。", author: "ボブ・マーリー" },
-        { quote: "未来を予測する最善の方法は、それを創り出すことだ。", author: "ピーター・ドラッカー" },
-        { quote: "想像力は知識よりも重要である。", author: "アルベルト・アインシュタイン" },
-        { quote: "人生とは、あなたが計画を立てている間に起こるものだ。", author: "ジョン・レノン" },
-        { quote: "人の価値は、その人が得たものではなく、その人が与えたもので測られる。", author: "アルベルト・アインシュタイン" },
-        { quote: "すべての夢は、それを実現しようと試みる勇気があるなら叶う。", author: "ウォルト・ディズニー" },
-        { quote: "最高の復讐は、素晴らしい成功を収めることだ。", author: "フランク・シナトラ" },
-        { quote: "人生にリハーサルはない。", author: "チャールズ・チャップリン" },
-        { quote: "天は人の上に人をつくらず、人の下に人をつくらず。", author: "福沢諭吉" },
-        { quote: "迷ったときには、より困難な道を選べ。", author: "アボット・ローレンス・ロウエル" },
-        { quote: "本当に大切なものは目に見えない。", author: "アントワーヌ・ド・サン＝テグジュペリ" },
-        { quote: "もし飛びたければ、手放さなければならないものがいくつかある。", author: "オノ・ヨーコ" },
-        { quote: "一番大切なことは、一番大切なことを一番大切にすることだ。", author: "スティーブン・コヴィー" },
-        { quote: "真の富とは、どれだけ持っているかではなく、どれだけ与えられるかだ。", author: "ブッダ" },
-        { quote: "学ぶのは簡単だ。だが、身につけた知識や習慣を捨てるのは難しい。", author: "ソクラテス" },
-        { quote: "行動する前に十分考える時間をとろう。しかし、行動する時が来たら、考えるのをやめて進め。", author: "ナポレオン・ボナパルト" },
-        { quote: "私は特別なことは何もしていない。ただ、人よりも長く問題と向き合っていただけだ。", author: "アルベルト・アインシュタイン" },
-        { quote: "過去は変えられないが、未来は今変えられる。", author: "ジェームズ・ディーン" },
-        { quote: "成功とは、熱意を失わずに失敗から失敗へと渡り歩く能力である。", author: "ウィンストン・チャーチル" },
-        { quote: "他人の意見で、自分の内側の声がかき消されないようにしなさい。", author: "スティーブ・ジョブズ" },
-        { quote: "幸せになる秘訣は、自分がしたいことをすることではなく、しなければならないことをすることに幸せを見出すことだ。", author: "ジェームス・M・バリ" },
-        { quote: "生きるとは、自分自身と闘うことだ。", author: "太宰治" },
-        { quote: "世の中に、無駄なものなんて何一つないよ。", author: "さくらももこ" },
-        { quote: "すべては実験である。", author: "野口英世" },
-        { quote: "逆境こそ、真の友を知る最高の試練である。", author: "シェイクスピア" },
-        { quote: "人生は短い。だからこそ、自分の信じた道を貫くべきだ。", author: "宮沢賢治" },
-        { quote: "人生で最も重要なことは、いかに生きるべきかを学ぶことだ。", author: "セネカ" },
-        { quote: "すべてを変える必要はない。必要なのは、考え方を変えることだけだ。", author: "ジグ・ジグラー" },
-        { quote: "目標は達成するためにあるのではなく、方向性を示すためにある。", author: "ブルース・リー" },
-        { quote: "賢者は、自分で考えていることを言う。愚者は、言おうと思っていることを自分で考えていると思う。", author: "プラトン" }
+        { quote: "道は近きにあり、而もこれを遠きに求む。", author: "孟子", tags: ["哲学", "人生", "思考"], explanation: "孟子のこの言葉は、求めるべき真理や幸福は、遠い理想郷にあるのではなく、日々の生活の中や自分の心の中といった身近な場所に存在することを説いています。外に答えを探し求めるのではなく、まず自己を見つめ直す重要性を教えてくれます。" },
+        { quote: "失敗とは、より賢くやり直すための良い機会である。", author: "ヘンリー・フォード", tags: ["仕事", "成功", "失敗", "挑戦"], explanation: "自動車産業の父とされるフォードは、失敗をネガティブに捉えず、成功に向けた貴重な学習機会と見なしました。問題点を把握し、改善策を見つけることが、より賢い次の行動につながるという、前向きな姿勢を表現しています。" },
+        { quote: "我々の最大の弱点は諦めることにある。成功する最も確実な方法は、常にもう一回だけ試してみることだ。", author: "トーマス・エジソン", tags: ["努力", "成功", "モチベーション", "挑戦"], explanation: "数多くの発明を成し遂げたエジソンによる、成功哲学を端的に表した言葉です。成功と失敗の分かれ道は能力の差ではなく、粘り強さ、つまり「諦めない精神」にあることを示唆しています。" },
+        { quote: "今日という日は、残りの人生の最初の日である。", author: "チャールズ・ディードリッヒ", tags: ["人生", "時間", "行動"], explanation: "過去にとらわれることなく、「今」が常に新しい始まりであることを教えてくれる言葉です。何かを始めるのに遅すぎることはなく、毎日が未来を創り始める最高のチャンスであるという、行動を促すメッセージが込められています。" },
+        { quote: "幸福は、すでに出来上がっているものではない。それは自らの行動によってもたらされる。", author: "ダライ・ラマ14世", tags: ["幸福", "行動", "哲学", "精神"], explanation: "幸福が外部環境や運命によって与えられる受動的なものではなく、自らの意志と行動の結果として築き上げられる能動的なものであると説いています。積極的な選択と努力が、心の平和と喜びを生み出す源泉だという仏教的な教えを反映しています。" },
+        { quote: "夢見ることができれば、それは実現できる。", author: "ウォルト・ディズニー", tags: ["夢", "モチベーション", "成功", "創造"], explanation: "世界的なエンターテイメント帝国を築いたディズニーの、創造と実現に対する揺るぎない信念を表しています。偉大な成果は、まず明確なビジョン（夢）を描くことから始まるという、夢想家と実行者の両面を持つ彼の精神が凝縮されています。" },
+        { quote: "自分自身を信じてみるだけでいい。きっと、生きる道が見えてくる。", author: "ゲーテ", tags: ["自信", "哲学", "人生"], explanation: "ドイツの文豪ゲーテが残したこの言葉は、自己信頼の力を強調しています。不安や迷いがあるときこそ、外部の声ではなく内なる声に耳を傾け、自分自身の可能性を信じることが、暗闇を照らす道標になるというメッセージです。" },
+        { quote: "人生は自転車に乗るようなものだ。倒れないようにするには、走り続けなければならない。", author: "アルベルト・アインシュタイン", tags: ["人生", "成長", "科学", "変化"], explanation: "物理学者のアインシュタインが、運動の法則を人生に例えた比喩表現です。現状維持は立ち止まることを意味し、人生のバランスを保ち目標を達成するためには、常に学び、努力し、前進し続けることが不可欠であるという教訓を示しています。" },
+        { quote: "小さなことを積み重ねることが、とんでもないところへ行くただひとつの道だ。", author: "イチロー", tags: ["努力", "習慣", "仕事", "成長"], explanation: "野球界のレジェンド、イチロー選手が実践してきた哲学です。大きな目標は、一足飛びには達成できず、日常の細部にまでこだわった継続的な努力や習慣の積み重ねによってのみ到達できるという、地道なプロセスを肯定する言葉です。" },
+        { quote: "他人と比較して、他人が自分より優れていたとしても、それは恥ではない。しかし、去年の自分より今年の自分が優れていないのは、大いに恥である。", author: "ジョン・ラボック", tags: ["成長", "自己肯定", "反省"], explanation: "他人との比較にエネルギーを使うのではなく、自己成長に焦点を当てることの重要性を説いています。競争相手は常に「過去の自分」であり、絶え間ない自己改善こそが人生において最も価値ある追求であるという、強いメッセージです。" },
+        { quote: "努力は必ず報われる。もし報われないのなら、それはまだ努力と呼べない。", author: "野村克也", tags: ["努力", "仕事", "野球", "根性"], explanation: "名将・野村克也氏のこの言葉は、結果が出ない状況にある努力を真摯に見つめ直すことを促しています。単に時間をかけた作業ではなく、目的意識と戦略、そして持続性をもって取り組むことこそが「真の努力」であるという、厳しくも温かい指導者の視点が込められています。" },
+        { quote: "人生は一冊の書物のようなものだ。愚か者はパラパラとめくり、賢い者は熟読する。", author: "アガサ・クリスティ", tags: ["人生", "読書", "ミステリー", "学習"], explanation: "人生という時間を漫然と過ごすのではなく、深く考え、学び、経験を消化することの価値を文学的に表現しています。人生の教訓や真実を理解するには、表面的ではなく、時間をかけて内省することが重要であると示唆しています。" },
+        { quote: "人間は考える葦である。", author: "ブレーズ・パスカル", tags: ["哲学", "思考", "本質"], explanation: "17世紀の思想家パスカルの有名な言葉で、「葦」のように弱く儚い存在である人間が、宇宙で最も尊いのは「考える力」を持っているからだと説いています。人間の偉大さと、その根底にある脆弱性を同時に示し、思考の尊さを讃えています。" },
+        { quote: "天才とは努力の別名である。", author: "羽生善治", tags: ["努力", "思考", "将棋", "天才"], explanation: "日本の将棋界を牽引してきた羽生善治氏による、天才の定義に対する見解です。天賦の才能よりも、たゆまぬ研鑽と努力の積み重ねこそが、非凡な結果を生み出す真の源泉であるという、努力の価値を最大限に肯定する言葉です。" },
+        { quote: "未来とは、今である。未来に備える最善の方法は、今を最高の瞬間として生きることだ。", author: "デイル・カーネギー", tags: ["未来", "時間", "行動"], explanation: "自己啓発の古典の著者カーネギーは、未来は遠いものではなく、現在の行動と意識の延長線上にあると説きました。最高の未来を望むなら、不安に駆られるのではなく、目の前の今に全力を尽くすことが最も重要であるという、実践的なメッセージです。" },
+        { quote: "最も大切なことは、人生を楽しむこと。幸せを感じること。", author: "オードリー・ヘップバーン", tags: ["幸福", "人生", "女優", "美"], explanation: "世界的な女優オードリー・ヘップバーンが遺した、人生に対する純粋な視点です。キャリアや名声ではなく、日々の生活の中での喜びや感謝、そして幸福感を追求することこそが、人生の究極的な目的であるという、彼女らしい優しさに満ちた言葉です。" },
+        { quote: "過去を悔やむより、未来を恐れるより、今を生きなさい。", author: "マザー・テレサ", tags: ["過去", "今", "奉仕", "精神"], explanation: "ノーベル平和賞を受賞したマザー・テレサによる、精神的な平穏と行動の重要性を説く言葉です。人間が抱える主要な苦悩である「後悔」と「不安」から解放され、目の前の瞬間に集中し、目の前の人々に奉仕することこそが真の生き方であると教えてくれます。" },
+        { quote: "どんなに遠くへ行く時も、最初の一歩は自分の足元から始まる。", author: "老子", tags: ["哲学", "始まり", "行動"], explanation: "老子の教えは、壮大な目標や困難な挑戦も、必ず身近で小さな行動から始まるという、行動原理を示しています。大きな変化を起こすためには、まず現状を認識し、目の前の最初の一歩を踏み出す勇気が不可欠であると説いています。" },
+        { quote: "もし今日が人生最後の日だとしたら、今からやろうとしていることをやりたいだろうか？", author: "スティーブ・ジョブズ", tags: ["仕事", "モチベーション", "思考", "決断"], explanation: "アップル創業者のジョブズが、スタンフォード大学の卒業式スピーチで語った、人生の価値観を問う問いかけです。この問いは、日々の選択が本当に自分の情熱と一致しているか、後悔のない人生を送るための指針となっているかを常にチェックすることを促します。" },
+        { quote: "困難に打ち勝つために、最も必要なのは一時の勇気ではなく、日々の習慣である。", author: "アリストテレス (意訳)", tags: ["習慣", "努力", "哲学", "成長"], explanation: "古代ギリシャの哲学者アリストテレスの倫理学に基づく考えを現代的に解釈した言葉です。偉大な人格や功績は、突発的な才能や一瞬の努力ではなく、日常における正しい行動や習慣の継続によって形成されるという、習慣の力を強調しています。" },
+        { quote: "学ぶことをやめたら、立ち止まったことになる。", author: "山本五十六", tags: ["学習", "成長", "仕事", "知識"], explanation: "連合艦隊司令長官であった山本五十六の、常に自己を磨き続けることの重要性を示唆する言葉です。変化の激しい時代において、現状の知識やスキルに満足せず、生涯を通じて学習し続ける姿勢こそが、停滞を避ける唯一の道であるという教訓です。" },
+        { quote: "人を信じよ、しかしその百倍も自らを信じよ。", author: "手塚治虫", tags: ["創造", "自信", "漫画", "芸術"], explanation: "「漫画の神様」手塚治虫が遺した、創造者としての強い信念を表す言葉です。他者との協調は大切にしつつも、最終的な創造物に対する責任とビジョンは自分自身にあり、自己の才能と決断を強く信じることが、独自の作品を生み出す原動力となることを示しています。" },
+        { quote: "知識の追求は、人生における最も素晴らしい冒険だ。", author: "アルバート・シュバイツァー", tags: ["知識", "学習", "冒険", "科学"], explanation: "医師であり神学者でもあるシュバイツァーは、知的好奇心を満たす旅を人生最高の冒険と位置付けました。新しいことを学び、世界に対する理解を深めるプロセスは、肉体的な冒険にも劣らない興奮と発見に満ちているという、知識の追求の喜びを讃えています。" },
+        { quote: "成功の反対は失敗ではない。何もしないことだ。", author: "ブライアン・トレーシー", tags: ["行動", "成功", "挑戦"], explanation: "成功の専門家であるトレーシーのこの言葉は、行動を起こすことの絶対的な重要性を説いています。失敗は行動の結果であり、学びの機会ですが、最も避けなければならないのは、失敗を恐れて一歩も踏み出さない「無行動」の状態であると主張しています。" },
+        { quote: "希望は、目覚めている人間が見る夢だ。", author: "アリストテレス", tags: ["希望", "夢", "哲学"], explanation: "古代ギリシャの哲学者アリストテレスは、希望を単なる非現実的な願望ではなく、目覚めている意識が持つ、実現可能な未来への強い意志として捉えました。希望は行動の原動力となり、現実を動かす力を持っているという、ポジティブな意味合いを込めています。" },
+        { quote: "何かを始めるためには、やめることからはじめなければならない。", author: "ピーター・ドラッカー", tags: ["仕事", "思考", "マネジメント", "変化"], explanation: "マネジメントの父とされるドラッカーは、新しいことに挑戦する際の最も大きな障害は、すでに持っているリソース（時間やエネルギー）が過去の活動に占有されていることだと指摘しました。効果的に前進するためには、まず不要なものを手放す「捨てる勇気」が必要であると説いています。" },
+        { quote: "人生とは、今日一日のことである。", author: "稲盛和夫", tags: ["仕事", "人生", "経営"], explanation: "京セラとKDDIの創業者である稲盛和夫氏の経営哲学の根幹をなす言葉の一つです。偉大な成果も、今日の努力の積み重ねでしかなく、過去や未来を憂うのではなく、今日という一日に全力を尽くすことが成功への唯一の方法であるという、実践的な哲学です。" },
+        { quote: "人生に失敗がないと、人生を失敗する。", author: "斎藤茂太", tags: ["失敗", "人生", "経験"], explanation: "精神科医である斎藤茂太氏による、失敗を避けすぎる人生への警鐘です。失敗や挫折を経験することは、人間的な深みや他者への共感力を育む上で不可欠であり、失敗のない人生は、結果的に人間として未熟な状態に終わってしまうという意味が込められています。" },
+        { quote: "最も速く進むものは、一人で進むものだ。最も遠くまで行くものは、皆で進むものだ。", author: "アフリカの諺", tags: ["チーム", "協力", "コミュニティ"], explanation: "短期的な成果は個人のスピードで達成できるかもしれませんが、持続的で大きな成功には共同体の力が必要であるという、知恵に満ちた諺です。特にチームワークやコミュニティの重要性が、この言葉によって示されています。" },
+        { quote: "流行は廃れるが、スタイルは永遠。", author: "ココ・シャネル", tags: ["美", "スタイル", "ファッション", "永遠"], explanation: "ファッションデザイナー、ココ・シャネルのこの言葉は、一時的なトレンドに流されるのではなく、個人の内面から滲み出る普遍的な美意識や個性を磨くことの価値を説いています。自分らしいスタイルこそが、時代を超えて価値を持ち続けると教えてくれます。" },
+        { quote: "天才とは、１％のひらめきと、９９％の努力である。", author: "トーマス・エジソン", tags: ["努力", "天才", "成功"], explanation: "エジソンの最も有名な言葉ですが、一般に「努力の重要性」を強調するために引用されます。しかし、この言葉は同時に、ひらめき（アイデア）だけでも、努力だけでも不十分であり、両者の組み合わせ、特に膨大な努力によってのみ発明が実現することを強調しています。" },
+        { quote: "自分の生きる人生を愛せ。自分の愛する人生を生きろ。", author: "ボブ・マーリー", tags: ["人生", "幸福", "音楽", "平和"], explanation: "レゲエの神様、ボブ・マーリーのメッセージは、自己肯定と自由な生き方を求める強い願望を表しています。外部の期待や社会の規範に縛られず、自分が心から望む生き方を選択し、それを愛することが、真の幸福に繋がるという力強い言葉です。" },
+        { quote: "未来を予測する最善の方法は、それを創り出すことだ。", author: "ピーター・ドラッカー", tags: ["未来", "創造", "仕事", "マネジメント"], explanation: "ドラッカーが提唱する未来志向のマネジメント哲学です。未来は待つものではなく、自らの行動や戦略によって能動的に形作るものであると説いています。未来に対する受動的な不安を、創造的な行動に変えることを促すメッセージです。" },
+        { quote: "想像力は知識よりも重要である。", author: "アルベルト・アインシュタイン", tags: ["想像力", "科学", "知識"], explanation: "科学者アインシュタインは、既存の知識は過去の経験の産物であるのに対し、想像力は世界を変化させ、進化させる原動力であるとしました。知識は限定的だが、想像力は無限であり、人類の進歩には想像力が不可欠であるという考えを表現しています。" },
+        { quote: "人生とは、あなたが計画を立てている間に起こるものだ。", author: "ジョン・レノン", tags: ["人生", "計画", "音楽", "変化"], explanation: "ビートルズのジョン・レノンが残した、人生の予期せぬ側面を捉えた言葉です。人生は計画通りに進むとは限らず、予期せぬ出来事や偶然の出会いこそが、人生の真の喜びや試練をもたらすという、変化を受け入れる哲学を示しています。" },
+        { quote: "人の価値は、その人が得たものではなく、その人が与えたもので測られる。", author: "アルベルト・アインシュタイン", tags: ["価値", "奉仕", "精神"], explanation: "アインシュタインは、個人の真の価値は、富や地位といった「所有」ではなく、社会や他者に対してどれだけ貢献し「与えた」かという行動の質によって決まると考えました。利己心ではなく、他者への奉仕の精神こそが重要であると説いています。" },
+        { quote: "すべての夢は、それを実現しようと試みる勇気があるなら叶う。", author: "ウォルト・ディズニー", tags: ["夢", "勇気", "挑戦"], explanation: "夢の実現には、単なる願望やアイデアだけでなく、それを現実にするための「一歩を踏み出す勇気」と「粘り強く試みる行動」が必須であるというメッセージです。夢と現実をつなぐ架け橋が勇気であることを示唆しています。" },
+        { quote: "最高の復讐は、素晴らしい成功を収めることだ。", author: "フランク・シナトラ", tags: ["成功", "モチベーション", "挑戦"], explanation: "歌手フランク・シナトラのこの言葉は、ネガティブな感情を、自己を向上させるためのエネルギーに変えるべきだという考えを表現しています。他人への攻撃や恨みに時間を費やすよりも、圧倒的な成功を収めることこそが、最も洗練された反論であると説いています。" },
+        { quote: "人生にリハーサルはない。", author: "チャールズ・チャップリン", tags: ["人生", "今", "時間"], explanation: "喜劇王チャップリンの言葉は、人生がやり直しのきかない一回限りの舞台であることを示しています。だからこそ、すべての瞬間を大切にし、後悔のないように真剣に生きることの価値を強調する、深い意味を持つ言葉です。" },
+        { quote: "天は人の上に人をつくらず、人の下に人をつくらず。", author: "福沢諭吉", tags: ["哲学", "平等", "学習"], explanation: "『学問のすゝめ』の冒頭に記されたこの言葉は、生まれながらの身分や貧富の差を否定し、すべての人が平等であるという現代社会の基本理念を象徴しています。ただし、その後の差は「学問をしたかしないか」によって生じるとして、学習の重要性を強く説きました。" },
+        { quote: "迷ったときには、より困難な道を選べ。", author: "アボット・ローレンス・ロウエル", tags: ["決断", "挑戦", "成長"], explanation: "ハーバード大学の学長を務めたロウエルのこの言葉は、安易な選択を避け、挑戦的な道を選ぶことの価値を強調しています。困難な道は、より多くの学びと成長の機会をもたらし、結果として大きな達成感と能力の向上に繋がるという教訓です。" },
+        { quote: "本当に大切なものは目に見えない。", author: "アントワーヌ・ド・サン＝テグジュペリ", tags: ["哲学", "愛", "本質", "読書"], explanation: "『星の王子さま』の中で語られるこのフレーズは、友情、愛情、誠実さといった、人生において最も価値のあるものは物質的なものではなく、心で感じる精神的なものであると説いています。表面的なものに惑わされず、本質を見抜くことの重要性を教えてくれます。" },
+        { quote: "もし飛びたければ、手放さなければならないものがいくつかある。", author: "オノ・ヨーコ", tags: ["解放", "変化", "人生"], explanation: "アーティストのオノ・ヨーコが残した、変化と自己実現に関する言葉です。新しい高みを目指すためには、過去の習慣、古い思考、不要な人間関係など、自分を縛り付けている重荷を手放す決断が必要であるという、勇気づけられるメッセージです。" },
+        { quote: "一番大切なことは、一番大切なことを一番大切にすることだ。", author: "スティーブン・コヴィー", tags: ["習慣", "仕事", "時間", "マネジメント"], explanation: "『7つの習慣』の著者コヴィーによる、優先順位の哲学です。緊急ではないが重要な事柄（真に大切なこと）に意識的に時間を使うことが、効果的な人生と仕事のマネジメントの鍵であると説かれています。" },
+        { quote: "真の富とは、どれだけ持っているかではなく、どれだけ与えられるかだ。", author: "ブッダ", tags: ["富", "哲学", "宗教", "精神"], explanation: "仏教の開祖ブッダの教えは、物質的な豊かさよりも、精神的な豊かさと他者への慈悲の心を強調します。分かち合いや奉仕の行為こそが、人間に最も深い充足感と幸福をもたらす真の財産であると示しています。" },
+        { quote: "学ぶのは簡単だ。だが、身につけた知識や習慣を捨てるのは難しい。", author: "ソクラテス", tags: ["学習", "哲学", "習慣", "思考"], explanation: "古代ギリシャの哲学者ソクラテスのこの言葉は、新しい知識を取り入れるよりも、古くて間違った前提や非効率な習慣を捨て去る方が困難であるという人間の本質を突いています。真の学習とは、既成概念を疑うことから始まるとも解釈できます。" },
+        { quote: "行動する前に十分考える時間をとろう。しかし、行動する時が来たら、考えるのをやめて進め。", author: "ナポレオン・ボナパルト", tags: ["行動", "決断", "仕事"], explanation: "フランスの軍事指導者ナポレオンによる、戦略的な思考と実行のバランスを示す言葉です。計画段階では慎重な分析が必要だが、一度決断を下したら迷わず、全力を尽くして実行に移すことの重要性を説きます。" },
+        { quote: "私は特別なことは何もしていない。ただ、人よりも長く問題と向き合っていただけだ。", author: "アルベルト・アインシュタイン", tags: ["努力", "科学", "思考"], explanation: "アインシュタインのこの謙虚な言葉は、彼の偉大な業績が、生来の天才性だけでなく、誰よりも粘り強く、深く、一つの問題に集中し続けた努力の賜物であることを示唆しています。偉業の裏には、膨大な時間と精神的な集中力があったことを教えてくれます。" },
+        { quote: "過去は変えられないが、未来は今変えられる。", author: "ジェームズ・ディーン", tags: ["未来", "行動", "変化"], explanation: "俳優ジェームズ・ディーンのこの言葉は、過去の失敗や後悔にとらわれず、現在の行動こそが未来の結果を決定するという、能動的な生き方を促します。今この瞬間が、運命を変える唯一のチャンスであるという、力強いメッセージです。" },
+        { quote: "成功とは、熱意を失わずに失敗から失敗へと渡り歩く能力である。", author: "ウィンストン・チャーチル", tags: ["成功", "失敗", "モチベーション", "根性"], explanation: "第二次世界大戦を乗り切ったイギリスの首相チャーチルによる、独特な成功の定義です。失敗はプロセスの不可欠な一部であり、重要なのは失敗のたびに情熱を再燃させ、次の試行へ進む粘り強さであると説いています。" },
+        { quote: "他人の意見で、自分の内側の声がかき消されないようにしなさい。", author: "スティーブ・ジョブズ", tags: ["自信", "思考", "創造"], explanation: "ジョブズが残した、自己の直感と信念を貫くことの重要性を説く言葉です。真の革新や創造性は、大衆や既存の意見に流されることなく、自分自身の情熱と直感を信じる、孤高の精神から生まれるという信念を表明しています。" },
+        { quote: "幸せになる秘訣は、自分がしたいことをすることではなく、しなければならないことをすることに幸せを見出すことだ。", author: "ジェームス・M・バリ", tags: ["幸福", "仕事", "人生"], explanation: "『ピーター・パン』の作者バリのこの言葉は、義務や責任を重荷として捉えるのではなく、その中に喜びや意味を見出すことの重要性を教えてくれます。人生で課せられた役割や仕事に積極的に関わる姿勢が、真の幸福感に繋がるというメッセージです。" },
+        { quote: "生きるとは、自分自身と闘うことだ。", author: "太宰治", tags: ["人生", "文学", "精神"], explanation: "日本の文豪、太宰治のこの言葉は、人生の本質が、外部との闘いよりも内面的な葛藤にあることを示唆しています。自己嫌悪や理想と現実のギャップ、そして人間の弱さと向き合い続けることこそが、生きるという行為であるという、文学的な深みのある表現です。" },
+        { quote: "世の中に、無駄なものなんて何一つないよ。", author: "さくらももこ", tags: ["人生", "肯定", "幸福"], explanation: "漫画家さくらももこ氏の、日常の中の小さな出来事や一見無意味に見えるもの全てに価値を見出す視点です。ネガティブな経験や失敗も、後から振り返れば人生の彩りや教訓となっており、すべての存在を肯定する温かい哲学が込められています。" },
+        { quote: "すべては実験である。", author: "野口英世", tags: ["挑戦", "科学", "行動"], explanation: "細菌学者であった野口英世による、科学者の精神を表した言葉です。人生や研究におけるすべての試みや経験を、成功か失敗かではなく、結果から学ぶための実験として捉えることで、恐れずに挑戦し続ける姿勢の重要性を説いています。" },
+        { quote: "逆境こそ、真の友を知る最高の試練である。", author: "シェイクスピア", tags: ["友情", "挑戦", "人間関係"], explanation: "イギリスの劇作家シェイクスピアの言葉は、順調な時には見えにくい人間の本質が、困難や逆境に直面したときにこそ明らかになることを示しています。真の友情や信頼できる仲間は、苦難の状況でこそ価値を発揮するという教訓です。" },
+        { quote: "人生は短い。だからこそ、自分の信じた道を貫くべきだ。", author: "宮沢賢治", tags: ["人生", "文学", "精神"], explanation: "『銀河鉄道の夜』などで知られる宮沢賢治の、時間に対する意識と生きる姿勢に関する言葉です。有限である人生の時間を、他者の価値観ではなく、自らが信じる理想や使命のために捧げ、一途に生きることの尊さを伝えています。" },
+        { quote: "人生で最も重要なことは、いかに生きるべきかを学ぶことだ。", author: "セネカ", tags: ["学習", "哲学", "習慣"], explanation: "古代ローマの哲学者セネカのストア派の教えを反映した言葉です。知識や富の獲得よりも、いかに徳高く、倫理的に、そして幸福に生きるかという「生き方」そのものを学び、実践することこそが、人生における最高の目的であると説いています。" },
+        { quote: "すべてを変える必要はない。必要なのは、考え方を変えることだけだ。", author: "ジグ・ジグラー", tags: ["思考", "変化", "モチベーション"], explanation: "モチベーションスピーカーであるジグラーのこの言葉は、人生の状況を変えるためには、外部環境を変えるよりも、まず内面的な捉え方、つまりものの見方や態度を変えることが最も効果的であると説いています。思考の変化が現実の変化の鍵であるというメッセージです。" },
+        { quote: "目標は達成するためにあるのではなく、方向性を示すためにある。", author: "ブルース・リー", tags: ["目標", "哲学", "行動"], explanation: "武術家ブルース・リーのこの言葉は、目標設定の本来の意味を問い直しています。目標に固執しすぎず、その目標が示す方向へ向かうプロセスや成長そのものが重要であり、目標は自己成長のための指針であるという哲学を表現しています。" },
+        { quote: "賢者は、自分で考えていることを言う。愚者は、言おうと思っていることを自分で考えていると思う。", author: "プラトン", tags: ["思考", "哲学", "知識"], explanation: "古代ギリシャの哲学者プラトンによる、思考と発言の関係性に関する鋭い洞察です。賢者は言葉を発する前に思考を整理し、自分の言葉に責任を持ちますが、愚者はその逆で、浅い考えを深い思考と錯覚している、という知的な謙虚さの重要性を示しています。" }
     ];
 
     // ===================================
-    // 2. DOM要素の取得
+    // 2. グローバル変数とDOM要素の取得
     // ===================================
+    let currentQuoteData = null; // 現在表示中の名言データを保持
+    let fullShareText = ""; // 共有用に整形されたフルテキストを保持
+
     const quoteTextElement = document.getElementById('quote-text');
     const quoteAuthorElement = document.getElementById('quote-author');
     const generateBtn = document.getElementById('generate-btn');
-    const amazonLinkArea = document.getElementById('amazon-link-area');
+    const shareBtn = document.getElementById('share-btn'); 
+    const recommendationArea = document.getElementById('recommendation-area'); 
+    const recommendationLinksContainer = document.getElementById('recommendation-links');
+    const tagsContainer = document.getElementById('tags-container'); 
+    const explanationTextElement = document.getElementById('explanation-text'); 
+    const notificationBox = document.getElementById('notification-box'); 
+    const notificationMessage = document.getElementById('notification-message'); 
+
+    // モーダル関連DOM要素
+    const shareModal = document.getElementById('share-modal');
+    const closeModalBtn = document.getElementById('close-modal-btn');
+    const modalQuotePreview = document.getElementById('modal-quote-preview');
+    // ★ <a> から <button> に変更
+    const shareTwitterBtn = document.getElementById('share-twitter-btn');
+    const shareLineBtn = document.getElementById('share-line-btn');
+    const copyTextBtn = document.getElementById('copy-text-btn');
+
+    // AmazonアソシエイトID
+    const AFFILIATE_TAG = 'yamano32010e-22'; 
 
     // ===================================
-    // 3. ロジック関数
+    // 3. ユーティリティ関数
     // ===================================
 
     /**
      * quotes配列からランダムに一つの名言オブジェクトを取得する
-     * @returns {object} { quote: "...", author: "..." }
      */
     function getRandomQuote() {
         const randomIndex = Math.floor(Math.random() * quotes.length);
@@ -241,63 +349,349 @@
     }
 
     /**
-     * Amazonの検索リンクを生成し、表示エリアを更新する
-     * @param {string} authorName - 著者の名前
+     * 画面下部に通知メッセージを表示する
      */
-    function updateAmazonLink(authorName) {
-        // Amazon Japanの検索URLを生成
-        // 【トラッキングIDを組み込み済み: yamano32010e-22】
-        const affiliateTag = 'yamano32010e-22'; 
-        const searchUrl = `https://www.amazon.co.jp/s?k=${encodeURIComponent(authorName)}&tag=${affiliateTag}`; 
+    function showNotification(message) {
+        notificationMessage.textContent = message;
+        notificationBox.style.opacity = 1;
         
-        amazonLinkArea.innerHTML = `
-            <p class="text-sm text-gray-500 mb-3">この著者の関連書籍を探す：</p>
-            <a href="${searchUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-4 rounded-full transition duration-200 shadow-md">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h3.28a1 1 0 01.948.684L12.01 9a1 1 0 00.9.692h4.301a1 1 0 110 2h-4.301a1 1 0 00-.9-.692L7.232 4H4a1 1 0 01-1-1zm14 10a1 1 0 00-1 1v2a1 1 0 102 0v-2a1 1 0 00-1-1z" clip-rule="evenodd" />
-                    <path d="M11 6a3 3 0 11-6 0 3 3 0 016 0zm-3 7a4 4 0 00-4 4v2a1 1 0 102 0v-2a2 2 0 012-2h4a2 2 0 012 2v2a1 1 0 102 0v-2a4 4 0 00-4-4H8z" />
-                </svg>
-                <span>${authorName} の本を Amazon で検索</span>
-            </a>
-        `;
-        amazonLinkArea.classList.remove('hidden');
+        setTimeout(() => {
+            notificationBox.style.opacity = 0;
+        }, 3000);
     }
 
     /**
-     * 取得した名言をHTMLに表示する
+     * タグに基づき、Amazonで検索すべきキーワードとボタンテキストを決定する
      */
-    function displayQuote() {
-        // ページ全体のリロードにより、この関数は常に新しい名言を表示する
-        const { quote, author } = getRandomQuote();
+    function getThemeRecommendation(tags) {
+        // ... (省略: 既存のロジックは変更なし) ...
+        if (tags.includes("仕事") && tags.includes("マネジメント")) {
+            return { keyword: "リーダーシップ マネジメント本", label: "リーダーシップ論" };
+        }
+        if (tags.includes("努力") && tags.includes("習慣")) {
+            return { keyword: "習慣化 トラッカー ダイアリー", label: "習慣・目標管理グッズ" };
+        }
+        if (tags.includes("失敗") && tags.includes("挑戦")) {
+            return { keyword: "失敗から学ぶ 成功事例", label: "失敗学・挑戦の記録" };
+        }
+        if (tags.includes("幸福") && tags.includes("精神")) {
+            return { keyword: "マインドフルネス 瞑想グッズ", label: "メンタルヘルス・幸福論" };
+        }
+        if (tags.includes("読書") || tags.includes("知識")) {
+            return { keyword: "読書術 速読 読解力", label: "読書術・アウトプット" };
+        }
+        if (tags.includes("美") || tags.includes("ファッション") || tags.includes("女優")) {
+            return { keyword: "ファッション スタイル 美容本", label: "美容・スタイルアップ" };
+        }
+        if (tags.includes("哲学") || tags.includes("本質")) {
+            return { keyword: "古典名著 哲学入門書", label: "哲学・人生の古典" };
+        }
         
-        // フェードアウト
-        quoteTextElement.style.opacity = 0;
-        quoteAuthorElement.style.opacity = 0;
-        amazonLinkArea.style.opacity = 0;
+        if (tags.includes("仕事") || tags.includes("成功")) {
+            return { keyword: "ビジネス 自己啓発書", label: "ビジネス・成功" };
+        }
+        if (tags.includes("人生") || tags.includes("時間")) {
+            return { keyword: "ライフハック タイムマネジメント", label: "時間・人生設計" };
+        }
+        if (tags.includes("創造") || tags.includes("芸術")) {
+            return { keyword: "クリエイティブ 思考法", label: "創造性・アイデア発想" };
+        }
 
-        // 0.3秒（CSSのduration）待ってからテキストを入れ替え、フェードイン
-        setTimeout(() => {
-            quoteTextElement.textContent = quote;
-            quoteAuthorElement.textContent = `— ${author}`;
+        return { keyword: "インスピレーション 名言集", label: "名言関連商品" };
+    }
+
+    /**
+     * 名言に付与されたタグをバッジとして表示する
+     */
+    function displayTags(tags) {
+        tagsContainer.innerHTML = ''; 
+        tags.forEach(tag => {
+            const tagElement = document.createElement('span');
+            tagElement.textContent = `#${tag}`;
+            tagElement.className = 'text-xs font-semibold px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full shadow-sm whitespace-nowrap fade-in';
+            tagsContainer.appendChild(tagElement);
+        });
+    }
+
+    /**
+     * 著者とテーマに基づくレコメンドリンクを生成・表示する
+     */
+    function updateRecommendation(quote) {
+        const { author, tags } = quote;
+        
+        // 1. 著者検索リンクの作成
+        const authorUrl = `https://www.amazon.co.jp/s?k=${encodeURIComponent(author)}&tag=${AFFILIATE_TAG}`; 
+        const authorLinkHtml = `
+            <a href="${authorUrl}" target="_blank" rel="noopener noreferrer" class="text-xs sm:text-sm bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-3 rounded-full transition duration-200 shadow-md transform hover:scale-[1.05] whitespace-nowrap">
+                ${author} の関連書籍を見る
+            </a>
+        `;
+
+        // 2. テーマ別レコメンドリンクの作成
+        const themeRec = getThemeRecommendation(tags);
+        const themeUrl = `https://www.amazon.co.jp/s?k=${encodeURIComponent(themeRec.keyword)}&tag=${AFFILIATE_TAG}`;
+        const themeLinkHtml = `
+            <a href="${themeUrl}" target="_blank" rel="noopener noreferrer" class="text-xs sm:text-sm bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-3 rounded-full transition duration-200 shadow-md transform hover:scale-[1.05] whitespace-nowrap">
+                テーマ: ${themeRec.label} 関連商品
+            </a>
+        `;
+
+        recommendationLinksContainer.innerHTML = authorLinkHtml + themeLinkHtml;
+        recommendationArea.classList.remove('hidden');
+    }
+
+    /**
+     * テキストをクリップボードにコピーする処理
+     */
+    async function copyToClipboard(text) {
+        let copySuccess = false;
+
+        // 1. モダンAPI (navigator.clipboard.writeText) の試行
+        if (navigator.clipboard && window.isSecureContext) {
+            try {
+                await navigator.clipboard.writeText(text);
+                showNotification('名言と解説をクリップボードにコピーしました！');
+                copySuccess = true;
+            } catch (err) {
+                // 失敗した場合、フォールバック（document.execCommand）へ進む
+            }
+        }
+
+        // 2. フォールバック: document.execCommand('copy')
+        if (!copySuccess) {
+            const tempInput = document.createElement('textarea');
+            tempInput.value = text;
+            tempInput.style.position = 'absolute';
+            tempInput.style.left = '-9999px';
+            tempInput.style.opacity = 0; 
+            document.body.appendChild(tempInput);
             
-            // Amazonリンクの更新
-            updateAmazonLink(author);
-
-            quoteTextElement.style.opacity = 1;
-            quoteAuthorElement.style.opacity = 1;
-            amazonLinkArea.style.opacity = 1;
-        }, 300);
+            tempInput.focus();
+            tempInput.select();
+            tempInput.setSelectionRange(0, 99999); 
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showNotification('名言と解説をクリップボードにコピーしました！');
+                    copySuccess = true;
+                } else {
+                    throw new Error('execCommand failed');
+                }
+            } catch (err) {
+                showNotification('コピーに失敗しました。手動でコピーしてください。');
+            } finally {
+                document.body.removeChild(tempInput);
+            }
+        }
+        return copySuccess;
     }
 
     // ===================================
-    // 4. イベントリスナーと初期化 (重要: ボタンはリロードを実行)
+    // 4. モーダル操作関数
     // ===================================
 
-    // ボタンクリックでページ全体をリロードするように変更し、広告インプレッション数を最大化
+    /**
+     * 共有モーダルを開く
+     */
+    function openShareModal() {
+        if (!currentQuoteData) {
+            showNotification('名言が読み込まれていません。');
+            return;
+        }
+
+        const { quote, author, explanation } = currentQuoteData;
+        
+        // 共有テキストのフォーマット (改行を短縮し、モバイルで読みやすく)
+        fullShareText = `
+【今日のインスピレーション✨】
+"${quote}"
+— ${author}
+
+📖解説:
+${explanation}
+
+#名言 #格言 #自己啓発
+---
+[この名言をもっと見る] ${window.location.href}
+        `.trim();
+        
+        // モーダル内のプレビューを設定
+        modalQuotePreview.textContent = `"${quote}" — ${author}`;
+
+        // モーダルを表示
+        shareModal.style.display = 'flex';
+        // アニメーションのためクラスを変更
+        setTimeout(() => {
+            shareModal.classList.remove('modal-leave-to');
+        }, 10);
+    }
+
+    /**
+     * 共有モーダルを閉じる
+     */
+    function closeShareModal() {
+        shareModal.classList.add('modal-leave-to');
+        setTimeout(() => {
+            shareModal.style.display = 'none';
+        }, 300);
+    }
+
+
+    // ===================================
+    // 5. メイン機能 (表示とシェア)
+    // ===================================
+
+    /**
+     * 取得した名言をHTMLに表示し、データを更新する
+     */
+    function displayQuote() {
+        const quoteData = getRandomQuote();
+        currentQuoteData = quoteData; // ★ 現在の名言データを保持
+
+        // --- STEP 1: UIの初期リセットとフェードアウト ---
+        quoteTextElement.style.opacity = 0;
+        quoteAuthorElement.style.opacity = 0;
+        tagsContainer.style.opacity = 0; 
+        recommendationArea.style.opacity = 0;
+        explanationTextElement.style.opacity = 0;
+
+        // --- STEP 2: テキストの入れ替えと即時表示 ---
+        setTimeout(() => {
+            // 名言と著者を表示
+            quoteTextElement.textContent = quoteData.quote;
+            quoteAuthorElement.textContent = `— ${quoteData.author}`;
+            
+            // タグの表示 
+            displayTags(quoteData.tags);
+
+            // 解説文をデータから直接取得し、表示
+            explanationTextElement.textContent = quoteData.explanation.trim();
+
+            // レコメンドリンクの更新
+            updateRecommendation(quoteData);
+
+            // フェードイン
+            quoteTextElement.style.opacity = 1;
+            quoteAuthorElement.style.opacity = 1;
+            tagsContainer.style.opacity = 1; 
+            recommendationArea.style.opacity = 1;
+            explanationTextElement.style.opacity = 1;
+
+        }, 300);
+    }
+    
+    /**
+     * 名言と解説をWeb Share APIまたは共有モーダルで共有する
+     */
+    async function handleShareClick() {
+        if (!currentQuoteData) {
+            showNotification('名言が読み込まれていません。');
+            return;
+        }
+
+        const { quote, author, explanation } = currentQuoteData;
+        
+        // 共有テキストのフォーマット
+        const localShareText = `
+【今日のインスピレーション✨】
+"${quote}"
+— ${author}
+
+📖解説:
+${explanation}
+
+#名言 #格言 #自己啓発
+---
+[この名言をもっと見る] ${window.location.href}
+        `.trim();
+
+        // 1. Web Share API (ネイティブ共有) の試行
+        if (navigator.share) {
+            try {
+                await navigator.share({
+                    title: '今日のインスピレーション名言',
+                    text: localShareText,
+                    url: window.location.href
+                });
+            } catch (error) {
+                // AbortError（ユーザーキャンセル）以外の場合、フォールバックとしてモーダルを開く
+                if (error.name !== 'AbortError') {
+                    openShareModal();
+                }
+            }
+        } 
+        // 2. Web Share非対応環境（iFrame/デスクトップなど）: モーダルを開く
+        else {
+            openShareModal();
+        }
+    }
+
+    /**
+     * Twitterでシェアする (JSでウィンドウを開く)
+     */
+    function shareOnTwitter() {
+        if (!currentQuoteData) return;
+        const { quote, author } = currentQuoteData;
+        const twitterText = encodeURIComponent(`"${quote}"\n— ${author}\n\n#名言 #格言`);
+        const twitterUrl = `https://twitter.com/intent/tweet?text=${twitterText}&url=${encodeURIComponent(window.location.href)}`;
+        // ★ window.openで明示的に新しいタブを開く
+        window.open(twitterUrl, '_blank', 'noopener,noreferrer');
+        closeShareModal();
+    }
+
+    /**
+     * LINEでシェアする (JSでウィンドウを開く)
+     */
+    function shareOnLine() {
+        if (!currentQuoteData) return;
+        // fullShareTextはopenShareModalで設定済み
+        const lineText = encodeURIComponent(fullShareText);
+        const lineUrl = `https://social-plugins.line.me/lineit/share?text=${lineText}`;
+        // ★ window.openで明示的に新しいタブを開く
+        window.open(lineUrl, '_blank', 'noopener,noreferrer');
+        closeShareModal();
+    }
+
+
+    // ===================================
+    // 6. イベントリスナーと初期化
+    // ===================================
+
+    // 「新しい名言を生成」ボタン
     generateBtn.addEventListener('click', function() {
-        // window.location.reload() を実行し、新しい広告と名言を読み込む
         window.location.reload(); 
     });
+
+    // 「名言をシェア」ボタン (共有ロジックを呼び出し)
+    shareBtn.addEventListener('click', handleShareClick);
+
+    // モーダル関連イベントリスナー
+    closeModalBtn.addEventListener('click', closeShareModal);
+    
+    // モーダル外クリックで閉じる
+    shareModal.addEventListener('click', (e) => {
+        if (e.target === shareModal) {
+            closeShareModal();
+        }
+    });
+
+    // ★ 新しく追加: Twitterボタンのクリックイベント
+    shareTwitterBtn.addEventListener('click', shareOnTwitter);
+
+    // ★ 新しく追加: LINEボタンのクリックイベント
+    shareLineBtn.addEventListener('click', shareOnLine);
+
+
+    // モーダル内の「テキストをコピー」ボタン
+    copyTextBtn.addEventListener('click', async () => {
+        // fullShareTextはopenShareModalで設定済み
+        const success = await copyToClipboard(fullShareText);
+        if (success) {
+            closeShareModal(); // コピー成功後にモーダルを閉じる
+        }
+    });
+
 
     // ページロード時に最初の名言を表示
     document.addEventListener('DOMContentLoaded', displayQuote);
