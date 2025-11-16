@@ -179,7 +179,7 @@
         </p>
     </div>
     
-    <!-- **★★ 修正点: 操作ボタンを解説エリアの上に移動 ★★** -->
+    <!-- 操作ボタンエリア -->
     <div class="flex flex-col sm:flex-row gap-4 mt-6 w-full">
         <!-- ページリロードボタン -->
         <button id="generate-btn" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-full transition-all duration-300 transform hover:scale-[1.03] shadow-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
@@ -285,7 +285,7 @@
 
 <script>
     // ===================================
-    // 1. 名言データの配列 (LLM/アスタリスク表現を修正)
+    // 1. 名言データの配列 
     // ===================================
     const ALL_QUOTES = [
         { 
@@ -568,14 +568,13 @@ ${uniqueTagsString}
 ${FIXED_SHARE_URL}
         `.trim();
 
-        // Web Share / Twitter / LINE用 テキスト (解説文の要約、ハッシュタグ、口語CTAを含む)
+        // **修正点**: Web Share APIの 'url' パラメータでリンクが自動的に付与されるため、
+        // shortShareTextからはURLとその誘導文を削除する。
         shortShareText = `
 【今日の名言】
 「${quote}」
 — ${author}
 
-名言の深掘り解説はこちらから！
-${FIXED_SHARE_URL}
 ${uniqueTagsString}
         `.trim(); 
 
@@ -696,10 +695,11 @@ ${uniqueTagsString}
 
         // 1. Native Web Share APIが利用可能であれば、これを使用する
         if (navigator.share) {
+            // navigator.shareに渡すテキストには、URLを含めない (urlパラメータでOSが自動付与するため)
             navigator.share({
                 title: '【今日の名言】',
                 text: shortShareText,
-                url: FIXED_SHARE_URL,
+                url: FIXED_SHARE_URL, // OSの共有ダイアログにリンクを渡す
             })
             .then(() => showNotification('ネイティブ共有ダイアログを開いたよ！'))
             .catch((error) => {
@@ -743,7 +743,8 @@ ${uniqueTagsString}
     function shareOnTwitter() {
         if (!currentQuoteData) return;
         const twitterText = encodeURIComponent(shortShareText);
-        const twitterUrl = `https://twitter.com/intent/tweet?text=${twitterText}`;
+        // TwitterはURLを自動で認識するため、短縮URLを本文に含める必要は薄いが、確実性を高めるため含める
+        const twitterUrl = `https://twitter.com/intent/tweet?text=${twitterText}&url=${encodeURIComponent(FIXED_SHARE_URL)}`;
         window.open(twitterUrl, '_blank', 'noopener,noreferrer');
         closeShareModal();
     }
@@ -753,11 +754,12 @@ ${uniqueTagsString}
      */
     function shareOnLine() {
         if (!currentQuoteData) return;
-        // URLスキームは、Web Share APIや通常のLINE共有ボタンよりも確実
-        const lineTextEncoded = encodeURIComponent(shortShareText);
+        // LINE共有テキストには、URLも含めて確実性を高める
+        const lineTextWithUrl = shortShareText + '\n\n' + FIXED_SHARE_URL;
+        const lineTextEncoded = encodeURIComponent(lineTextWithUrl);
         // LINEアプリ内ブラウザでは window.location.href を直接変更することが最も確実
         window.location.href = `https://line.me/R/msg/text/?${lineTextEncoded}`;
-        // モーダルを閉じる前に処理が中断される可能性があるため、閉じなくても良いが、一応呼ぶ
+        // モーダルを閉じる
         closeShareModal(); 
     }
 
