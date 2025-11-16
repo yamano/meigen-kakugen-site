@@ -312,8 +312,7 @@
     // ===================================
     let currentQuoteData = null; // 現在表示中の名言データを保持
     let fullShareText = ""; // コピーボタン用に整形されたフルテキストを保持 (解説文を含む)
-    let shortShareText = ""; // Web Share API用に整形された短縮テキストを保持 (解説文を含まない)
-
+    let shortShareText = ""; // Web Share API/SNS用に整形された短縮テキストを保持
 
     const quoteTextElement = document.getElementById('quote-text');
     const quoteAuthorElement = document.getElementById('quote-author');
@@ -491,7 +490,7 @@
     }
 
     // ===================================
-    // 4. シェアテキスト設定関数
+    // 4. シェアテキスト設定関数 (変更点: より人間味のある文章に)
     // ===================================
 
     /**
@@ -501,8 +500,9 @@
         const { quote, author, explanation } = quoteData;
 
         // ★★★ コピー用フルテキスト (解説文とCTAを含む) ★★★
+        // 人間味のある挨拶とCTAに変更
         fullShareText = `
-【🎁 あなたへ贈る、今日の名言と解説 🎁】
+【🎁 今日、あなたへ贈る名言と、その深い解説 🎁】
 
 「${quote}」
 — ${author}
@@ -510,20 +510,19 @@
 ✨ この言葉が持つ意味:
 ${explanation}
 
-#名言 #自己成長 #インスピレーション
-
-👇 続きのインスピレーションはここからチェック！
+🙏 忙しい毎日にちょっとしたヒントを。
+👇 他の名言もこちらでどうぞ！
 ${FIXED_SHARE_URL}
         `.trim();
 
-        // ★★★ Web Share / Twitter / LINE用 短縮テキスト ★★★
+        // ★★★ Web Share / Twitter / LINE用 短縮テキスト (変更点: CTAを強調) ★★★
         shortShareText = `
-今日のあなたへ。心に響く一言です✨
+「${quote}」— ${author}
 
-「${quote}」
-— ${author}
-
-#名言 #今日の格言
+この名言、深く響きました…！💡✨
+忙しい毎日のヒントになる解説全文は👇こちらからどうぞ！
+${FIXED_SHARE_URL}
+#名言 #今日の格言 #インスピレーション
         `.trim();
         
         // モーダル内のプレビューを設定 (短縮版のプレビュー)
@@ -640,27 +639,31 @@ ${FIXED_SHARE_URL}
     function shareOnTwitter() {
         if (!currentQuoteData) return;
         
+        // shortShareTextはURLとハッシュタグを含んでいる
         const twitterText = encodeURIComponent(shortShareText);
-        const urlEncoded = encodeURIComponent(FIXED_SHARE_URL);
         
-        // Twitter Intentでは、textとurlを分けて渡す
-        const twitterUrl = `https://twitter.com/intent/tweet?text=${twitterText}&url=${urlEncoded}`;
+        // Twitter Intentでは、textにすべてを結合して渡す
+        const twitterUrl = `https://twitter.com/intent/tweet?text=${twitterText}`;
         
         window.open(twitterUrl, '_blank', 'noopener,noreferrer');
         closeShareModal();
     }
 
     /**
-     * LINEでシェアする (JSでウィンドウを開く)
+     * LINEでシェアする (JSでウィンドウを開く) (変更点: URLをシンプルに)
      */
     function shareOnLine() {
         if (!currentQuoteData) return;
 
-        // LINEではテキストにURLを結合して渡す必要がある
-        const cta = "👇 続きのインスピレーションはここからチェック！";
-        const lineText = shortShareText + "\n\n" + cta + "\n" + FIXED_SHARE_URL; // 改行を入れて見やすくする
+        // LINEの共有テキストは、シンプルで、かつURLを明確に含むようにする
+        const lineText = `「${currentQuoteData.quote}」— ${currentQuoteData.author}
+
+忙しい毎日のヒントになる解説全文は👇こちらからどうぞ！
+${FIXED_SHARE_URL}`; 
+        
         const lineTextEncoded = encodeURIComponent(lineText);
         
+        // 公式LINE共有URLにテキストを渡す
         const lineUrl = `https://social-plugins.line.me/lineit/share?text=${lineTextEncoded}`;
 
         window.open(lineUrl, '_blank', 'noopener,noreferrer');
