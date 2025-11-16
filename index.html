@@ -202,12 +202,12 @@
 <!-- 2. 共有モーダル (画面中央に表示) -->
 <div id="share-modal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-40 modal-leave-to" style="display: none;">
     <div class="bg-white p-6 rounded-2xl shadow-2xl max-w-sm w-full mx-4 transform transition-all">
-        <h3 class="text-xl font-bold text-gray-800 mb-4 text-center">名言を共有する</h3>
+        <h3 class="text-xl font-bold text-gray-800 mb-4 text-center">名言をシェアする</h3>
         
         <!-- モーダル内で共有テキストをプレビュー -->
         <!-- ここでは短い共有テキストをプレビューとして表示 -->
         <div class="bg-indigo-50 p-3 rounded-lg text-sm text-gray-700 mb-4 border border-indigo-200">
-            <p id="modal-quote-preview" class="font-medium italic"></p>
+            <p id="modal-quote-preview" class="font-medium italic text-center"></p>
         </div>
 
         <div class="flex flex-col gap-3">
@@ -222,14 +222,14 @@
             <button id="share-line-btn" class="flex items-center justify-center gap-3 bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-full transition duration-200 transform hover:scale-[1.02] shadow-md">
                 <!-- LINE Icon (Inline SVG Placeholder) -->
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11.96 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm4.332 17.618h-8.583c-.341 0-.616-.275-.616-.615v-8.583c0-.341.275-.616.616-.616h8.583c.341 0 .615.275.615.616v8.583c0 .341-.274.615-.615.615z"/></svg>
-                LINE でシェア
+                LINE で友だちに送る
             </button>
 
             <!-- テキストコピーボタン -->
             <button id="copy-text-btn" class="flex items-center justify-center gap-3 bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 rounded-full transition duration-200 transform hover:scale-[1.02] shadow-md">
                 <!-- Copy Icon (Inline SVG) -->
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                【解説付き】テキストをコピー
+                【解説付き】全文をコピー
             </button>
         </div>
 
@@ -337,8 +337,8 @@
     // AmazonアソシエイトID
     const AFFILIATE_TAG = 'yamano32010e-22'; 
     
-    // ★★★ 修正ポイント: コピー時に使用する固定URL ★★★
-    const FIXED_SHARE_URL = 'https://meigen-kakugen.com/';
+    // コピー時に使用する固定URL
+    const FIXED_SHARE_URL = window.location.href; // 現在のURLを取得するように変更
 
     // ===================================
     // 3. ユーティリティ関数
@@ -491,40 +491,34 @@
     }
 
     // ===================================
-    // 4. モーダル操作関数
+    // 4. シェアテキスト設定関数
     // ===================================
 
     /**
-     * 共有テキストを整形し、モーダルを開く
+     * 共有用およびコピー用のテキストを整形し、グローバル変数に設定する
      */
-    function openShareModal() {
-        if (!currentQuoteData) {
-            showNotification('名言が読み込まれていません。');
-            return;
-        }
+    function setupShareText(quoteData) {
+        const { quote, author, explanation } = quoteData;
 
-        const { quote, author, explanation } = currentQuoteData;
-        
-        // ★★★ 修正ポイント 1: 人間味のあるフルテキスト (コピー用) - 固定URLを使用 ★★★
-        // ユーザーに不要なテキスト（コメントなど）を含めない
+        // ★★★ コピー用フルテキスト (解説文とCTAを含む) ★★★
         fullShareText = `
-【今日の名言と解説】
+【🎁 あなたへ贈る、今日の名言と解説 🎁】
 
 「${quote}」
 — ${author}
 
-🌟 解説:
+✨ この言葉が持つ意味:
 ${explanation}
 
-#名言 #自己啓発 #インスピレーション
+#名言 #自己成長 #インスピレーション
 
-▼引用元
+👇 続きのインスピレーションはここからチェック！
 ${FIXED_SHARE_URL}
         `.trim();
 
-        // ★★★ 修正ポイント 2: 短縮テキスト (Web Share / Twitter / LINE用) ★★★
+        // ★★★ Web Share / Twitter / LINE用 短縮テキスト ★★★
         shortShareText = `
-今日のあなたへ贈る名言です。
+今日のあなたへ。心に響く一言です✨
 
 「${quote}」
 — ${author}
@@ -534,6 +528,23 @@ ${FIXED_SHARE_URL}
         
         // モーダル内のプレビューを設定 (短縮版のプレビュー)
         modalQuotePreview.textContent = `"${quote}" — ${author}`; 
+    }
+
+    // ===================================
+    // 5. モーダル操作関数
+    // ===================================
+
+    /**
+     * 共有モーダルを開く
+     */
+    function openShareModal() {
+        if (!currentQuoteData) {
+            showNotification('名言が読み込まれていません。');
+            return;
+        }
+
+        // テキストを最新の状態に更新してからモーダルを開く
+        setupShareText(currentQuoteData);
         
         // モーダルを表示
         shareModal.style.display = 'flex';
@@ -555,46 +566,35 @@ ${FIXED_SHARE_URL}
 
 
     // ===================================
-    // 5. メイン機能 (表示とシェア)
+    // 6. メイン機能 (表示とシェア)
     // ===================================
 
     /**
-     * 取得した名言をHTMLに表示し、データを更新する
+     * 取得した名言をHTMLに表示し、データを更新する (ページロード時専用)
      */
     function displayQuote() {
         const quoteData = getRandomQuote();
         currentQuoteData = quoteData; // ★ 現在の名言データを保持
 
-        // --- STEP 1: UIの初期リセットとフェードアウト ---
-        quoteTextElement.style.opacity = 0;
-        quoteAuthorElement.style.opacity = 0;
-        tagsContainer.style.opacity = 0; 
-        recommendationArea.style.opacity = 0;
-        explanationTextElement.style.opacity = 0;
+        // --- STEP 1: テキストの入れ替えと表示 ---
+        quoteTextElement.textContent = quoteData.quote;
+        quoteAuthorElement.textContent = `— ${quoteData.author}`;
+        
+        // タグの表示 
+        displayTags(quoteData.tags);
 
-        // --- STEP 2: テキストの入れ替えと即時表示 ---
-        setTimeout(() => {
-            // 名言と著者を表示
-            quoteTextElement.textContent = quoteData.quote;
-            quoteAuthorElement.textContent = `— ${quoteData.author}`;
-            
-            // タグの表示 
-            displayTags(quoteData.tags);
+        // 解説文をデータから直接取得し、表示
+        explanationTextElement.textContent = quoteData.explanation.trim();
 
-            // 解説文をデータから直接取得し、表示
-            explanationTextElement.textContent = quoteData.explanation.trim();
+        // レコメンドリンクの更新
+        updateRecommendation(quoteData);
 
-            // レコメンドリンクの更新
-            updateRecommendation(quoteData);
-
-            // フェードイン
-            quoteTextElement.style.opacity = 1;
-            quoteAuthorElement.style.opacity = 1;
-            tagsContainer.style.opacity = 1; 
-            recommendationArea.style.opacity = 1;
-            explanationTextElement.style.opacity = 1;
-
-        }, 300);
+        // 初回ロード時はフェードイン演出は省略し、即時表示
+        quoteTextElement.style.opacity = 1;
+        quoteAuthorElement.style.opacity = 1;
+        tagsContainer.style.opacity = 1; 
+        recommendationArea.style.opacity = 1;
+        explanationTextElement.style.opacity = 1;
     }
     
     /**
@@ -605,34 +605,33 @@ ${FIXED_SHARE_URL}
             showNotification('名言が読み込まれていません。');
             return;
         }
+
+        // 共有テキストを先にセットアップ
+        setupShareText(currentQuoteData); 
         
-        // openShareModalでshortShareTextが設定される
-        openShareModal(); 
-        
-        // 1. Web Share API (ネイティブ共有) の試行
-        if (navigator.share) {
+        const isShareAvailable = navigator.share && window.isSecureContext;
+
+        if (isShareAvailable) {
             try {
-                // shortShareTextはURLを**含まない**クリーンなテキスト
+                // 1. ネイティブ共有を試みる
                 await navigator.share({
                     title: '今日のインスピレーション名言',
                     text: shortShareText, 
-                    url: FIXED_SHARE_URL // Web Share APIには固定URLを渡す
+                    url: FIXED_SHARE_URL 
                 });
-                // 共有成功時にはモーダルを閉じる
-                closeShareModal(); 
+                // 成功したら終了
+                return;
             } catch (error) {
-                // AbortError（ユーザーキャンセル）以外の場合、フォールバックとしてモーダルを開いたままにする
+                // AbortError (ユーザーキャンセル) やその他のエラーの場合、フォールバックとしてモーダルを開く
                 if (error.name !== 'AbortError') {
-                    // モーダルは既に開いている状態
-                    return;
+                    console.error("Native Share Error:", error);
                 }
+                // 処理を継続し、カスタムモーダルを開く
             }
-        } 
-        // 2. Web Share非対応環境（iFrame/デスクトップなど）: モーダルを開いたままにする
-        else {
-             // モーダルは既にopenShareModal()で開いている状態
-             return;
         }
+        
+        // 2. Native Shareが使えない、またはキャンセル・失敗した場合、カスタムモーダルを開く
+        openShareModal();
     }
 
     /**
@@ -641,7 +640,6 @@ ${FIXED_SHARE_URL}
     function shareOnTwitter() {
         if (!currentQuoteData) return;
         
-        // shortShareTextはURLを**含まない**クリーンなテキスト
         const twitterText = encodeURIComponent(shortShareText);
         const urlEncoded = encodeURIComponent(FIXED_SHARE_URL);
         
@@ -658,9 +656,11 @@ ${FIXED_SHARE_URL}
     function shareOnLine() {
         if (!currentQuoteData) return;
 
-        // LINEではテキストにURLを結合して渡す必要がある（URLの自動挿入機能が不確実なため）
-        const lineText = shortShareText + "\n\n" + FIXED_SHARE_URL; // 改行を入れて見やすくする
+        // LINEではテキストにURLを結合して渡す必要がある
+        const cta = "👇 続きのインスピレーションはここからチェック！";
+        const lineText = shortShareText + "\n\n" + cta + "\n" + FIXED_SHARE_URL; // 改行を入れて見やすくする
         const lineTextEncoded = encodeURIComponent(lineText);
+        
         const lineUrl = `https://social-plugins.line.me/lineit/share?text=${lineTextEncoded}`;
 
         window.open(lineUrl, '_blank', 'noopener,noreferrer');
@@ -669,16 +669,16 @@ ${FIXED_SHARE_URL}
 
 
     // ===================================
-    // 6. イベントリスナーと初期化
+    // 7. イベントリスナーと初期化
     // ===================================
 
-    // 「新しい名言を生成」ボタン
-    generateBtn.addEventListener('click', function() {
-        // リロードではなく、名言を再表示するロジックに変更（ユーザー体験向上）
-        displayQuote(); 
+    // ★★★ 変更点: 「新しい名言を生成」ボタンはページ全体をリロードする ★★★
+    generateBtn.addEventListener('click', () => {
+        // 広告表示機会を増やすため、ページ全体をリロードします
+        window.location.reload(); 
     });
 
-    // 「名言をシェア」ボタン (共有ロジックを呼び出し)
+    // 「名言をシェア」ボタン 
     shareBtn.addEventListener('click', handleShareClick);
 
     // モーダル関連イベントリスナー
@@ -708,7 +708,7 @@ ${FIXED_SHARE_URL}
     });
 
 
-    // ページロード時に最初の名言を表示
+    // ページロード時に最初の名言を表示 (リロード時も実行される)
     document.addEventListener('DOMContentLoaded', displayQuote);
 
 </script>
