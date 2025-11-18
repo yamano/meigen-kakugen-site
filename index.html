@@ -102,9 +102,38 @@
         #generate-btn {
             margin-top: 32px; 
         }
+
+        /* 静的リスト用のスタイル */
+        .static-quote-card {
+            border: 1px solid #e5e7eb; /* Gray 200 */
+            border-radius: 0.75rem; /* rounded-xl */
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            background-color: #f9fafb; /* Gray 50 */
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+        }
+        .static-quote-text {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.125rem; /* text-lg */
+            font-weight: 700; /* font-bold */
+            color: #1f2937; /* Gray 800 */
+            margin-bottom: 0.5rem;
+        }
+        .static-author-text {
+            font-size: 0.875rem; /* text-sm */
+            color: #4b5563; /* Gray 600 */
+            text-align: right;
+            margin-bottom: 0.75rem;
+        }
+        .static-explanation-text {
+            font-size: 0.875rem; /* text-sm */
+            color: #374151; /* Gray 700 */
+            line-height: 1.6;
+        }
+
     </style>
     
-    <!-- 広告コードの挿入場所 1: AdSense認証スクリプト (HEAD内) -->
+    <!-- Google AdSense認証スクリプト (HEAD内) -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6721819057047925"
      crossorigin="anonymous"></script>
      
@@ -238,7 +267,6 @@
 </div>
 
 <!-- 広告コードの挿入場所 3: 記事下/コンテンツ間広告 -->
-<!-- ユーザーが解説を読み終わった後に配置することで、次のアクションに移る前に広告を表示 -->
 <div id="ad-container-bottom" class="main-container ad-unit-container">
     <p class="text-xs font-bold text-gray-400 mb-2">【関連コンテンツ】</p>
     
@@ -255,7 +283,7 @@
 </div>
 <!-- /広告コードの挿入場所 3 -->
 
-<!-- 静的で高品質なコンテンツの追加 -->
+<!-- 既存の静的コンテンツ (コンテンツ量強化) -->
 <div class="main-container bg-white p-8 sm:p-12 rounded-2xl shadow-xl mt-4">
     <h2 class="text-2xl font-bold text-gray-800 mb-4 border-b pb-2 border-indigo-100">
         💡 「今日の一言」が人生を変える理由
@@ -263,21 +291,34 @@
     <p class="text-gray-600 text-sm mb-4 leading-relaxed">
         この名言・格言集は、歴史上の偉人や成功者たちが残した普遍的な知恵を厳選し、お届けします。
         成功とは、一瞬の閃きではなく、毎日の小さな行動と正しいマインドセットの積み重ねによって達成されます。
-        私たちは、ただの名言を紹介するだけでなく、その背景にある深い**教訓**と、それを**あなたの現代の生活や仕事に応用する方法**を徹底的に解説しています。
+        私たちが提供する名言は、単なる言葉の羅列ではなく、その背景にある深い**教訓**と、それを**あなたの現代の生活や仕事に応用する方法**を徹底的に解説しています。
+        特に、**「なぜその名言が今も重要なのか」**という視点で、具体的な行動指針を提示しています。
     </p>
     <p class="text-gray-600 text-sm mb-4 leading-relaxed">
-        **【主なテーマ】**
+        **【名言がもたらす具体的な効果】**
         <ul class="list-disc list-inside ml-4 text-sm text-gray-700 space-y-1 mt-2">
-            <li>自己啓発・成長: 習慣化、モチベーション維持、自己肯定感を高める教訓。</li>
-            <li>仕事術・リーダーシップ: 決断力、時間管理、チームでの協力と戦略立案。</li>
-            <li>人生哲学・幸福論: 失敗への向き合い方、変化への適応、心の平和を見つける方法。</li>
+            <li>**モチベーションの再点火:** 偉人の言葉に触れることで、停滞した気持ちに火をつけ、行動へのエネルギーを再充電できます。</li>
+            <li>**意思決定の質の向上:** 困難な状況で、先人の知恵がブレない判断軸を提供してくれます。</li>
+            <li>**自己成長の加速:** 習慣化、失敗への向き合い方など、自己成長に直結する教訓を体系的に学べます。</li>
         </ul>
     </p>
     <p class="text-gray-600 text-sm leading-relaxed italic border-t pt-3 mt-4">
         毎朝、新しい名言に触れることで、あなたの思考はリフレッシュされ、行動へのエネルギーが生まれます。さあ、あなたも今日の教訓を見つけて、人生の新たな一歩を踏み出しましょう。
     </p>
 </div>
-<!-- /静的で高品質なコンテンツの追加 -->
+<!-- /既存の静的コンテンツ -->
+
+<!-- NEW: 静的名言一覧 (コンテンツ量大幅強化) -->
+<div id="static-quotes-list" class="main-container bg-white p-8 sm:p-12 rounded-2xl shadow-xl mt-4">
+    <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b pb-2 border-indigo-100">
+        📚 収録名言・格言と深掘り解説（全18選）
+    </h2>
+    <!-- ここにJavaScriptで生成した静的リストを挿入する -->
+    <div id="all-quotes-list-content">
+        <!-- JavaScriptによってすべての名言がここにレンダリングされます -->
+    </div>
+</div>
+<!-- /NEW: 静的名言一覧 -->
 
 
 <footer>
@@ -339,7 +380,7 @@
     // ===================================
     
     // 【重要】固定の名言データ配列
-    let ALL_QUOTES = [
+    const ALL_QUOTES = [
         {
             quote: "成功とは、失敗を恐れずに挑戦し続ける能力である。",
             author: "ウィンストン・チャーチル",
@@ -470,6 +511,7 @@
     const notificationBox = document.getElementById('notification-box'); 
     const notificationMessage = document.getElementById('notification-message'); 
     const filterStatusElement = document.getElementById('current-filter-tag'); // フィルタ状態表示要素
+    const allQuotesListContent = document.getElementById('all-quotes-list-content'); // 静的リストコンテナ
 
     
     // モーダル関連DOM要素
@@ -579,6 +621,35 @@
         
         return copySuccess;
     }
+    
+    /**
+     * 【新規機能】すべての名言を静的にHTMLにレンダリングする (クローラー対策)
+     */
+    function renderStaticQuotesList() {
+        let listHtml = '';
+        ALL_QUOTES.forEach((q, index) => {
+            const tagsHtml = q.tags.map(tag => `<span class="inline-block bg-indigo-100 text-indigo-700 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">${tag}</span>`).join('');
+            
+            listHtml += `
+                <div class="static-quote-card">
+                    <h3 class="static-quote-text">
+                        ${index + 1}. 「${q.quote}」
+                    </h3>
+                    <p class="static-author-text">
+                        — ${q.author}
+                    </p>
+                    <div class="mb-3">
+                        ${tagsHtml}
+                    </div>
+                    <p class="static-explanation-text">
+                        <strong class="text-indigo-600">【解説】</strong> ${q.explanation}
+                    </p>
+                </div>
+            `;
+        });
+        allQuotesListContent.innerHTML = listHtml;
+    }
+
 
     // ===================================
     // 3. コンテンツの表示とフィルタリング
@@ -872,6 +943,9 @@ ${uniqueTagsString}
     document.addEventListener('DOMContentLoaded', () => {
         // 初回ロード時には、まず生成ボタンを押してもらうように促す
         shareBtn.disabled = true;
+        
+        // ページロード時にすべての名言リストを静的にレンダリングする（最重要）
+        renderStaticQuotesList(); 
     });
 </script>
 
