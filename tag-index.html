@@ -1,158 +1,168 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>テーマ別タグ索引 | 名言・格言集</title>
-    <meta name="description" content="名言をテーマ（タグ）別に分類した索引ページです。挑戦、成功、習慣化など、興味のある分野から教訓を見つけましょう。">
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f1f5f9;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-        .main-container {
-            max-width: 48rem;
-            width: 100%;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>テーマ別タグ索引 | 名言・格言集</title>
+    <meta name="description" content="名言をテーマ（タグ）別に分類した索引ページです。挑戦、成功、習慣化など、興味のある分野から教訓を見つけましょう。">
+    
+    <!-- 広告スクリプトの読み込み (HEAD内に追加) -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6721819057047925"
+            crossorigin="anonymous"></script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .main-container {
+            max-width: 48rem;
+            width: 100%;
+        }
+    </style>
 </head>
 <body class="p-4 sm:p-8">
 
 <div class="main-container bg-white p-8 sm:p-12 rounded-2xl shadow-xl mb-8">
-    
-    <header class="text-center pb-6 border-b border-indigo-100">
-        <h1 class="text-3xl font-bold text-indigo-600 mb-2">テーマ別タグ索引</h1>
-        <p class="text-md text-gray-500">興味のあるテーマから名言・教訓を絞り込めます。</p>
-    </header>
+    
+    <header class="text-center pb-6 border-b border-indigo-100">
+        <h1 class="text-3xl font-bold text-indigo-600 mb-2">テーマ別タグ索引</h1>
+        <p class="text-md text-gray-500">興味のあるテーマから名言・教訓を絞り込めます。</p>
+    </header>
 
-    <!-- 広告スペース (上部に追加) -->
-    <div class="mt-8 mb-8 p-4 bg-gray-50 border border-gray-300 rounded-lg text-center shadow-inner">
-        <p class="text-sm font-medium text-gray-500 mb-2">-- 広告スペース (トップ) --</p>
-        <div class="bg-gray-200 h-20 w-full max-w-sm mx-auto flex items-center justify-center rounded-md">
-            <span class="text-gray-600 font-semibold text-lg">Ad Placeholder</span>
-        </div>
-    </div>
-    <!-- /広告スペース -->
+    <!-- 広告タグ (上部のプレースホルダーと置き換え) -->
+    <div class="mt-8 mb-8 text-center">
+        <!-- 埋め込み広告ユニット (ディスプレイ広告などを想定) -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-6721819057047925"
+             data-ad-slot="2062575648"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+    <!-- /広告タグ -->
 
-    <!-- タグ一覧のコンテナ -->
-    <div id="tag-list-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <!-- JavaScriptでタグカードが挿入される -->
-    </div>
+    <!-- タグ一覧のコンテナ -->
+    <div id="tag-list-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <!-- JavaScriptでタグカードが挿入される -->
+    </div>
 
-    <!-- サイト内ナビゲーション (著者別索引リンクを含む) -->
-    <div class="mt-10 pt-6 border-t border-gray-200 text-center space-y-4">
-        <h2 class="text-xl font-semibold text-gray-700">他のコンテンツを探す</h2>
-        <div class="flex justify-center gap-4 flex-wrap">
-            <a href="index.html" class="inline-block bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2 px-4 rounded-full transition duration-200 text-sm">
-                トップページへ
-            </a>
-            <a href="author-index.html" class="inline-block bg-indigo-100 hover:bg-indigo-200 text-indigo-700 font-medium py-2 px-4 rounded-full transition duration-200 text-sm">
-                著者別索引へ
-            </a>
-        </div>
-    </div>
-    
+    <!-- サイト内ナビゲーション (著者別索引リンクを含む) -->
+    <div class="mt-10 pt-6 border-t border-gray-200 text-center space-y-4">
+        <h2 class="text-xl font-semibold text-gray-700">他のコンテンツを探す</h2>
+        <div class="flex justify-center gap-4 flex-wrap">
+            <a href="index.html" class="inline-block bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2 px-4 rounded-full transition duration-200 text-sm">
+                トップページへ
+            </a>
+            <a href="author-index.html" class="inline-block bg-indigo-100 hover:bg-indigo-200 text-indigo-700 font-medium py-2 px-4 rounded-full transition duration-200 text-sm">
+                著者別索引へ
+            </a>
+        </div>
+    </div>
+    
 </div>
 
 <script>
-    // 名言総数：40個
-    const ALL_QUOTES = [
-        { quote: "成功とは、失敗を恐れずに挑戦し続ける能力である。", author: "ウィンストン・チャーチル", tags: ["挑戦", "失敗", "継続", "成功"], explanation: "..." },
-        { quote: "考えるのは難しい。だからこそ、ほとんどの人は判断する。", author: "カール・ユング", tags: ["思考", "哲学", "決断"], explanation: "..." },
-        { quote: "完璧を目指すな。完成させろ。", author: "マーク・ザッカーバーグ", tags: ["実行", "スピード", "仕事術"], explanation: "..." },
-        { quote: "最も重要なことは、自分自身をコントロールすることだ。", author: "プラトン", tags: ["自己制御", "習慣化", "哲学"], explanation: "..." },
-        { quote: "幸福とは、能力と現実の要求が一致している状態である。", author: "ジョン・F・ケネディ", tags: ["幸福", "仕事術", "目標"], explanation: "..." },
-        { quote: "100回叩くと壊れる壁でも、皆が99回まで叩いている。", author: "本田宗一郎", tags: ["努力", "継続", "モチベーション"], explanation: "..." },
-        { quote: "想像力は知識よりも重要である。", author: "アルベルト・アインシュタイン", tags: ["創造性", "思考", "イノベーション"], explanation: "..." },
-        { quote: "変化こそが人生の不変の法則である。", author: "ソクラテス", tags: ["変化", "適応", "哲学"], explanation: "..." },
-        { quote: "あなたが変えられるのは、あなたの努力だけだ。", author: "ネルソン・マンデラ", tags: ["努力", "自己責任", "行動"], explanation: "..." },
-        { quote: "最も大きな危険は、目標が高すぎることではなく、低すぎることである。", author: "ミケランジェロ", tags: ["目標設定", "挑戦", "ビジョン"], explanation: "..." },
-        { quote: "他人の生き方を真似しても、成功は得られない。", author: "ココ・シャネル", tags: ["個性", "自己理解", "独自性"], explanation: "..." },
-        { quote: "人生は短い。今日できることを明日まで延ばすな。", author: "パブロ・ピカソ", tags: ["時間管理", "実行", "プロアクティブ"], explanation: "..." },
-        { quote: "逆境こそ、人が真に試される機会だ。", author: "ウォルト・ディズニー", tags: ["逆境", "成長", "レジリエンス"], explanation: "..." },
-        { quote: "習慣こそが、人生のすべてを決定する。", author: "アリストテレス", tags: ["習慣化", "基礎", "自己成長", "哲学"], explanation: "..." },
-        { quote: "自分のしていることに自信を持て。それが成功の第一歩だ。", author: "トーマス・エジソン", tags: ["自信", "モチベーション", "行動"], explanation: "..." },
-        { quote: "成功の秘訣は、常に目的を持ち続けることだ。", author: "スティーブ・ジョブズ", tags: ["目的", "ビジョン", "継続", "成功"], explanation: "..." },
-        { quote: "他者から期待されること以上に、自分が期待することを目指せ。", author: "ジョージ・バーナード・ショー", tags: ["自己基準", "独立", "挑戦"], explanation: "..." },
-        { quote: "あなたが今日話す言葉が、明日のあなたの人生を作る。", author: "オプラ・ウィンフリー", tags: ["言葉", "ポジティブ思考", "習慣化"], explanation: "..." },
-        { quote: "幸福の扉が一つ閉まると、別の扉が開く。しかし、私たちは閉じた扉ばかり見て、開いた扉に気づかない。", author: "ヘレン・ケラー", tags: ["希望", "視点", "幸福"], explanation: "..." },
-        { quote: "世界にみずから見たいと望む変化に、あなた自身がなりなさい。", author: "マハトマ・ガンジー", tags: ["変化", "行動", "倫理"], explanation: "..." },
-        { quote: "細部にこそ神が宿る。", author: "レオナルド・ダ・ヴィンチ", tags: ["品質", "芸術", "集中", "仕事術"], explanation: "..." },
-        { quote: "学びて思わざれば則ち罔し。思いて学ばざれば則ち殆し。", author: "孔子", tags: ["学習", "思考", "バランス", "哲学"], explanation: "..." },
-        { quote: "友人を打ち負かすとき、敵をつくっているのだ。", author: "アブラハム・リンカーン", tags: ["人間関係", "リーダーシップ", "協力"], explanation: "..." },
-        { quote: "私は幸運を信じている。そして、準備すればするほど、幸運になることがわかる。", author: "トーマス・ジェファーソン", tags: ["準備", "幸運", "努力"], explanation: "..." },
-        { quote: "私は夢を見る。そして、その夢を絵にする。", author: "ヴィンセント・ヴァン・ゴッホ", tags: ["創造性", "夢", "芸術"], explanation: "..." },
-        { quote: "夢を見ることができれば、それを実現できる。", author: "ウォルト・ディズニー", tags: ["夢", "達成", "モチベーション"], explanation: "..." },
-        { quote: "試行錯誤をしない人間は、何も新しいことを発見しない。", author: "アルベルト・アインシュタイン", tags: ["失敗", "挑戦", "創造性"], explanation: "..." },
-        { quote: "決して、決して、決して諦めるな。", author: "ウィンストン・チャーチル", tags: ["継続", "挑戦", "粘り強さ"], explanation: "..." },
-        { quote: "私は失敗したことがない。ただ、1万通りのうまくいかない方法を見つけただけだ。", author: "トーマス・エジソン", tags: ["失敗", "継続", "視点"], explanation: "..." },
-        { quote: "ハングリーであれ。愚かであれ。", author: "スティーブ・ジョブズ", tags: ["挑戦", "思想", "独立"], explanation: "..." },
-        { quote: "平和は微笑みから始まる。", author: "マザー・テレサ", tags: ["平和", "行動", "優しさ"], explanation: "..." },
-        { quote: "今日なしうることを明日に延ばすな。", author: "ベンジャミン・フランクリン", tags: ["実行", "時間管理", "習慣化"], explanation: "..." },
-        { quote: "行動は、才能や知識よりも重要である。", author: "ゲーテ", tags: ["行動", "実行", "価値"], explanation: "..." },
-        { quote: "自分の庭に咲く花を愛しなさい。", author: "エミリー・ディキンソン", tags: ["満足", "幸福", "視点"], explanation: "..." },
-        { quote: "今日は厳しい。明日はもっと厳しい。しかし明後日は美しい。", author: "ジャック・マー", tags: ["逆境", "継続", "希望"], explanation: "..." },
-        { quote: "人生で恐れることは何もない。理解することだけだ。", author: "マリー・キュリー", tags: ["学習", "知識", "恐怖"], explanation: "..." },
-        { quote: "最高の友人は、私たちが自分自身では言えないことを言う友人である。", author: "アリストテレス", tags: ["友情", "成長", "真実"], explanation: "..." },
-        { quote: "私の人生は私自身で選んだ。", author: "ココ・シャネル", tags: ["自己責任", "独立", "生き方"], explanation: "..." },
-        { quote: "成功は最終的なものではなく、失敗は致命的なものでもない。大切なのは、継続する勇気だ。", author: "ウィンストン・チャーチル", tags: ["成功", "失敗", "継続"], explanation: "..." },
-        { quote: "私は探さない。見つけるのだ。", author: "パブロ・ピカソ", tags: ["創造性", "思考", "独自性", "芸術"], explanation: "..." }
-    ];
+    // 名言総数：40個
+    const ALL_QUOTES = [
+        { quote: "成功とは、失敗を恐れずに挑戦し続ける能力である。", author: "ウィンストン・チャーチル", tags: ["挑戦", "失敗", "継続", "成功"], explanation: "..." },
+        { quote: "考えるのは難しい。だからこそ、ほとんどの人は判断する。", author: "カール・ユング", tags: ["思考", "哲学", "決断"], explanation: "..." },
+        { quote: "完璧を目指すな。完成させろ。", author: "マーク・ザッカーバーグ", tags: ["実行", "スピード", "仕事術"], explanation: "..." },
+        { quote: "最も重要なことは、自分自身をコントロールすることだ。", author: "プラトン", tags: ["自己制御", "習慣化", "哲学"], explanation: "..." },
+        { quote: "幸福とは、能力と現実の要求が一致している状態である。", author: "ジョン・F・ケネディ", tags: ["幸福", "仕事術", "目標"], explanation: "..." },
+        { quote: "100回叩くと壊れる壁でも、皆が99回まで叩いている。", author: "本田宗一郎", tags: ["努力", "継続", "モチベーション"], explanation: "..." },
+        { quote: "想像力は知識よりも重要である。", author: "アルベルト・アインシュタイン", tags: ["創造性", "思考", "イノベーション"], explanation: "..." },
+        { quote: "変化こそが人生の不変の法則である。", author: "ソクラテス", tags: ["変化", "適応", "哲学"], explanation: "..." },
+        { quote: "あなたが変えられるのは、あなたの努力だけだ。", author: "ネルソン・マンデラ", tags: ["努力", "自己責任", "行動"], explanation: "..." },
+        { quote: "最も大きな危険は、目標が高すぎることではなく、低すぎることである。", author: "ミケランジェロ", tags: ["目標設定", "挑戦", "ビジョン"], explanation: "..." },
+        { quote: "他人の生き方を真似しても、成功は得られない。", author: "ココ・シャネル", tags: ["個性", "自己理解", "独自性"], explanation: "..." },
+        { quote: "人生は短い。今日できることを明日まで延ばすな。", author: "パブロ・ピカソ", tags: ["時間管理", "実行", "プロアクティブ"], explanation: "..." },
+        { quote: "逆境こそ、人が真に試される機会だ。", author: "ウォルト・ディズニー", tags: ["逆境", "成長", "レジリエンス"], explanation: "..." },
+        { quote: "習慣こそが、人生のすべてを決定する。", author: "アリストテレス", tags: ["習慣化", "基礎", "自己成長", "哲学"], explanation: "..." },
+        { quote: "自分のしていることに自信を持て。それが成功の第一歩だ。", author: "トーマス・エジソン", tags: ["自信", "モチベーション", "行動"], explanation: "..." },
+        { quote: "成功の秘訣は、常に目的を持ち続けることだ。", author: "スティーブ・ジョブズ", tags: ["目的", "ビジョン", "継続", "成功"], explanation: "..." },
+        { quote: "他者から期待されること以上に、自分が期待することを目指せ。", author: "ジョージ・バーナード・ショー", tags: ["自己基準", "独立", "挑戦"], explanation: "..." },
+        { quote: "あなたが今日話す言葉が、明日のあなたの人生を作る。", author: "オプラ・ウィンフリー", tags: ["言葉", "ポジティブ思考", "習慣化"], explanation: "..." },
+        { quote: "幸福の扉が一つ閉まると、別の扉が開く。しかし、私たちは閉じた扉ばかり見て、開いた扉に気づかない。", author: "ヘレン・ケラー", tags: ["希望", "視点", "幸福"], explanation: "..." },
+        { quote: "世界にみずから見たいと望む変化に、あなた自身がなりなさい。", author: "マハトマ・ガンジー", tags: ["変化", "行動", "倫理"], explanation: "..." },
+        { quote: "細部にこそ神が宿る。", author: "レオナルド・ダ・ヴィンチ", tags: ["品質", "芸術", "集中", "仕事術"], explanation: "..." },
+        { quote: "学びて思わざれば則ち罔し。思いて学ばざれば則ち殆し。", author: "孔子", tags: ["学習", "思考", "バランス", "哲学"], explanation: "..." },
+        { quote: "友人を打ち負かすとき、敵をつくっているのだ。", author: "アブラハム・リンカーン", tags: ["人間関係", "リーダーシップ", "協力"], explanation: "..." },
+        { quote: "私は幸運を信じている。そして、準備すればするほど、幸運になることがわかる。", author: "トーマス・ジェファーソン", tags: ["準備", "幸運", "努力"], explanation: "..." },
+        { quote: "私は夢を見る。そして、その夢を絵にする。", author: "ヴィンセント・ヴァン・ゴッホ", tags: ["創造性", "夢", "芸術"], explanation: "..." },
+        { quote: "夢を見ることができれば、それを実現できる。", author: "ウォルト・ディズニー", tags: ["夢", "達成", "モチベーション"], explanation: "..." },
+        { quote: "試行錯誤をしない人間は、何も新しいことを発見しない。", author: "アルベルト・アインシュタイン", tags: ["失敗", "挑戦", "創造性"], explanation: "..." },
+        { quote: "決して、決して、決して諦めるな。", author: "ウィンストン・チャーチル", tags: ["継続", "挑戦", "粘り強さ"], explanation: "..." },
+        { quote: "私は失敗したことがない。ただ、1万通りのうまくいかない方法を見つけただけだ。", author: "トーマス・エジソン", tags: ["失敗", "継続", "視点"], explanation: "..." },
+        { quote: "ハングリーであれ。愚かであれ。", author: "スティーブ・ジョブズ", tags: ["挑戦", "思想", "独立"], explanation: "..." },
+        { quote: "平和は微笑みから始まる。", author: "マザー・テレサ", tags: ["平和", "行動", "優しさ"], explanation: "..." },
+        { quote: "今日なしうることを明日に延ばすな。", author: "ベンジャミン・フランクリン", tags: ["実行", "時間管理", "習慣化"], explanation: "..." },
+        { quote: "行動は、才能や知識よりも重要である。", author: "ゲーテ", tags: ["行動", "実行", "価値"], explanation: "..." },
+        { quote: "自分の庭に咲く花を愛しなさい。", author: "エミリー・ディキンソン", tags: ["満足", "幸福", "視点"], explanation: "..." },
+        { quote: "今日は厳しい。明日はもっと厳しい。しかし明後日は美しい。", author: "ジャック・マー", tags: ["逆境", "継続", "希望"], explanation: "..." },
+        { quote: "人生で恐れることは何もない。理解することだけだ。", author: "マリー・キュリー", tags: ["学習", "知識", "恐怖"], explanation: "..." },
+        { quote: "最高の友人は、私たちが自分自身では言えないことを言う友人である。", author: "アリストテレス", tags: ["友情", "成長", "真実"], explanation: "..." },
+        { quote: "私の人生は私自身で選んだ。", author: "ココ・シャネル", tags: ["自己責任", "独立", "生き方"], explanation: "..." },
+        { quote: "成功は最終的なものではなく、失敗は致命的なものでもない。大切なのは、継続する勇気だ。", author: "ウィンストン・チャーチル", tags: ["成功", "失敗", "継続"], explanation: "..." },
+        { quote: "私は探さない。見つけるのだ。", author: "パブロ・ピカソ", tags: ["創造性", "思考", "独自性", "芸術"], explanation: "..." }
+    ];
 
-    /**
-     * すべての名言データからタグの出現回数を集計する
-     * @returns {Object<string, number>} タグ名と件数のマップ
-     */
-    function countTags() {
-        const tagCounts = {};
-        ALL_QUOTES.forEach(quote => {
-            quote.tags.forEach(tag => {
-                tagCounts[tag] = (tagCounts[tag] || 0) + 1;
-            });
-        });
-        return tagCounts;
-    }
+    /**
+     * すべての名言データからタグの出現回数を集計する
+     * @returns {Object<string, number>} タグ名と件数のマップ
+     */
+    function countTags() {
+        const tagCounts = {};
+        ALL_QUOTES.forEach(quote => {
+            quote.tags.forEach(tag => {
+                tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+            });
+        });
+        return tagCounts;
+    }
 
-    /**
-     * タグ索引一覧をHTMLにレンダリングする
-     */
-    function renderTagIndex() {
-        const tagCounts = countTags();
-        const tags = Object.keys(tagCounts).sort(); // タグ名をソート
-        const container = document.getElementById('tag-list-container');
-        
-        let htmlContent = '';
-        tags.forEach(tag => {
-            const count = tagCounts[tag];
-            // クリック時にindex.htmlに戻り、メインアプリのJSでフィルタリングが行われる想定
-            // タグ付きURLパラメータを付与
-            const url = `index.html?tag=${encodeURIComponent(tag)}`; 
-            
-            htmlContent += `
-                <a href="${url}" class="block bg-indigo-50 hover:bg-indigo-100 p-4 rounded-xl shadow-md transition duration-200 transform hover:scale-[1.02] border border-indigo-200">
-                    <div class="flex justify-between items-center">
-                        <h3 class="text-lg font-semibold text-indigo-700"># ${tag}</h3>
-                        <span class="text-2xl font-bold text-indigo-500">${count}</span>
-                    </div>
-                    <p class="text-sm text-gray-500 mt-1">
-                        関連する教訓が${count}件あります。クリックして表示
-                    </p>
-                </a>
-            `;
-        });
+    /**
+     * タグ索引一覧をHTMLにレンダリングする
+     */
+    function renderTagIndex() {
+        const tagCounts = countTags();
+        const tags = Object.keys(tagCounts).sort(); // タグ名をソート
+        const container = document.getElementById('tag-list-container');
+        
+        let htmlContent = '';
+        tags.forEach(tag => {
+            const count = tagCounts[tag];
+            // クリック時にindex.htmlに戻り、メインアプリのJSでフィルタリングが行われる想定
+            // タグ付きURLパラメータを付与
+            const url = `index.html?tag=${encodeURIComponent(tag)}`; 
+            
+            htmlContent += `
+                <a href="${url}" class="block bg-indigo-50 hover:bg-indigo-100 p-4 rounded-xl shadow-md transition duration-200 transform hover:scale-[1.02] border border-indigo-200">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-lg font-semibold text-indigo-700"># ${tag}</h3>
+                        <span class="text-2xl font-bold text-indigo-500">${count}</span>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-1">
+                        関連する教訓が${count}件あります。クリックして表示
+                    </p>
+                </a>
+            `;
+        });
 
-        container.innerHTML = htmlContent;
-    }
+        container.innerHTML = htmlContent;
+    }
 
-    document.addEventListener('DOMContentLoaded', renderTagIndex);
+    document.addEventListener('DOMContentLoaded', renderTagIndex);
 </script>
 
 </body>
