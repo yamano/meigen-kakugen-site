@@ -22,6 +22,21 @@
             max-width: 48rem;
             width: 100%;
         }
+        /* AdSenseのインプレッションをシミュレートするためのプレースホルダーCSS */
+        .adsbygoogle-placeholder {
+            background-color: #f0fdf4; /* Pale Green BG */
+            min-height: 100px; 
+            margin: 16px 0;
+            border: 1px dashed #4ade80;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #15803d;
+            text-align: center;
+            border-radius: 0.75rem; /* rounded-xl */
+            padding: 1rem;
+        }
     </style>
 </head>
 <body class="p-4 sm:p-8">
@@ -35,7 +50,7 @@
 
     <!-- 著者一覧のコンテナ -->
     <div id="author-list-container" class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <!-- JavaScriptで著者カードが挿入される -->
+        <!-- JavaScriptで著者カードと広告が挿入される -->
     </div>
 
     <!-- サイト内ナビゲーション -->
@@ -89,6 +104,33 @@
     }
 
     /**
+     * Google AdSenseの広告コードをHTMLとして返す
+     * @param {string} slotId - 広告スロットID
+     * @returns {string} 広告ユニットのHTML文字列
+     */
+    function createAdsenseHtml(slotId) {
+        // 実際のAdSenseコードをそのまま挿入
+        return `
+            <div class="col-span-1 sm:col-span-2 list-none">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6721819057047925"
+                     crossorigin="anonymous"></script>
+                <!-- 著者一覧広告 (${slotId}) -->
+                <ins class="adsbygoogle adsbygoogle-placeholder"
+                     style="display:block"
+                     data-ad-client="ca-pub-6721819057047925"
+                     data-ad-slot="${slotId}"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true">
+                     広告ユニット ID: ${slotId} (名言著者)
+                </ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        `;
+    }
+
+    /**
      * 著者索引一覧をHTMLにレンダリングする
      */
     function renderAuthorIndex() {
@@ -97,12 +139,13 @@
         const container = document.getElementById('author-list-container');
         
         let htmlContent = '';
-        authors.forEach(author => {
+        const adSlotId = "3208136351"; // 著者一覧ページの専用ID
+        
+        authors.forEach((author, index) => {
             const count = authorCounts[author];
-            // クリック時にindex.htmlに戻り、メインアプリのJSでフィルタリングが行われる想定
-            // 著者付きURLパラメータを付与
             const url = `index.html?author=${encodeURIComponent(author)}`; 
             
+            // 著者カードを挿入
             htmlContent += `
                 <a href="${url}" class="block bg-blue-50 hover:bg-blue-100 p-4 rounded-xl shadow-md transition duration-200 transform hover:scale-[1.02] border border-blue-200">
                     <div class="flex justify-between items-center">
@@ -114,7 +157,17 @@
                     </p>
                 </a>
             `;
+
+            // 著者リストが長くなった場合を想定し、リストの途中に広告を挿入（例: 4つ目のカードの後）
+            if (index === 3) { 
+                 htmlContent += createAdsenseHtml(adSlotId);
+            }
         });
+
+        // 著者数が少ない場合はリストの最後に広告を追加
+        if (authors.length < 5) {
+             htmlContent += createAdsenseHtml(adSlotId);
+        }
 
         container.innerHTML = htmlContent;
     }
