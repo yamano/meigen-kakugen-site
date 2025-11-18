@@ -16,7 +16,7 @@
     <meta property="og:title" content="【今日の教訓】日替わり名言・格言集と徹底解説">
     <meta property="og:description" content="厳選名言を深掘り解説。モチベーション向上、自己啓発に。">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://[あなたのサイトURL]/index.html"> 
+    <meta property="og:url" content="https://meigen-kakugen.com/index.html"> 
     <meta property="og:image" content="https://placehold.co/1200x630/4f46e5/ffffff?text=MEIGEN">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@meigen_bot"> 
@@ -52,6 +52,7 @@
             font-weight: 400;
             min-height: 100px; 
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
@@ -88,49 +89,47 @@
             min-height: 150px; 
         }
 
-        /* 広告コンテナのスタイル：ポリシー違反にならないよう、目立ちすぎないようにしつつ、視認性を確保 */
+        /* 広告コンテナのスタイル */
         .ad-unit-container {
             margin-top: 24px; 
             margin-bottom: 24px;
-            padding: 12px 0; /* 上下のパディングを確保 */
+            padding: 12px 0; 
             text-align: center;
             border-top: 1px dashed #e5e7eb; 
             border-bottom: 1px dashed #e5e7eb;
         }
         
-        /* 広告とインタラクティブ要素の距離を確保（最低30px） */
         #generate-btn {
             margin-top: 32px; 
         }
 
         /* 静的リスト用のスタイル */
         .static-quote-card {
-            border: 1px solid #e5e7eb; /* Gray 200 */
-            border-radius: 0.75rem; /* rounded-xl */
+            border: 1px solid #e5e7eb; 
+            border-radius: 0.75rem; 
             padding: 1rem;
             margin-bottom: 1.5rem;
-            background-color: #f9fafb; /* Gray 50 */
+            background-color: #f9fafb; 
             box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
         }
         .static-quote-text {
             font-family: 'Noto Serif JP', serif;
-            font-size: 1.125rem; /* text-lg */
-            font-weight: 700; /* font-bold */
-            color: #1f2937; /* Gray 800 */
+            font-size: 1.125rem; 
+            font-weight: 700; 
+            color: #1f2937; 
             margin-bottom: 0.5rem;
         }
         .static-author-text {
-            font-size: 0.875rem; /* text-sm */
-            color: #4b5563; /* Gray 600 */
+            font-size: 0.875rem; 
+            color: #4b5563; 
             text-align: right;
             margin-bottom: 0.75rem;
         }
         .static-explanation-text {
-            font-size: 0.875rem; /* text-sm */
-            color: #374151; /* Gray 700 */
+            font-size: 0.875rem; 
+            color: #374151; 
             line-height: 1.6;
         }
-
     </style>
     
     <!-- Google AdSense認証スクリプト (HEAD内) -->
@@ -160,7 +159,7 @@
       "@type": "WebPage",
       "name": "【日替わり】名言・格言集｜人生・成功の教訓と深掘り解説",
       "description": "厳選された名言と、その背景・意味を深く解説。毎日を豊かにする教訓が見つかります。",
-      "url": "https://[あなたのサイトURL]/index.html", 
+      "url": "https://meigen-kakugen.com/index.html", 
       "inLanguage": "ja",
       "mainContentOfPage": {
         "@type": "Article",
@@ -184,7 +183,7 @@
         日替わり 名言・格言集
     </h1>
     
-    <!-- NEW: 索引へのナビゲーション -->
+    <!-- 索引へのナビゲーション -->
     <nav class="flex justify-center gap-4 text-sm mb-6 pb-2 border-b border-gray-100">
         <a href="tag-index.html" class="text-indigo-600 hover:text-indigo-800 font-medium transition duration-200">
             📚 テーマ別索引
@@ -195,10 +194,9 @@
         </a>
     </nav>
     
-    <!-- 広告コードの挿入場所 2: トップバナー広告 (ファーストビュー内) -->
+    <!-- 広告コードの挿入場所 2: トップバナー広告 -->
     <div id="ad-container-top" class="ad-unit-container">
         <p class="text-xs font-bold text-gray-400 mb-2">【スポンサーリンク】</p>
-        <!-- AdSense広告ユニットコード: 名言集_トップバナー (正式なID: 2834631640) -->
         <ins class="adsbygoogle"
              style="display:block"
              data-ad-client="ca-pub-6721819057047925"
@@ -213,7 +211,7 @@
     <!-- 現在のフィルタリング状態を表示するエリア -->
     <div id="filter-status" class="text-center mb-6 min-h-[30px]">
         <span id="current-filter-tag" class="text-sm font-medium text-gray-500">
-            すべての教訓からランダムに表示中 <span class="text-xs text-gray-400">(タグ・索引から絞り込み)</span>
+            すべての教訓からランダムに表示中 <span class="text-xs text-gray-400">(タグをクリックで絞り込み)</span>
         </span>
     </div>
     
@@ -266,7 +264,7 @@
         </div>
     </div>
     
-    <!-- Amazonリンク表示エリア -->
+    <!-- 関連情報エリア -->
     <div id="recommendation-area" class="mt-8 pt-4 border-t border-gray-200 text-center hidden fade-in">
         <p class="text-sm font-semibold text-gray-600 mb-3">今日の教訓をさらに深める：</p>
         <!-- リンクはJavaScriptで動的に挿入されます -->
@@ -280,7 +278,6 @@
 <!-- 広告コードの挿入場所 3: 記事下/コンテンツ間広告 -->
 <div id="ad-container-bottom" class="main-container ad-unit-container">
     <p class="text-xs font-bold text-gray-400 mb-2">【関連コンテンツ】</p>
-    
     <!-- AdSense広告ユニットコード: 名言格言下部バナー (正式なID: 3484248774) -->
     <ins class="adsbygoogle"
          style="display:block"
@@ -319,18 +316,16 @@
 </div>
 <!-- /既存の静的コンテンツ -->
 
-<!-- NEW: 静的名言一覧 (コンテンツ量大幅強化) -->
+<!-- 静的名言一覧 (コンテンツ量大幅強化 / SEO対策) -->
 <div id="static-quotes-list" class="main-container bg-white p-8 sm:p-12 rounded-2xl shadow-xl mt-4">
     <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b pb-2 border-indigo-100">
-        📚 収録名言・格言と深掘り解説（全40選）
+        📚 収録名言・格言と深掘り解説（全33選）
     </h2>
     <!-- ここにJavaScriptで生成した静的リストを挿入する -->
     <div id="all-quotes-list-content">
         <!-- JavaScriptによってすべての名言がここにレンダリングされます -->
     </div>
 </div>
-<!-- /NEW: 静的名言一覧 -->
-
 
 <footer>
     <div class="text-sm text-gray-500 space-x-4">
@@ -359,21 +354,18 @@
         <div class="flex flex-col gap-3">
             <!-- Twitter 共有ボタン (JS制御) -->
             <button id="share-twitter-btn" class="flex items-center justify-center gap-3 bg-blue-400 hover:bg-blue-500 text-white font-bold py-3 rounded-full transition duration-200 transform hover:scale-[1.02] shadow-md">
-                <!-- Twitter Icon (Inline SVG) -->
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.901 1.153h3.586l-8.73 10.04h10.89l-14.61 9.92h-3.66l8.89-10.22h-10.89z"/></svg>
                 Twitter (X) でシェア
             </button>
 
             <!-- LINE 共有ボタン (JS制御) -->
             <button id="share-line-btn" class="flex items-center justify-center gap-3 bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-full transition duration-200 transform hover:scale-[1.02] shadow-md">
-                <!-- LINE Icon (Inline SVG Placeholder) -->
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11.96 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm4.332 17.618h-8.583c-.341 0-.616-.275-.616-.615v-8.583c0-.341.275-.616.616-.616h8.583c.341 0 .615.275.615.616v8.583c0 .341-.274.615-.615.615z"/></svg>
                 LINE で友だちに送る
             </button>
 
             <!-- テキストコピーボタン -->
             <button id="copy-text-btn" class="flex items-center justify-center gap-3 bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 rounded-full transition duration-200 transform hover:scale-[1.02] shadow-md">
-                <!-- Copy Icon (Inline SVG) -->
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                 【解説付き】全文をコピー
             </button>
@@ -387,96 +379,83 @@
 
 <script>
     // ===================================
-    // 1. 固定データとグローバル変数
+    // 1. データとグローバル変数
     // ===================================
     
-    // 【重要】固定の名言データ配列 (全40個に拡張)
+    // 【重要】固定の名言データ配列 (全33個)
     const ALL_QUOTES = [
-        { quote: "成功とは、失敗を恐れずに挑戦し続ける能力である。", author: "ウィンストン・チャーチル", tags: ["挑戦", "失敗", "継続"], explanation: "チャーチルは、成功の秘訣は一度の勝利ではなく、何度失敗しても諦めずに立ち向かう精神力にあると説きました。この教訓は、今日のビジネス環境におけるイノベーションや、新しいスキル習得にそのまま応用できます。失敗は終わりではなく、次へのステップとして捉えましょう。" },
-        { quote: "考えるのは難しい。だからこそ、ほとんどの人は判断する。", author: "カール・ユング", tags: ["思考", "哲学", "決断"], explanation: "深く考えることはエネルギーを使いますが、人はすぐに結論（判断）に飛びつきがちです。ユングの言葉は、安易な判断を下す前に、一度立ち止まって本質的な問題は何かを深く掘り下げることの重要性を教えてくれます。特に重要な経営判断や人生の選択において役立つ教訓です。" },
-        { quote: "完璧を目指すな。完成させろ。", author: "マーク・ザッカーバーグ", tags: ["実行", "スピード", "仕事術"], explanation: "Facebookの創業者であるザッカーバーグの言葉は、特にITやスタートアップの業界で重視されます。完璧を追求するあまり、市場への投入が遅れることの機会損失を警告しています。まずは「完成」させて世に出し、フィードバックを得ながら「完璧」に近づけるアジャイルな姿勢が、現代の成功には不可欠です。" },
-        { quote: "最も重要なことは、自分自身をコントロールすることだ。", author: "プラトン", tags: ["自己制御", "習慣化", "哲学"], explanation: "古代ギリシャの哲学者プラトンは、外的な富や権力ではなく、内的な自己の感情や欲望を律することこそが、真の幸福と成功の基盤だと考えました。この教訓は、衝動的な消費や感情的な意思決定を避け、長期的な目標達成に向けた習慣を築く上で、極めて重要な指針となります。" },
-        { quote: "幸福とは、能力と現実の要求が一致している状態である。", author: "ジョン・F・ケネディ", tags: ["幸福", "仕事術", "目標"], explanation: "ケネディ大統領が語る幸福論は、自己の持つ才能や能力が、社会や仕事から求められている課題を解決する時に、最も大きな満足感が得られるということを示しています。自分の強みを活かし、それを必要としている場所を見つけることが、キャリアと人生の充足に繋がります。" },
-        { quote: "100回叩くと壊れる壁でも、皆が99回まで叩いている。", author: "本田宗一郎", tags: ["努力", "継続", "モチベーション"], explanation: "ホンダの創業者である本田宗一郎の言葉は、成功と失敗の境界線が「あと一歩」の粘り強さにあることを示唆しています。多くの人が挫折する99回目でやめてしまうところを、100回目に到達するまで続ける意思が、競争優位性となります。最後の粘りが重要です。" },
-        { quote: "想像力は知識よりも重要である。", author: "アルベルト・アインシュタイン", tags: ["創造性", "思考", "イノベーション"], explanation: "アインシュタインは、既存の知識も大切だが、新しい何かを生み出すための想像力こそが、人類の進歩の源泉であると考えました。この言葉は、既存の枠組みにとらわれず、自由な発想で課題解決に取り組むこと、つまりイノベーションを起こすためのマインドセットの重要性を説いています。" },
-        { quote: "変化こそが人生の不変の法則である。", author: "ソクラテス", tags: ["変化", "適応", "哲学"], explanation: "古代からの教訓でありながら、現代のテクノロジー時代に最も当てはまる言葉の一つです。ビジネスも人生も常に変化しており、この事実を受け入れ、自らも変化に適応していく能力が生き残るために必須です。変化を恐れず、むしろ楽しむ姿勢が求められます。" },
-        { quote: "あなたが変えられるのは、あなたの努力だけだ。", author: "ネルソン・マンデラ", tags: ["努力", "自己責任", "行動"], explanation: "南アフリカの元大統領マンデラの言葉は、他人の行動や環境を変えようとする無駄な努力をやめ、唯一コントロール可能な「自分の努力と行動」に集中することの重要性を教えてくれます。外部環境のせいにせず、自律的に行動する力を養いましょう。" },
-        { quote: "最も大きな危険は、目標が高すぎることではなく、低すぎることである。", author: "ミケランジェロ", tags: ["目標設定", "挑戦", "ビジョン"], explanation: "ルネサンスの巨匠ミケランジェロは、人の能力は目標の高さによって引き出されると信じていました。達成できないかもしれないと恐れて目標を低く設定するよりも、壮大なビジョンを持つことで、想像以上の力を発揮できることを示唆しています。常にストレッチ目標を設定しましょう。" },
-        { quote: "他人の生き方を真似しても、成功は得られない。", author: "ココ・シャネル", tags: ["個性", "自己理解", "独自性"], explanation: "ファッション界のレジェンド、シャネルの言葉は、自分自身の個性と価値観に根ざした生き方を追求することの重要性を強調しています。流行や他人の成功体験を盲目的に追いかけるのではなく、独自のスタイルを確立することこそが、真の成功と幸福に繋がる道です。" },
-        { quote: "人生は短い。今日できることを明日まで延ばすな。", author: "パブロ・ピカソ", tags: ["時間管理", "実行", "プロアクティブ"], explanation: "偉大な芸術家ピカソのこの言葉は、生産性向上に直結する教訓です。先延ばしは最大の敵であり、今日という一日、今という瞬間が持つ価値を最大限に活かすよう促しています。タスクは小さく分解し、「今すぐ実行」を心がけましょう。" },
-        { quote: "逆境こそ、人が真に試される機会だ。", author: "ウォルト・ディズニー", tags: ["逆境", "成長", "レジリエンス"], explanation: "ディズニーの成功は数々の失敗と困難の上に築かれました。逆境に直面した時こそ、その人の真価、そしてレジリエンス（精神的回復力）が問われます。困難を避けるのではなく、それを成長のための最高の試練として受け入れるマインドセットが、偉業を成す鍵です。" },
-        { quote: "習慣こそが、人生のすべてを決定する。", author: "アリストテレス", tags: ["習慣化", "基礎", "自己成長"], explanation: "哲学の祖アリストテレスは、人間の行動や性格は一時的な出来事ではなく、日々の習慣によって形作られると見ていました。成功は、派手なイベントの結果ではなく、質の高い習慣の積み重ねによって決まります。目標達成のためには、まず小さな良い習慣から作りましょう。" },
-        { quote: "自分のしていることに自信を持て。それが成功の第一歩だ。", author: "トーマス・エジソン", tags: ["自信", "モチベーション", "行動"], explanation: "発明王エジソンは、自らのアイデアや製品に対する揺るぎない確信が、困難な研究開発を続ける原動力になったことを知っています。自信は単なる感情ではなく、行動を促し、他者を説得する力となります。まずは自分の選択を信じ、堂々と行動しましょう。" },
-        { quote: "成功の秘訣は、常に目的を持ち続けることだ。", author: "スティーブ・ジョブズ", tags: ["目的", "ビジョン", "継続"], explanation: "アップルの共同創業者ジョブズは、製品開発においても経営においても、明確な「なぜ？」を持つことの重要性を説きました。目的（パーパス）がブレなければ、一時的な失敗や市場の変化にも動じず、真に価値のあるものを作り続けることができます。あなたの目的は何ですか？" },
-        { quote: "他者から期待されること以上に、自分が期待することを目指せ。", author: "ジョージ・バーナード・ショー", tags: ["自己基準", "独立", "挑戦"], explanation: "他人の期待に応えることは社会生活において重要ですが、それだけでは自己の成長が止まります。バーナード・ショーは、自分自身が設定した高い基準（自己期待）を達成することこそが、真のモチベーションと成果に繋がると示唆します。自分の内なる声に耳を傾けましょう。" },
-        { quote: "あなたが今日話す言葉が、明日のあなたの人生を作る。", author: "オプラ・ウィンフリー", tags: ["言葉", "ポジティブ思考", "習慣"], explanation: "メディア界の女王オプラは、言葉の力が現実を創造すると信じています。ネガティブな言葉はネガティブな現実を、ポジティブで建設的な言葉は成功と幸福を引き寄せます。日々の口癖や内なる独り言に意識を向け、使う言葉を変えていきましょう。" },
-        // --- ここから追加の22個 ---
-        { quote: "成功は、熱意を失わずに失敗から失敗へと渡り歩く能力である。", author: "ウィンストン・チャーチル", tags: ["失敗", "継続", "成功"], explanation: "チャーチルは、成功は一直線ではなく、挫折と挑戦の連続だと語りました。重要なのは、失敗をしても熱意を失わず、その経験を糧に進み続けることです。この粘り強さが、最終的な勝利を決定します。" },
-        { quote: "人生とは、あなたが他の計画を立てるのに忙しい間に起こることだ。", author: "ジョン・レノン", tags: ["人生", "計画", "視点"], explanation: "ビートルズのジョン・レノンは、人生の最も価値ある瞬間は、完璧に計画されたイベントではなく、日常の中に不意に訪れると教えてくれます。計画に固執しすぎず、今この瞬間の美しさや予期せぬ出来事を受け入れる柔軟性が大切です。" },
-        { quote: "知識は力なり。", author: "フランシス・ベーコン", tags: ["知識", "学習"], explanation: "哲学者ベーコンのこの言葉は、情報と理解が、個人の能力と社会的な影響力の源泉であることを示します。現代社会において知識は特に強力な資産であり、絶えず学び続ける姿勢が、あらゆる分野での優位性を生み出します。" },
-        { quote: "どんなに忙しくても、魂を養う時間を持つこと。", author: "マザー・テレサ", tags: ["メンタルヘルス", "休息", "倫理"], explanation: "マザー・テレサは、外の世界への奉仕や活動と同様に、内面（魂）の充足を大切にすべきだと説きました。忙しい日常の中でも、瞑想、読書、静かな時間など、自分と向き合う時間を持つことが、持続可能な活動の基盤となります。" },
-        { quote: "もし九割がダメなら、残りの一割のために生きる価値がある。", author: "ボブ・マーリー", tags: ["希望", "ポジティブ思考"], explanation: "レゲエの神様ボブ・マーリーは、人生におけるネガティブな要素に圧倒されず、わずかなポジティブな要素に焦点を当てることの重要性を教えてくれます。困難な状況でも、希望を見つけ出す視点を持つことが、前に進む力になります。" },
-        { quote: "自分の心と直感に従う勇気を持ちなさい。", author: "スティーブ・ジョブズ", tags: ["直感", "自信", "独立"], explanation: "ジョブズは、知識や論理だけでは解けない問題に対して、直感こそが唯一の羅針盤だと強調しました。自分の内なる声、心の奥底で正しいと感じることを信じ、世間の常識や期待に反してでも、自分の道を進む勇気を持ちましょう。" },
-        { quote: "私の仕事は、人々が自分らしくいるのを助けることではない。私の仕事は、彼らがそれを始めるのを助けることだ。", author: "オプラ・ウィンフリー", tags: ["リーダーシップ", "支援", "影響力"], explanation: "オプラのこの言葉は、真のリーダーシップとは、結果を与えるのではなく、他者が自らの力を発揮し始めるきっかけを作ることにある、という考えを示しています。人を育てる上では、答えを与えるのではなく、問いかけ、最初の一歩をサポートすることが重要です。" },
-        { quote: "幸福への道はない。幸福そのものが道なのだ。", author: "マハトマ・ガンジー", tags: ["幸福", "視点", "哲学"], explanation: "ガンジーは、幸福を達成すべき最終目標ではなく、日々の生き方やプロセスそのものとして捉えるべきだと説きました。今現在を楽しめない人が未来に幸福になれる保証はありません。この瞬間、この過程に感謝し、喜びを見出すことが大切です。" },
-        { quote: "人生は勇敢な冒険か、あるいは全く何もないかだ。", author: "ヘレン・ケラー", tags: ["挑戦", "冒険", "生き方"], explanation: "三重苦を克服したヘレン・ケラーの言葉は、安全圏にとどまる人生は退屈で実りのないものになりがちだと警告しています。恐れずに新しい経験に飛び込み、人生を自己成長のための壮大な冒険として楽しむ姿勢を促しています。" },
-        { quote: "過去を変えることはできないが、未来は変えられる。", author: "ネルソン・マンデラ", tags: ["未来", "行動", "自己制御"], explanation: "過去の過ちや失敗にとらわれても何も生まれません。マンデラの言葉は、エネルギーを後悔ではなく、今からの行動、つまり未来を形作ることに集中させるべきだと教えてくれます。今日の一歩が、明日の現実を変えるのです。" },
-        { quote: "私たちが最も恐れるのは、自分たちが計り知れないほど強力であるということだ。", author: "マリアンヌ・ウィリアムソン", tags: ["自己成長", "潜在能力", "恐怖"], explanation: "多くの人が成功を恐れるのは、自分の真の可能性を知るのが怖いからです。ウィリアムソンは、私たちの内側には計り知れない力があり、その力を解放することこそが、世界に貢献し、他者にインスピレーションを与える道だと説いています。" },
-        { quote: "最も危険なのは、進化しないことだ。", author: "ジェフ・ベゾス", tags: ["変化", "成長", "イノベーション"], explanation: "アマゾンの創業者ベゾスは、停滞は衰退に等しいと考えました。常に変化し続ける市場において、昨日と同じやり方に固執することは最も大きなリスクです。毎日少しでも改善し、学び、進化し続けることが、長期的な成功を保証します。" },
-        { quote: "あなたの時間は限られている。他人の人生を生きることで浪費してはいけない。", author: "スティーブ・ジョブズ", tags: ["時間管理", "独立", "生き方"], explanation: "人生の有限性を認識し、他人の期待や社会の常識に縛られて、自分の本当にやりたいことを見失ってはいけないというメッセージです。自分の価値観に基づき、後悔のない人生を送るために、自分の時間を何に使うか真剣に考えましょう。" },
-        { quote: "真の賢者は、他人の過ちから学ぶ。", author: "オットー・フォン・ビスマルク", tags: ["学習", "経験", "知識"], explanation: "鉄血宰相ビスマルクは、成功者とそうでない者の違いを、経験の活かし方に見出しました。自分の失敗から学ぶのは当然ですが、他者の失敗事例を分析し、同じ過ちを犯さないよう先回りすることが、賢明な学習方法だと説いています。" },
-        { quote: "芸術は、目に見えないものを見えるようにする。", author: "ポール・クレー", tags: ["創造性", "芸術", "視点"], explanation: "芸術家クレーの言葉は、創造性の本質を捉えています。目に見える現象だけでなく、感情、アイデア、精神的な概念など、内面的なものを表現し、他者と共有することの力を示しています。これはビジネスにおける「ビジョンの可視化」にも通じる教訓です。" },
-        { quote: "私を殺さないものが、私をより強くする。", author: "フリードリヒ・ニーチェ", tags: ["逆境", "成長", "哲学"], explanation: "ドイツの哲学者ニーチェのこの言葉は、困難や苦痛を乗り越えた経験こそが、人を精神的にも能力面でも成長させるという「反脆弱性」の概念を表しています。逆境を避けずに立ち向かうことで、あなたは以前よりも強くなります。" },
-        { quote: "批判を避ける方法はただ一つ。何もせず、何も言わず、何者でもなくなることだ。", author: "アリストテレス", tags: ["行動", "挑戦", "独立"], explanation: "行動を起こせば必ず批判は伴う、という事実を示しています。真に価値のあることを成し遂げようとすれば、批判は避けられません。この言葉は、批判を恐れて行動を止めるのではなく、批判を無視して自分の信じる道を進む勇気を後押しします。" },
-        { quote: "人は、考えることによって偉大になる。", author: "ブレーズ・パスカル", tags: ["思考", "哲学", "価値"], explanation: "パスカルは、人間の尊厳は肉体の強さや富ではなく、思考する能力にあると考えました。深く、批判的に、そして創造的に考えることこそが、私たちを他の生物から区別し、偉大な成果を生み出す基盤となります。" },
-        { quote: "シンプルにすることは、複雑にすることよりも難しい。", author: "レオナルド・ダ・ヴィンチ", tags: ["デザイン", "思考", "品質"], explanation: "ダ・ヴィンチは、複雑なものを削ぎ落とし、本質だけを残す「シンプルさ」の実現には、高度な洞察力が必要だと知っていました。製品開発、プレゼンテーション、文章作成など、あらゆる分野で「シンプル」なものは最も洗練されたものとされます。" },
-        { quote: "最も素晴らしい報酬は、仕事そのものの中にある。", author: "セオドア・ルーズベルト", tags: ["仕事術", "モチベーション", "満足"], explanation: "ルーズベルトは、外的な報酬（給与や名声）よりも、仕事を通じて成長し、課題を解決する過程で得られる内的な満足感こそが、最も価値のある報酬だと語りました。仕事に目的意識を持つことが、モチベーションを永続させます。" },
-        { quote: "最高の復讐は、成功することだ。", author: "フランク・シナトラ", tags: ["成功", "モチベーション", "視点"], explanation: "歌手フランク・シナトラのこの言葉は、ネガティブな感情（怒り、恨み）を行動のエネルギーに変える視点を提供します。他者を見返すために、彼らが否定した以上の成功を収めることが、最も強力で建設的な反論となります。" },
-        { quote: "明日死ぬかのように生きろ。永遠に生きるかのように学べ。", author: "マハトマ・ガンジー", tags: ["生き方", "学習", "習慣化"], explanation: "ガンジーのこの教訓は、「今を大切に生きる情熱」と「未来を見据えて自己投資を続ける冷静さ」という、相反する二つの姿勢のバランスの重要性を示しています。毎日を最大限に生き、同時に知恵とスキルを絶えず蓄積しましょう。" }
+        { quote: "想像力は知識よりも重要だ。知識には限界があるが、想像力は世界を包み込む。", author: "アルベルト・アインシュタイン", tags: ["科学", "創造性"], explanation: "知識は過去の蓄積ですが、想像力は未来を創造する力です。アインシュタインは、限界のある知識を超えて、新しい可能性を見出すには自由な発想が不可欠であると説きました。イノベーションの源泉となる教えです。" },
+        { quote: "ハングリーであれ。愚かであれ。\n\n(Stay hungry, stay foolish.)", author: "スティーブ・ジョブズ", tags: ["ビジネス", "革新"], explanation: "現状に満足せず常に貪欲に学び続け、常識にとらわれない大胆な発想を持ち続けることの重要性を説いた言葉です。既成概念を打ち破り、新しい価値を創造するためのマインドセットです。" },
+        { quote: "夢見ることができれば、それは実現できる。", author: "ウォルト・ディズニー", tags: ["夢", "実現"], explanation: "ディズニーの創造の原点は、まず鮮明に夢を描くことにありました。ビジョンを明確に持ち、それを信じ抜くことが、現実を変える第一歩となるという力強いメッセージです。" },
+        { quote: "明日死ぬかのように生きよ。永遠に生きるかのように学べ。", author: "マハトマ・ガンディー", tags: ["人生", "学習"], explanation: "「今」を大切にする情熱と、未来への自己投資としての学習を両立させることの重要性を説いています。一日一日を全力で生きつつ、長期的な成長も怠らない姿勢が求められます。" },
+        { quote: "月が綺麗ですね。\n\n（I love you の日本的訳として）", author: "夏目漱石", tags: ["文学", "愛"], explanation: "直接的な言葉を使わず、情景を通して想いを伝える日本独特の奥ゆかしさを象徴する逸話です。言葉の裏にある感情や文脈を読み解く感性の大切さを教えてくれます。" },
+        { quote: "かけがえのない人間になるためには、常に人とは違っていなければならない。", author: "ココ・シャネル", tags: ["ファッション", "個性"], explanation: "流行を追うのではなく、自分だけのスタイルと価値観を貫くことの重要性を説いています。他者との違いを恐れず、独自の個性を磨き上げることが、唯一無二の存在になる道です。" },
+        { quote: "天才とは、1％のひらめきと99％の努力である。", author: "トーマス・エジソン", tags: ["努力", "成功"], explanation: "偉大な発明や成果は、一瞬の閃きだけでなく、それを形にするための膨大で地道な努力によって支えられているという教訓です。継続的な努力こそが成功への鍵です。" },
+        { quote: "深淵をのぞく時、深淵もまたこちらをのぞいているのだ。", author: "フリードリヒ・ニーチェ", tags: ["哲学", "心理"], explanation: "悪や困難な問題と対峙する際、自分自身もその影響を受け、変質してしまう危険性を示唆しています。常に自己を客観視し、闇に飲み込まれない強い精神力を持つことの重要性を説いています。" },
+        { quote: "失敗したところでやめてしまうから失敗になる。成功するところまで続ければ、それは成功になる。", author: "松下幸之助", tags: ["ビジネス", "不屈"], explanation: "失敗は結果ではなく、諦めた時点で確定するものです。成功するまで試行錯誤を続ければ、すべての失敗は成功へのプロセスの一部となるという、不屈の精神を説いています。" },
+        { quote: "愛の反対は憎しみではなく、無関心です。", author: "マザー・テレサ", tags: ["愛", "平和"], explanation: "人間関係において最も残酷なのは、相手に関心を持たないことです。憎しみよりも深い断絶を生む「無関心」を乗り越え、周囲の人々に愛と関心を持って接することの大切さを教えてくれます。" },
+        { quote: "生きるべきか、死ぬべきか、それが問題だ。\n\n(To be, or not to be)", author: "ウィリアム・シェイクスピア", tags: ["演劇", "苦悩"], explanation: "ハムレットの苦悩を通して、人生の岐路における決断の重さと、存在そのものの意味を問いかける言葉です。困難に立ち向かうか、逃れるか、究極の選択を迫られた時の人間の心理を描写しています。" },
+        { quote: "最も強い者が生き残るのではなく、最も賢い者が生き延びるのでもない。唯一生き残ることが出来るのは、変化できる者である。", author: "チャールズ・ダーウィン", tags: ["進化", "変化"], explanation: "環境の変化に適応する能力こそが、生存と繁栄の条件であるという進化論の教訓です。現代のビジネスや生活においても、変化を恐れず柔軟に対応する力が求められます。" },
+        { quote: "成功は99％の失敗の上に成り立っている。", author: "本田宗一郎", tags: ["ビジネス", "挑戦"], explanation: "多くの失敗と挑戦の積み重ねが、一つの成功を生み出すという事実を示しています。失敗を恐れて挑戦を避けるのではなく、失敗から学び続けることが成功への近道です。" },
+        { quote: "最大の栄光は、決して転ばないことにあるのではない。転ぶたびに起き上がり続けることにある。", author: "孔子", tags: ["思想", "儒教"], explanation: "失敗しないことよりも、失敗から立ち直る「回復力（レジリエンス）」にこそ人間の真価があるという教えです。何度転んでも立ち上がる不屈の精神が、人生を切り拓きます。" },
+        { quote: "世界で最も素晴らしく、最も美しいものは、目で見たり手で触れたりすることはできません。それは心で感じなければならないのです。", author: "ヘレン・ケラー", tags: ["人生", "希望"], explanation: "真に価値あるもの（愛、友情、希望など）は、物質的な形を持たず、心で感じるものであるという教訓です。目に見えるものだけでなく、内面的な豊かさを大切にすることの重要性を説いています。" },
+        { quote: "私は自分が何も知らないということを知っている。\n\n（無知の知）", author: "ソクラテス", tags: ["哲学", "知識"], explanation: "自分の知識の限界を自覚すること（無知の知）が、真の探求の始まりであるという教えです。謙虚さを持ち、常に学び続ける姿勢こそが、知恵への道を開きます。" },
+        { quote: "人間は恋と革命のために生まれて来たのだ。", author: "太宰治", tags: ["文学", "情熱"], explanation: "情熱的な恋愛と、社会を変革する革命こそが、人間が生きる根源的なエネルギーであるという太宰治の思想を表しています。現状に安住せず、情熱を持って生きることの意味を問いかけています。" },
+        { quote: "人民の、人民による、人民のための政治。", author: "リンカーン", tags: ["政治", "民主主義"], explanation: "民主主義の根本原理を簡潔に表現した言葉です。政治権力は国民に由来し、国民によって行使され、国民の利益のためにあるべきだという理想を示しています。" },
+        { quote: "人生はクローズアップで見れば悲劇だが、ロングショットで見れば喜劇だ。", author: "チャールズ・チャップリン", tags: ["映画", "人生観"], explanation: "目前の苦難も、長い人生の一部として俯瞰すれば、笑い話や喜劇の一部になり得るという視点の転換を教えてくれます。辛い時こそ、客観的な視点を持つことで心が軽くなります。" },
+        { quote: "芸術は爆発だ。", author: "岡本太郎", tags: ["芸術", "情熱"], explanation: "既存の枠組みを破壊し、内なるエネルギーを爆発させることこそが芸術の本質であるという主張です。常識にとらわれず、自己を全面的に表現する情熱の大切さを説いています。" },
+        { quote: "不可能（IMPOSSIBLE）なんて言葉はないわ。その言葉自体が言っているのよ、「私は可能（I'M POSSIBLE）」だって。", author: "オードリー・ヘップバーン", tags: ["前向き", "自信"], explanation: "言葉遊びを通して、不可能と思える状況でもポジティブな視点を持つことで、可能性を見出せるというメッセージです。自信と前向きな姿勢が、限界を突破する力を与えてくれます。" },
+        { quote: "日本を今一度、せんたく（洗濯）いたし申候。", author: "坂本龍馬", tags: ["歴史", "改革"], explanation: "当時の日本の古い体制や慣習を一新し、新しい国造りを目指すという龍馬の強い決意を表した言葉です。現状を打破し、大きな変革を成し遂げようとする改革者の精神を象徴しています。" },
+        { quote: "私の辞書に不可能という文字はない。", author: "ナポレオン・ボナパルト", tags: ["歴史", "自信"], explanation: "強い意志と行動力があれば、どんな困難も克服できるというナポレオンの絶対的な自信を表しています。限界を自分で決めつけず、可能性を信じて突き進むリーダーシップの精神です。" },
+        { quote: "我思う、ゆえに我あり。\n\n(Cogito, ergo sum)", author: "ルネ・デカルト", tags: ["哲学", "真理"], explanation: "あらゆるものを疑っても、疑っている自分自身の存在だけは疑いようがないという哲学的真理です。自己の意識と理性を基盤として、真実を探求する姿勢の重要性を示しています。" },
+        { quote: "雨ニモマケズ、風ニモマケズ。", author: "宮沢賢治", tags: ["文学", "忍耐"], explanation: "どんな困難や苦しみにも負けず、静かに強く生きる理想の姿を描いた詩の一節です。逆境においても利他的な精神を持ち続ける、日本的な忍耐と美徳の精神を表現しています。" },
+        { quote: "成功とは、意欲を失わずに失敗から失敗へと進む能力のことだ。", author: "ウィンストン・チャーチル", tags: ["リーダーシップ"], explanation: "失敗を恐れず、何度つまづいても情熱を持ち続けることが、最終的な成功への唯一の道であると説いています。リーダーにとって最も重要な資質は、逆境における不屈の精神です。" },
+        { quote: "水になれ。\n\n(Be water, my friend.)", author: "ブルース・リー", tags: ["武道", "柔軟性"], explanation: "水のように形にとらわれず、状況に応じて柔軟に変化し、適応することの強さを説いた教えです。固定観念を捨て、自由自在に動くことで、あらゆる障害を乗り越えることができます。" },
+        { quote: "あなたが「できる」と思おうと、「できない」と思おうと、どちらも正しい。", author: "ヘンリー・フォード", tags: ["経営", "マインド"], explanation: "結果は自分の信念によって決まるという法則です。できると信じれば方法は見つかり、できないと信じれば言い訳が見つかります。マインドセットが現実を創ることを教えてくれます。" },
+        { quote: "急がずに、だが休まずに。", author: "ヨハン・ヴォルフガング・フォン・ゲーテ", tags: ["人生", "継続"], explanation: "焦って結果を求めるのではなく、着実に一歩ずつ進み続けることの重要性を説いています。継続こそが力なり。長期的な視点で物事に取り組み、歩みを止めないことが大成への道です。" },
+        { quote: "人間は一本の葦（あし）にすぎない。自然の中で最も弱いものである。だが、それは考える葦である。", author: "ブレーズ・パスカル", tags: ["哲学", "人間"], explanation: "人間は自然界において脆く弱い存在ですが、思考する能力を持つことによって偉大さを獲得するという思想です。肉体的な強さではなく、知性と精神性こそが人間の尊厳であることを示しています。" },
+        { quote: "誰もがスターであり、輝く権利を持っている。", author: "マリリン・モンロー", tags: ["芸能", "自己肯定"], explanation: "すべての人には独自の魅力と才能があり、それを表現して輝く権利があるというエンパワーメントの言葉です。自分自身を信じ、ありのままの自分を肯定することの大切さを伝えています。" },
+        { quote: "小さいことを積み重ねるのが、とんでもないところへ行くただひとつの道。", author: "イチロー", tags: ["スポーツ", "努力"], explanation: "偉大な記録や成果は、魔法のような一撃ではなく、日々の地道な努力の積み重ねによってのみ達成されるという教訓です。毎日の小さな一歩を大切にすることが、やがて大きな到達点へと導きます。" },
+        { quote: "つまづいたっていいじゃないか にんげんだもの", author: "相田みつを", tags: ["詩", "癒やし"], explanation: "失敗や弱さも人間らしさの一部として受け入れ、自分を許すことの大切さを説いた言葉です。完璧でなくても良いというメッセージが、疲れた心に寄り添い、再び歩き出す勇気を与えてくれます。" }
     ];
 
-    let currentQuoteData = null; // 現在表示中の名言データを保持
-    let fullShareText = ""; // コピーボタン用に整形されたフルテキストを保持
-    let shortShareText = ""; // SNS/Web Share API用に整形されたテキストを保持
+    let currentQuoteData = null; // 現在表示中の名言データ
+    let filteredQuotes = ALL_QUOTES; // フィルタリング後の名言リスト
+    let currentFilterTag = null; // 現在適用中のタグフィルタ
+    let currentFilterAuthor = null; // 現在適用中の著者フィルタ
+    let fullShareText = ''; // コピー用の長文テキスト
+    let shortShareText = ''; // Web Share API用の短文テキスト
     
-    // 【新規】フィルタリング関連の変数
-    let filteredQuotes = ALL_QUOTES; // 初期値は全名言
-    let currentFilterTag = null; // 現在選択中のタグ
-    let currentFilterAuthor = null; // 現在選択中の著者
-    
-    // DOM要素
+    // DOM要素の取得
     const quoteTextElement = document.getElementById('quote-text');
     const quoteAuthorElement = document.getElementById('quote-author');
     const generateBtn = document.getElementById('generate-btn');
-    const shareBtn = document.getElementById('share-btn'); 
-    const recommendationArea = document.getElementById('recommendation-area'); 
-    const recommendationLinksContainer = document.getElementById('recommendation-links');
-    const tagsContainer = document.getElementById('tags-container'); 
-    const explanationTextElement = document.getElementById('explanation-text'); 
-    const notificationBox = document.getElementById('notification-box'); 
-    const notificationMessage = document.getElementById('notification-message'); 
-    const filterStatusElement = document.getElementById('current-filter-tag'); // フィルタ状態表示要素
-    const allQuotesListContent = document.getElementById('all-quotes-list-content'); // 静的リストコンテナ
-
+    const shareBtn = document.getElementById('share-btn');
+    const tagsContainer = document.getElementById('tags-container');
+    const explanationTextElement = document.getElementById('explanation-text');
+    const recommendationArea = document.getElementById('recommendation-area');
+    const recommendationLinks = document.getElementById('recommendation-links');
+    const filterStatusElement = document.getElementById('filter-status');
+    const allQuotesListContent = document.getElementById('all-quotes-list-content');
+    const notificationBox = document.getElementById('notification-box');
+    const notificationMessage = document.getElementById('notification-message');
     
-    // モーダル関連DOM要素
+    // モーダル関連要素
     const shareModal = document.getElementById('share-modal');
     const closeModalBtn = document.getElementById('close-modal-btn');
-    const modalQuotePreview = document.getElementById('modal-quote-preview');
     const shareTwitterBtn = document.getElementById('share-twitter-btn');
-    const shareLineBtn = document.getElementById('share-line-btn'); 
+    const shareLineBtn = document.getElementById('share-line-btn');
     const copyTextBtn = document.getElementById('copy-text-btn');
-
-    // AmazonアソシエイトID
-    const AFFILIATE_TAG = 'yamano32010e-22'; 
+    const modalQuotePreview = document.getElementById('modal-quote-preview');
     
-    // コピー時に使用する固定URL
-    const FIXED_SHARE_URL = window.location.href.split('?')[0]; // URLパラメータを除去
+    // 固定の共有URL (実際のホスティングURLに置き換える)
+    const FIXED_SHARE_URL = "https://meigen-kakugen.com/index.html"; 
+
 
     // ===================================
     // 2. ユーティリティ関数
     // ===================================
-
+    
     /**
      * 画面下部に通知メッセージを表示する
      */
@@ -488,100 +467,87 @@
             notificationBox.style.opacity = 0;
         }, 3000);
     }
-
+    
     /**
-     * 著者とテーマに基づき、Amazonで検索すべきキーワードとボタンテキストを決定する
+     * レコメンドエリアを更新する
      */
     function updateRecommendation(quoteData) {
-        const { tags, author } = quoteData;
-
-        // 1. 著者名からのリンク (最優先)
-        const authorUrl = `https://www.amazon.co.jp/s?k=${encodeURIComponent(author)}&tag=${AFFILIATE_TAG}`; 
-        const authorLinkHtml = `
-            <a href="${authorUrl}" target="_blank" rel="noopener noreferrer" class="text-xs sm:text-sm bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-3 rounded-full transition duration-200 shadow-md transform hover:scale-[1.05] whitespace-nowrap">
-                ${author} の関連書籍を見る
-            </a>
-        `;
+        recommendationLinks.innerHTML = '';
+        const author = quoteData.author;
         
-        // 2. タグに基づいたテーマ別リンク
-        let keyword = "自己啓発書";
-        let label = "関連書籍";
+        // Wikipediaリンク
+        const wikipediaUrl = `https://ja.wikipedia.org/wiki/${encodeURIComponent(author)}`;
+        const wikipediaLink = document.createElement('a');
+        wikipediaLink.href = wikipediaUrl;
+        wikipediaLink.target = '_blank';
+        wikipediaLink.rel = 'noopener noreferrer';
+        wikipediaLink.className = 'inline-flex items-center text-sm text-gray-600 bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded-full transition duration-150';
+        wikipediaLink.innerHTML = `📚 ${author} をWikipediaで調べる`;
+        recommendationLinks.appendChild(wikipediaLink);
 
-        if (tags.includes("仕事術") || tags.includes("リーダーシップ")) {
-            keyword = "リーダーシップ マネジメント 自己啓発";
-            label = "リーダーシップ論";
-        } else if (tags.includes("習慣化") || tags.includes("継続")) {
-            keyword = "習慣化 トラッカー 成功法則";
-            label = "習慣化・成功法則";
-        } else if (tags.includes("失敗") || tags.includes("挑戦")) {
-            keyword = "失敗を恐れない 挑戦 マインドセット";
-            label = "挑戦のマインドセット";
-        } else if (tags.includes("幸福") || tags.includes("哲学")) {
-            keyword = "ウェルビーイング マインドフルネス 幸福論";
-            label = "メンタルヘルス・幸福論";
-        }
+        // Amazonリンク（著者名検索）
+        // アソシエイトタグは適宜変更してください
+        const amazonUrl = `https://www.amazon.co.jp/s?k=${encodeURIComponent(author)}&tag=yamano32010e-22`; 
+        const amazonLink = document.createElement('a');
+        amazonLink.href = amazonUrl;
+        amazonLink.target = '_blank';
+        amazonLink.rel = 'noopener noreferrer';
+        amazonLink.className = 'inline-flex items-center text-sm text-white bg-yellow-500 hover:bg-yellow-600 px-3 py-1 rounded-full transition duration-150 ml-2';
+        amazonLink.innerHTML = `🛒 Amazonで関連書籍を探す`;
+        recommendationLinks.appendChild(amazonLink);
 
-        const themeUrl = `https://www.amazon.co.jp/s?k=${encodeURIComponent(keyword)}&tag=${AFFILIATE_TAG}`;
-        const themeLinkHtml = `
-            <a href="${themeUrl}" target="_blank" rel="noopener noreferrer" class="text-xs sm:text-sm bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-3 rounded-full transition duration-200 shadow-md transform hover:scale-[1.05] whitespace-nowrap">
-                テーマ: ${label} 関連商品
-            </a>
-        `;
-
-        recommendationLinksContainer.innerHTML = authorLinkHtml + themeLinkHtml;
         recommendationArea.classList.remove('hidden');
     }
-
+    
     /**
-     * テキストをクリップボードにコピーする処理
+     * テキストをクリップボードにコピーする
      */
     async function copyToClipboard(text) {
-        // execCommandを使ったコピー処理
+        // execCommandを使ったコピー処理 (互換性重視)
         const tempInput = document.createElement('textarea');
         tempInput.value = text;
         tempInput.style.position = 'absolute';
         tempInput.style.left = '-9999px';
-        tempInput.style.opacity = 0; 
         document.body.appendChild(tempInput);
-        
-        tempInput.focus();
         tempInput.select();
-        tempInput.setSelectionRange(0, 99999); 
         
-        let copySuccess = false;
         try {
             const successful = document.execCommand('copy');
             if (successful) {
-                showNotification('名言と解説をコピーしたよ！');
-                copySuccess = true;
+                showNotification('名言と解説をコピーしました！');
             } else {
-                throw new Error('execCommand failed');
+                showNotification('コピーに失敗しました。');
             }
         } catch (err) {
             console.error('Copy failed:', err);
-            showNotification('コピーに失敗しちゃった...手動でコピーしてみてね。');
+            showNotification('コピーに失敗しました。');
         } finally {
             document.body.removeChild(tempInput);
         }
-        
-        return copySuccess;
     }
     
     /**
-     * すべての名言を静的にHTMLにレンダリングする (クローラー対策)
-     */
+      * すべての名言を静的にHTMLにレンダリングする (クローラー対策)
+      */
     function renderStaticQuotesList() {
         let listHtml = '';
         ALL_QUOTES.forEach((q, index) => {
-            const tagsHtml = q.tags.map(tag => `<span class="inline-block bg-indigo-100 text-indigo-700 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">${tag}</span>`).join('');
+            // タグをクリック可能にするため、タグにフィルターリンクを付与
+            const tagsHtml = q.tags.map(tag => {
+                const tagLink = `?tag=${encodeURIComponent(tag)}`;
+                return `<a href="${tagLink}" class="inline-block bg-indigo-100 text-indigo-700 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full hover:bg-indigo-200 transition-colors">#${tag}</a>`;
+            }).join('');
             
+            // 著者にフィルターリンクを付与
+            const authorLink = `?author=${encodeURIComponent(q.author)}`;
+
             listHtml += `
                 <div class="static-quote-card">
                     <h3 class="static-quote-text">
                         ${index + 1}. 「${q.quote}」
                     </h3>
                     <p class="static-author-text">
-                        — ${q.author}
+                        — <a href="${authorLink}" class="text-indigo-600 hover:text-indigo-800 underline">${q.author}</a>
                     </p>
                     <div class="mb-3">
                         ${tagsHtml}
@@ -601,8 +567,8 @@
     // ===================================
     
     /**
-     * ランダムな名言を選択し、UIを更新する
-     */
+      * ランダムな名言を選択し、UIを更新する
+      */
     function displayRandomQuote() {
         // フィルタリングされたリスト、または全てのリストから選択
         const quotesToDrawFrom = filteredQuotes.length > 0 ? filteredQuotes : ALL_QUOTES;
@@ -624,7 +590,8 @@
         currentQuoteData = quoteData; 
 
         // --- STEP 1: テキストの入れ替えと表示 ---
-        quoteTextElement.textContent = quoteData.quote;
+        // 改行を<br>に変換して表示
+        quoteTextElement.innerHTML = quoteData.quote.replace(/\n/g, '<br>');
         quoteAuthorElement.textContent = `— ${quoteData.author}`;
         
         // タグの表示 (フィルタ状態を反映)
@@ -644,7 +611,8 @@
         quoteAuthorElement.style.opacity = 1;
         tagsContainer.style.opacity = 1; 
         recommendationArea.style.opacity = 1;
-        explanationTextElement.style.opacity = 1;
+        explanationTextElement.parentNode.style.opacity = 1; 
+        recommendationArea.classList.remove('hidden');
         shareBtn.disabled = false;
         
         // フィルタリング中でない場合のみ通知
@@ -652,21 +620,18 @@
             showNotification('今日の教訓を表示しました！');
         }
 
-        // ----------------------------------------------------
-        // 【ポリシー準拠】広告ユニットの動的な再ロード処理
-        // ----------------------------------------------------
-        const ads = document.querySelectorAll('.adsbygoogle');
-        ads.forEach(ad => {
-            if (typeof window.adsbygoogle !== 'undefined') {
-                ad.innerHTML = '';
-                (window.adsbygoogle = window.adsbygoogle || []).push({});
-            }
-        });
-        // ----------------------------------------------------
+        // 広告リロード (AdSenseがある場合)
+        if (typeof adsbygoogle !== 'undefined') {
+            const adSlots = document.querySelectorAll('.adsbygoogle');
+            adSlots.forEach(slot => {
+                slot.innerHTML = '';
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            });
+        }
     }
     
     /**
-     * 名言に付与されたタグをバッジとして表示する（クリックイベント追加）
+     * 名言に付与されたタグをバッジとして表示する
      */
     function displayTags(tags) {
         tagsContainer.innerHTML = ''; 
@@ -676,160 +641,83 @@
             const tagElement = document.createElement('span');
             tagElement.textContent = `#${tag}`;
             
-            // スタイルを設定
-            let tagClass = 'text-xs font-semibold px-3 py-1 rounded-full shadow-sm whitespace-nowrap fade-in cursor-pointer transition duration-150';
+            let tagClass = 'text-xs font-semibold px-3 py-1 rounded-full shadow-sm whitespace-nowrap fade-in cursor-pointer transition duration-150 m-1';
             
             if (isCurrentFilter) {
-                // フィルタリング中のタグ (解除アクション)
-                tagClass += ' bg-indigo-600 text-white hover:bg-indigo-700 ring-2 ring-indigo-300';
+                tagClass += ' bg-indigo-600 text-white hover:bg-indigo-700';
             } else {
-                // 通常のタグ (絞り込みアクション)
                 tagClass += ' bg-indigo-100 text-indigo-700 hover:bg-indigo-200';
             }
             
             tagElement.className = tagClass;
-            tagElement.dataset.tag = tag; // データ属性にタグ名を保存
-            
-            // クリックイベントを追加
             tagElement.addEventListener('click', () => filterQuotesByTag(tag));
-            
             tagsContainer.appendChild(tagElement);
         });
     }
 
 
     /**
-     * 指定されたタグで名言をフィルタリングし、表示を更新する
+     * タグでフィルタリング
      */
     function filterQuotesByTag(tag) {
-        let message = '';
-        currentFilterAuthor = null; // 著者フィルタを解除
-
         if (tag === currentFilterTag) {
-            // 同じタグがクリックされた場合は、フィルタを解除
+            // 解除
             currentFilterTag = null;
             filteredQuotes = ALL_QUOTES;
-            filterStatusElement.innerHTML = `すべての教訓からランダムに表示中 <span class="text-xs text-gray-400">(タグ・索引から絞り込み)</span>`;
-            message = 'フィルタリングを解除しました。';
+            filterStatusElement.textContent = "すべての教訓からランダムに表示中 (タグをクリックで絞り込み)";
         } else {
-            // 新しいタグでフィルタリング
+            // 適用
             currentFilterTag = tag;
+            currentFilterAuthor = null; // 著者のフィルタは解除
             filteredQuotes = ALL_QUOTES.filter(q => q.tags.includes(tag));
-            
-            if (filteredQuotes.length > 0) {
-                filterStatusElement.innerHTML = `テーマ: 「<span class="text-indigo-600 font-bold">#${tag}</span>」に関連する<span class="text-indigo-600 font-bold">${filteredQuotes.length}件</span>の教訓から表示中`;
-                message = `テーマ「#${tag}」で教訓を絞り込みました。`;
-            } else {
-                // タグで絞り込まれた結果がない場合
-                currentFilterTag = null;
-                filteredQuotes = ALL_QUOTES;
-                filterStatusElement.innerHTML = `すべての教訓からランダムに表示中 <span class="text-xs text-red-600 font-bold">(一致する名言がありませんでした)</span>`;
-                message = `申し訳ありません。「#${tag}」に一致する名言は見つかりませんでした。`;
-            }
+            filterStatusElement.innerHTML = `タグ: <span class="font-bold text-indigo-600">#${tag}</span> で絞り込み中`;
         }
-        
-        // フィルタリング後のリストから名言を再表示 (この中に広告再ロード処理が含まれる)
         displayRandomQuote();
-        showNotification(message);
     }
     
     /**
-     * 指定された著者で名言をフィルタリングし、表示を更新する
+     * 著者でフィルタリング (URLパラメータ経由などで使用)
      */
     function filterQuotesByAuthor(author) {
-        let message = '';
-        currentFilterTag = null; // タグフィルタを解除
-
         if (author === currentFilterAuthor) {
-            // 同じ著者がクリックされた場合は、フィルタを解除
             currentFilterAuthor = null;
             filteredQuotes = ALL_QUOTES;
-            filterStatusElement.innerHTML = `すべての教訓からランダムに表示中 <span class="text-xs text-gray-400">(タグ・索引から絞り込み)</span>`;
-            message = 'フィルタリングを解除しました。';
+            filterStatusElement.textContent = "すべての教訓からランダムに表示中";
         } else {
-            // 新しい著者でフィルタリング
             currentFilterAuthor = author;
+            currentFilterTag = null;
             filteredQuotes = ALL_QUOTES.filter(q => q.author === author);
-            
-            if (filteredQuotes.length > 0) {
-                filterStatusElement.innerHTML = `著者: 「<span class="text-indigo-600 font-bold">${author}</span>」の<span class="text-indigo-600 font-bold">${filteredQuotes.length}件</span>の教訓から表示中`;
-                message = `著者「${author}」で教訓を絞り込みました。`;
-            } else {
-                // 著者で絞り込まれた結果がない場合
-                currentFilterAuthor = null;
-                filteredQuotes = ALL_QUOTES;
-                filterStatusElement.innerHTML = `すべての教訓からランダムに表示中 <span class="text-xs text-red-600 font-bold">(一致する名言がありませんでした)</span>`;
-                message = `申し訳ありません。「${author}」に一致する名言は見つかりませんでした。`;
-            }
+            filterStatusElement.innerHTML = `著者: <span class="font-bold text-indigo-600">${author}</span> で絞り込み中`;
         }
-        
-        // フィルタリング後のリストから名言を再表示 (この中に広告再ロード処理が含まれる)
         displayRandomQuote();
-        showNotification(message);
     }
 
     /**
-     * 共有用およびコピー用のテキストを整形し、グローバル変数に設定する
+     * シェアテキストの生成
      */
     function setupShareText(quoteData) {
         const { quote, author, explanation, tags } = quoteData;
-
-        // 1. 動的なハッシュタグ生成
-        const tagStrings = (tags || []).filter(t => t).map(tag => `#${tag}`);
-        const fixedTags = ["#名言", "#今日の格言", "#自己成長"];
-        const uniqueTagsString = Array.from(new Set([...tagStrings, ...fixedTags])).join(' ');
+        const tagStrings = tags.map(tag => `#${tag}`).join(' ');
         
-        // コピー用フルテキスト (解説文、ハッシュタグ、URLを含む)
-        fullShareText = `
-【日替わり：今日の名言と深掘り解説】
-
-「${quote}」
-— ${author}
-
-解説:
-${explanation}
-
-${uniqueTagsString}
-
-👇あなたの日々の行動力を高める教訓はこちら
-${FIXED_SHARE_URL}
-        `.trim();
-
-        // Web Share APIの 'url' パラメータでリンクが自動的に付与されるため、URLは含めない
-        shortShareText = `
-【日替わり：今日の名言】
-「${quote}」
-— ${author}
-
-${uniqueTagsString}
-        `.trim(); 
-
-        // モーダル内のプレビューを設定 (名言と著者のみ)
-        modalQuotePreview.textContent = `"${quote}" — ${author}`; 
+        fullShareText = `【今日の教訓】\n「${quote}」\n— ${author}\n\n【深掘り解説】\n${explanation}\n\n${tagStrings}\n👇続きはこちら\n${FIXED_SHARE_URL}`;
+        shortShareText = `「${quote}」\n— ${author}\n${tagStrings} #名言`;
+        
+        modalQuotePreview.textContent = `「${quote}」 — ${author}`;
     }
     
     // ===================================
     // 4. モーダル操作と共有処理
     // ===================================
 
-    /**
-     * メインのシェアボタンの処理: Native Share APIがあればそれを使用。なければモーダルを開く。
-     */
     function handleMainShare() {
-        if (!currentQuoteData) {
-            showNotification('名言がまだ表示されていません。');
-            return;
-        }
+        if (!currentQuoteData) return;
 
         if (navigator.share) {
             navigator.share({
-                title: '【日替わり：今日の名言】',
+                title: '【日替わり：今日の教訓】',
                 text: shortShareText,
                 url: FIXED_SHARE_URL, 
-            })
-            .then(() => showNotification('ネイティブ共有ダイアログを開いたよ！'))
-            .catch((error) => {
-                // AbortErrorはユーザーがキャンセルした場合なので無視し、それ以外はモーダルを開く
+            }).catch((error) => {
                 if (error.name !== 'AbortError') {
                     openShareModal(); 
                 }
@@ -839,126 +727,77 @@ ${uniqueTagsString}
         }
     }
 
-    /**
-     * 共有モーダルを開く
-     */
     function openShareModal() {
         if (!currentQuoteData) return;
         setupShareText(currentQuoteData);
-        
         shareModal.style.display = 'flex';
-        // アニメーションの開始
-        setTimeout(() => {
-            shareModal.classList.remove('modal-leave-to');
-        }, 10);
+        setTimeout(() => shareModal.classList.remove('modal-leave-to'), 10);
     }
 
-    /**
-     * 共有モーダルを閉じる
-     */
     function closeShareModal() {
         shareModal.classList.add('modal-leave-to');
-        // アニメーション完了後に非表示
-        setTimeout(() => {
-            shareModal.style.display = 'none';
-        }, 300);
+        setTimeout(() => shareModal.style.display = 'none', 300);
     }
 
-    /**
-     * Twitterでシェアする
-     */
     function shareOnTwitter() {
-        if (!currentQuoteData) return;
-        const twitterText = encodeURIComponent(shortShareText);
-        const twitterUrl = `https://twitter.com/intent/tweet?text=${twitterText}&url=${encodeURIComponent(FIXED_SHARE_URL)}`;
-        window.open(twitterUrl, '_blank', 'noopener,noreferrer');
+        const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shortShareText)}&url=${encodeURIComponent(FIXED_SHARE_URL)}`;
+        window.open(url, '_blank');
         closeShareModal();
     }
 
-    /**
-     * LINEでシェアする
-     */
     function shareOnLine() {
-        if (!currentQuoteData) return;
-        const lineTextWithUrl = shortShareText + '\n\n' + FIXED_SHARE_URL;
-        const lineTextEncoded = encodeURIComponent(lineTextWithUrl);
-        // LINEアプリを開くためのリンク
-        window.location.href = `https://line.me/R/msg/text/?${lineTextEncoded}`;
+        const text = `${shortShareText}\n${FIXED_SHARE_URL}`;
+        window.open(`https://line.me/R/msg/text/?${encodeURIComponent(text)}`, '_blank');
         closeShareModal(); 
     }
 
     // ===================================
-    // 5. URLパラメータ処理と初期化
+    // 5. URLパラメータ処理
     // ===================================
 
-    /**
-     * URLパラメータをチェックし、フィルタリングを開始する
-     */
     function checkUrlParameters() {
         const urlParams = new URLSearchParams(window.location.search);
         const tag = urlParams.get('tag');
         const author = urlParams.get('author');
 
         if (tag) {
-            // URLからタグ指定があれば、そのタグでフィルタリングを開始
             filterQuotesByTag(decodeURIComponent(tag));
             return true;
         }
-        
         if (author) {
-            // URLから著者指定があれば、その著者でフィルタリングを開始
             filterQuotesByAuthor(decodeURIComponent(author));
             return true;
         }
-        
         return false;
     }
 
 
     // ===================================
-    // 6. イベントリスナーと初期化
+    // 6. 初期化
     // ===================================
 
-    // 「今日の教訓を見る」ボタン: 名言表示
     generateBtn.addEventListener('click', displayRandomQuote);
-
-    // 「名言をシェア」ボタン 
     shareBtn.addEventListener('click', handleMainShare);
-
-    // モーダル関連イベントリスナー
     closeModalBtn.addEventListener('click', closeShareModal);
-    // モーダルのオーバーレイクリックで閉じる
     shareModal.addEventListener('click', (e) => {
-        if (e.target === shareModal) {
-            closeShareModal();
-        }
+        if (e.target === shareModal) closeShareModal();
     });
     shareTwitterBtn.addEventListener('click', shareOnTwitter);
     shareLineBtn.addEventListener('click', shareOnLine);
     copyTextBtn.addEventListener('click', async () => {
-        const success = await copyToClipboard(fullShareText); 
-        if (success) {
-            closeShareModal();
-        }
+        await copyToClipboard(fullShareText);
+        closeShareModal();
     });
 
-    // ページロード時の初期設定
     document.addEventListener('DOMContentLoaded', () => {
-        // 初回ロード時には、まず生成ボタンを押してもらうように促す
-        shareBtn.disabled = true;
-        
-        // ページロード時にすべての名言リストを静的にレンダリングする（最重要）
         renderStaticQuotesList(); 
         
-        // URLパラメータがあればフィルタリングを開始、なければ初期状態を維持
         const didFilter = checkUrlParameters();
-        if (didFilter) {
-            // フィルタリングが開始された場合は、自動的に名言を1つ表示する
-            // (displayRandomQuoteはfilterQuotesByTag/Author内部で呼ばれる)
+        if (!didFilter) {
+            displayRandomQuote();
         }
     });
 </script>
 
 </body>
 </html>
-
