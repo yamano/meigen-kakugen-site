@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>利用規約 | 名言・格言集</title>
+    <title>利用規約｜名言の読み解きノート</title>
     <!-- Tailwind CSS CDNをロード -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts (UI用のInter, 名言用のNoto Serif JP) -->
@@ -56,24 +56,37 @@
 </head>
 <body>
 
+<header class="w-full border-b bg-white mb-6">
+    <div class="max-w-3xl mx-auto px-4 py-5 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+        <a href="index.html" class="font-bold text-indigo-700 text-lg">名言の読み解きノート</a>
+        <nav class="text-sm flex flex-wrap gap-x-4 gap-y-2">
+            <a class="text-gray-700 hover:text-indigo-700 font-medium" href="articles/how-to-read-quotes.html">読み方ガイド</a>
+            <a class="text-gray-700 hover:text-indigo-700 font-medium" href="tag-index.html">テーマ索引</a>
+            <a class="text-gray-700 hover:text-indigo-700 font-medium" href="author-index.html">著者索引</a>
+            <a class="text-gray-700 hover:text-indigo-700 font-medium" href="about.html">運営者情報</a>
+            <a class="text-gray-700 hover:text-indigo-700 font-medium" href="contact.html">お問い合わせ</a>
+        </nav>
+    </div>
+</header>
+
 <div class="main-container bg-white p-8 sm:p-12 rounded-2xl shadow-xl mb-4">
     
     <h1 class="text-3xl font-bold text-center mb-8 text-indigo-600 border-b-2 border-indigo-100 pb-2">
         利用規約
     </h1>
 
-    <p>当サイト「名言・格言集」は、訪問者様に対して、ランダムな名言・格言を提供するサービスです。本サービスをご利用になる際には、以下の利用規約にご同意いただく必要があります。</p>
+    <p>当サイト「名言の読み解きノート」は、名言の背景・解釈・実践を整理する学習コンテンツを提供します。本サービスをご利用になる際には、以下の利用規約にご同意いただく必要があります。</p>
 
     <!-- サービス内容 -->
     <h2 id="service">サービス内容</h2>
-    <p>当サイトは、著作権切れ、または一般に広く知られた名言・格言をデータベース化し、ランダムに表示するサービスを提供します。コンテンツの提供は、予告なく変更または終了することがあります。</p>
+    <p>当サイトは、学習目的のコンテンツ（記事、解説、ワーク等）を提供します。コンテンツの提供は、予告なく変更または終了することがあります。</p>
 
     <!-- 著作権と引用について -->
     <h2 id="copyright">著作権と引用について</h2>
     <ul>
-        <li>当サイトに掲載されている名言・格言の原文の著作権は、原著作者に帰属します。</li>
-        <li>当サイトが表示する名言・格言は、著作権の切れたもの、または公共の利益のために提供されている情報に基づいています。</li>
-        <li>当サイトのレイアウト、デザイン、プログラム等の著作権は当サイト運営者に帰属します。</li>
+        <li>引用・出典の扱いは <a href="editorial-policy.html" class="text-indigo-600 hover:underline">編集方針</a> に従います。</li>
+        <li>当サイトに掲載される引用文・著作物の権利は、各権利者に帰属します。</li>
+        <li>当サイトの文章（解説・記事）、レイアウト、デザイン等の著作権は当サイト運営者に帰属します。</li>
     </ul>
 
     <!-- 禁止事項 -->
@@ -96,16 +109,17 @@
     <!-- 制定日 -->
     <h2 id="established">制定日</h2>
     <p>制定日：2025年11月16日</p>
+    <p>最終更新日：2025年12月28日</p>
 </div>
 
 <footer>
     <div class="text-sm text-gray-500 space-x-4">
-        <!-- **重要**: リンク先は index.html, privacy.html に設定済みです -->
-        <a href="index.html" class="hover:underline text-indigo-600">トップページ</a>
+        <a href="index.html" class="hover:underline text-indigo-600">トップ</a>
+        <a href="about.html" class="hover:underline text-indigo-600">運営者情報</a>
+        <a href="contact.html" class="hover:underline text-indigo-600">お問い合わせ</a>
+        <a href="editorial-policy.html" class="hover:underline text-indigo-600">編集方針</a>
         <a href="privacy.html" class="hover:underline text-indigo-600">プライバシーポリシー</a>
-        <span class="text-gray-400">|</span>
-        <!-- Amazonアソシエイトの規約に基づく表示 -->
-        <span class="text-gray-500">当サイトはAmazon.co.jpアソシエイトに参加しています。</span>
+        <a href="sitemap.html" class="hover:underline text-indigo-600">サイトマップ</a>
     </div>
 </footer>
 
