@@ -42,6 +42,7 @@
       </div>
       <nav class="text-sm flex flex-wrap gap-x-4 gap-y-2">
         <a class="text-gray-700 hover:text-indigo-700 font-medium" href="articles/how-to-read-quotes.html">読み方ガイド</a>
+        <a class="text-gray-700 hover:text-indigo-700 font-medium" href="articles/source-hunting.html">出典の探し方</a>
         <a class="text-gray-700 hover:text-indigo-700 font-medium" href="tag-index.html">テーマ索引</a>
         <a class="text-gray-700 hover:text-indigo-700 font-medium" href="author-index.html">著者索引</a>
         <a class="text-gray-700 hover:text-indigo-700 font-medium" href="about.html">運営者情報</a>
@@ -80,6 +81,10 @@
           <a class="block border rounded-xl p-4 hover:border-indigo-200 hover:bg-indigo-50 transition" href="articles/how-to-read-quotes.html">
             <p class="text-sm text-gray-500">ガイド</p>
             <p class="font-bold text-gray-900">名言の“読み解き方”：誤読を避けて行動につなげる手順</p>
+          </a>
+          <a class="block border rounded-xl p-4 hover:border-indigo-200 hover:bg-indigo-50 transition" href="articles/source-hunting.html">
+            <p class="text-sm text-gray-500">出典</p>
+            <p class="font-bold text-gray-900">名言の出典の探し方：一次資料にたどり着くための手順</p>
           </a>
           <a class="block border rounded-xl p-4 hover:border-indigo-200 hover:bg-indigo-50 transition" href="articles/decision-making-with-quotes.html">
             <p class="text-sm text-gray-500">実践</p>
@@ -151,32 +156,36 @@
   </footer>
 
   <script>
-    // 審査・品質改善のため「出典が明確で、解説が主」の短い引用のみを扱う（引用は補助、解説が主）。
-    // ここは“学習の入口”として最小限にし、詳しい解説は記事ページに集約します。
+    // 審査・品質改善のため「引用は補助、解説が主」を徹底します。
+    // ここは“入口”として最小限にし、出典確認の手順は記事に集約します。
     const QUOTES = [
       {
-        text: "急がずに、だが休まずに。",
-        author: "ヨハン・ヴォルフガング・フォン・ゲーテ",
-        source: "出典: 格言として広く知られる表現（学習用引用）",
-        action: "今日やる作業を1つだけ選び「5分だけ」着手して、終わったら明日の最初の一手をメモする。"
-      },
-      {
-        text: "我思う、ゆえに我あり。",
+        text: "Je pense, donc je suis.",
         author: "ルネ・デカルト",
-        source: "出典: 『方法序説』等で知られる命題（学習用引用）",
-        action: "不安になっているテーマを紙に書き「事実/解釈/次の行動」に3分割して、事実だけを書き出す。"
+        source: "出典: 『方法序説』（Discours de la méthode, 1637）で知られる命題",
+        confidence: "確度A（一次資料）",
+        action: "頭の中の不安を1つだけ紙に書き「事実/解釈/次の行動」に分け、事実だけを3行で書く。"
       },
       {
-        text: "最大の栄光は、決して転ばないことにあるのではない。転ぶたびに起き上がり続けることにある。",
-        author: "孔子（伝）",
-        source: "出典: 伝承的に引用される言葉（学習用引用）",
-        action: "最近の失敗を1つ選び「学んだこと」を1行で言語化し、次の1回で試す改善を1つ決める。"
+        text: "If I have seen further it is by standing on the shoulders of Giants.",
+        author: "アイザック・ニュートン",
+        source: "出典: フック宛書簡（1675/1676頃の書簡として知られる表現）",
+        confidence: "確度A（一次資料）",
+        action: "参考にした人/資料を3つ書き、今日学ぶ範囲を「その続きの1段」だけに限定する。"
       },
       {
-        text: "私は自分が何も知らないということを知っている。",
-        author: "ソクラテス（伝）",
-        source: "出典: 伝承的に引用される表現（学習用引用）",
-        action: "いま詳しいつもりの分野について「まだ確認していない前提」を3つ書き、1つだけ調べ直す。"
+        text: "Ipsa scientia potestas est.",
+        author: "フランシス・ベーコン",
+        source: "出典: 『Meditationes Sacrae』（1597）の一句として知られる表現（ラテン語）",
+        confidence: "確度B（二次資料）",
+        action: "いま欲しい知識を1つ決め「5分で読める一次情報（公式/原典/仕様）」に当たる。"
+      },
+      {
+        text: "Festina lente.",
+        author: "格言（ラテン語）",
+        source: "出典: 古くから伝わる標語（解釈・出典は諸説あり）",
+        confidence: "確度C（伝承/要確認）",
+        action: "やることを1つに絞り、速さではなく「止まらない最小ペース」を決める（例：毎日10分）。"
       }
     ];
 
@@ -184,7 +193,7 @@
       const q = QUOTES[Math.floor(Math.random() * QUOTES.length)];
       document.getElementById("q-text").textContent = q.text;
       document.getElementById("q-author").textContent = `— ${q.author}`;
-      document.getElementById("q-source").textContent = q.source;
+      document.getElementById("q-source").textContent = `${q.confidence ? q.confidence + " / " : ""}${q.source}`;
       document.getElementById("q-action").textContent = q.action;
     }
 
