@@ -1,168 +1,87 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>テーマ別タグ索引 | 名言・格言集</title>
-    <meta name="description" content="名言をテーマ（タグ）別に分類した索引ページです。挑戦、成功、習慣化など、興味のある分野から教訓を見つけましょう。">
-    
-    <!-- 広告スクリプトの読み込み (HEAD内に追加) -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6721819057047925"
-            crossorigin="anonymous"></script>
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap');
-        body {
-            font-family: 'Noto Sans JP', 'Inter', sans-serif;
-            background-color: #f1f5f9;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-        .main-container {
-            max-width: 48rem;
-            width: 100%;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>テーマ索引｜名言の読み解きノート</title>
+  <meta name="description" content="名言の読み解きノートのテーマ索引。意思決定、習慣、回復力などのテーマ別に記事を探せます。" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+    body { font-family: Inter, sans-serif; background:#f1f5f9; }
+  </style>
 </head>
-<body class="p-4 sm:p-8">
-
-<div class="main-container bg-white p-8 sm:p-12 rounded-2xl shadow-xl mb-8">
-    
-    <header class="text-center pb-6 border-b border-indigo-100">
-        <h1 class="text-3xl font-bold text-indigo-600 mb-2">テーマ別タグ索引</h1>
-        <p class="text-md text-gray-500">興味のあるテーマから名言・教訓を絞り込めます。</p>
-    </header>
-
-    <!-- 広告タグ (上部のプレースホルダーと置き換え) -->
-    <div class="mt-8 mb-8 text-center">
-        <!-- 埋め込み広告ユニット (ディスプレイ広告などを想定) -->
-        <ins class="adsbygoogle"
-              style="display:block"
-              data-ad-client="ca-pub-6721819057047925"
-              data-ad-slot="2062575648"
-              data-ad-format="auto"
-              data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
+<body>
+  <header class="w-full border-b bg-white">
+    <div class="max-w-5xl mx-auto px-4 py-5 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+      <a class="font-bold text-indigo-700 text-lg" href="index.html">名言の読み解きノート</a>
+      <nav class="text-sm flex flex-wrap gap-x-4 gap-y-2">
+        <a class="text-gray-700 hover:text-indigo-700 font-medium" href="articles/how-to-read-quotes.html">読み方ガイド</a>
+        <a class="text-gray-700 hover:text-indigo-700 font-medium" href="author-index.html">著者索引</a>
+        <a class="text-gray-700 hover:text-indigo-700 font-medium" href="editorial-policy.html">編集方針</a>
+        <a class="text-gray-700 hover:text-indigo-700 font-medium" href="about.html">運営者情報</a>
+        <a class="text-gray-700 hover:text-indigo-700 font-medium" href="contact.html">お問い合わせ</a>
+      </nav>
     </div>
-    <!-- /広告タグ -->
+  </header>
 
-    <!-- タグ一覧のコンテナ -->
-    <div id="tag-list-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <!-- JavaScriptでタグカードが挿入される -->
+  <main class="max-w-5xl mx-auto px-4 py-10">
+    <section class="bg-white rounded-2xl shadow p-6 sm:p-10">
+      <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">テーマ索引</h1>
+      <p class="text-gray-700 leading-relaxed">
+        気分で探すのではなく、「いま必要なテーマ」から記事を選べるように整理しています。
+        テーマは順次追加します。
+      </p>
+    </section>
+
+    <section class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <a class="block bg-white border rounded-2xl p-5 shadow hover:border-indigo-200 hover:bg-indigo-50 transition" href="articles/decision-making-with-quotes.html">
+        <p class="text-xs font-bold text-indigo-700 mb-1">意思決定</p>
+        <p class="font-bold text-gray-900">迷いを減らす「判断の軸」</p>
+        <p class="text-sm text-gray-700 mt-2">言葉をチェックリスト化して、優先順位と撤退基準まで落とし込みます。</p>
+      </a>
+
+      <a class="block bg-white border rounded-2xl p-5 shadow hover:border-indigo-200 hover:bg-indigo-50 transition" href="articles/build-habits-slowly.html">
+        <p class="text-xs font-bold text-indigo-700 mb-1">習慣</p>
+        <p class="font-bold text-gray-900">小さく続ける設計</p>
+        <p class="text-sm text-gray-700 mt-2">最小単位・環境・再開ルールで、止まらない形を作ります。</p>
+      </a>
+
+      <a class="block bg-white border rounded-2xl p-5 shadow hover:border-indigo-200 hover:bg-indigo-50 transition" href="articles/resilience-not-perfection.html">
+        <p class="text-xs font-bold text-indigo-700 mb-1">回復力</p>
+        <p class="font-bold text-gray-900">失敗から起き上がる技術</p>
+        <p class="text-sm text-gray-700 mt-2">行動・認知・環境の3面で、回復の手順を組み立てます。</p>
+      </a>
+
+      <a class="block bg-white border rounded-2xl p-5 shadow hover:border-indigo-200 hover:bg-indigo-50 transition" href="articles/how-to-read-quotes.html">
+        <p class="text-xs font-bold text-indigo-700 mb-1">ガイド</p>
+        <p class="font-bold text-gray-900">名言の読み解き方</p>
+        <p class="text-sm text-gray-700 mt-2">文脈→意味→反例→実践の4ステップで、誤読を避けます。</p>
+      </a>
+    </section>
+
+    <section class="mt-10 bg-white rounded-2xl shadow p-6 sm:p-10">
+      <h2 class="text-xl font-bold text-gray-900 mb-3">補足：テーマを増やす基準</h2>
+      <ul class="list-disc ml-5 space-y-2 text-gray-700">
+        <li>読者の「次の行動」を具体化できること</li>
+        <li>誤読しやすいポイント（反例/注意点）を整理できること</li>
+        <li>出典や注記の扱いを明確にできること</li>
+      </ul>
+      <p class="text-sm text-gray-600 mt-4">
+        方針の詳細は <a class="text-indigo-700 hover:underline" href="editorial-policy.html">編集方針</a> をご覧ください。
+      </p>
+    </section>
+  </main>
+
+  <footer class="max-w-5xl mx-auto px-4 pb-10 text-sm text-gray-600">
+    <div class="border-t pt-6 flex flex-wrap gap-x-4 gap-y-2">
+      <a class="hover:underline text-indigo-700" href="index.html">トップ</a>
+      <a class="hover:underline text-indigo-700" href="about.html">運営者情報</a>
+      <a class="hover:underline text-indigo-700" href="contact.html">お問い合わせ</a>
+      <a class="hover:underline text-indigo-700" href="privacy.html">プライバシーポリシー</a>
+      <a class="hover:underline text-indigo-700" href="terms.html">利用規約</a>
+      <a class="hover:underline text-indigo-700" href="sitemap.html">サイトマップ</a>
     </div>
-
-    <!-- サイト内ナビゲーション (著者別索引リンクを含む) -->
-    <div class="mt-10 pt-6 border-t border-gray-200 text-center space-y-4">
-        <h2 class="text-xl font-semibold text-gray-700">他のコンテンツを探す</h2>
-        <div class="flex justify-center gap-4 flex-wrap">
-            <a href="index.html" class="inline-block bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2 px-4 rounded-full transition duration-200 text-sm">
-                トップページへ
-            </a>
-            <a href="author-index.html" class="inline-block bg-indigo-100 hover:bg-indigo-200 text-indigo-700 font-medium py-2 px-4 rounded-full transition duration-200 text-sm">
-                著者別索引へ
-            </a>
-        </div>
-    </div>
-    
-</div>
-
-<script>
-    // 名言データ (最新の33件)
-    const ALL_QUOTES = [
-        { quote: "想像力は知識よりも重要だ。知識には限界があるが、想像力は世界を包み込む。", author: "アルベルト・アインシュタイン", tags: ["科学", "創造性"] },
-        { quote: "ハングリーであれ。愚かであれ。", author: "スティーブ・ジョブズ", tags: ["ビジネス", "革新"] },
-        { quote: "夢見ることができれば、それは実現できる。", author: "ウォルト・ディズニー", tags: ["夢", "実現"] },
-        { quote: "明日死ぬかのように生きよ。永遠に生きるかのように学べ。", author: "マハトマ・ガンディー", tags: ["人生", "学習"] },
-        { quote: "月が綺麗ですね。", author: "夏目漱石", tags: ["文学", "愛"] },
-        { quote: "かけがえのない人間になるためには、常に人とは違っていなければならない。", author: "ココ・シャネル", tags: ["ファッション", "個性"] },
-        { quote: "天才とは、1％のひらめきと99％の努力である。", author: "トーマス・エジソン", tags: ["努力", "成功"] },
-        { quote: "深淵をのぞく時、深淵もまたこちらをのぞいているのだ。", author: "フリードリヒ・ニーチェ", tags: ["哲学", "心理"] },
-        { quote: "失敗したところでやめてしまうから失敗になる。成功するところまで続ければ、それは成功になる。", author: "松下幸之助", tags: ["ビジネス", "不屈"] },
-        { quote: "愛の反対は憎しみではなく、無関心です。", author: "マザー・テレサ", tags: ["愛", "平和"] },
-        { quote: "生きるべきか、死ぬべきか、それが問題だ。", author: "ウィリアム・シェイクスピア", tags: ["演劇", "苦悩"] },
-        { quote: "最も強い者が生き残るのではなく、最も賢い者が生き延びるのでもない。唯一生き残ることが出来るのは、変化できる者である。", author: "チャールズ・ダーウィン", tags: ["進化", "変化"] },
-        { quote: "成功は99％の失敗の上に成り立っている。", author: "本田宗一郎", tags: ["ビジネス", "挑戦"] },
-        { quote: "最大の栄光は、決して転ばないことにあるのではない。転ぶたびに起き上がり続けることにある。", author: "孔子", tags: ["思想", "儒教"] },
-        { quote: "世界で最も素晴らしく、最も美しいものは、目で見たり手で触れたりすることはできません。それは心で感じなければならないのです。", author: "ヘレン・ケラー", tags: ["人生", "希望"] },
-        { quote: "私は自分が何も知らないということを知っている。", author: "ソクラテス", tags: ["哲学", "知識"] },
-        { quote: "人間は恋と革命のために生まれて来たのだ。", author: "太宰治", tags: ["文学", "情熱"] },
-        { quote: "人民の、人民による、人民のための政治。", author: "リンカーン", tags: ["政治", "民主主義"] },
-        { quote: "人生はクローズアップで見れば悲劇だが、ロングショットで見れば喜劇だ。", author: "チャールズ・チャップリン", tags: ["映画", "人生観"] },
-        { quote: "芸術は爆発だ。", author: "岡本太郎", tags: ["芸術", "情熱"] },
-        { quote: "不可能（IMPOSSIBLE）なんて言葉はないわ。その言葉自体が言っているのよ、「私は可能（I'M POSSIBLE）」だって。", author: "オードリー・ヘップバーン", tags: ["前向き", "自信"] },
-        { quote: "日本を今一度、せんたく（洗濯）いたし申候。", author: "坂本龍馬", tags: ["歴史", "改革"] },
-        { quote: "私の辞書に不可能という文字はない。", author: "ナポレオン・ボナパルト", tags: ["歴史", "自信"] },
-        { quote: "我思う、ゆえに我あり。", author: "ルネ・デカルト", tags: ["哲学", "真理"] },
-        { quote: "雨ニモマケズ、風ニモマケズ。", author: "宮沢賢治", tags: ["文学", "忍耐"] },
-        { quote: "成功とは、意欲を失わずに失敗から失敗へと進む能力のことだ。", author: "ウィンストン・チャーチル", tags: ["リーダーシップ"] },
-        { quote: "水になれ。", author: "ブルース・リー", tags: ["武道", "柔軟性"] },
-        { quote: "あなたが「できる」と思おうと、「できない」と思おうと、どちらも正しい。", author: "ヘンリー・フォード", tags: ["経営", "マインド"] },
-        { quote: "急がずに、だが休まずに。", author: "ヨハン・ヴォルフガング・フォン・ゲーテ", tags: ["人生", "継続"] },
-        { quote: "人間は一本の葦（あし）にすぎない。自然の中で最も弱いものである。だが、それは考える葦である。", author: "ブレーズ・パスカル", tags: ["哲学", "人間"] },
-        { quote: "誰もがスターであり、輝く権利を持っている。", author: "マリリン・モンロー", tags: ["芸能", "自己肯定"] },
-        { quote: "小さいことを積み重ねるのが、とんでもないところへ行くただひとつの道。", author: "イチロー", tags: ["スポーツ", "努力"] },
-        { quote: "つまづいたっていいじゃないか にんげんだもの", author: "相田みつを", tags: ["詩", "癒やし"] }
-    ];
-
-    /**
-     * すべての名言データからタグの出現回数を集計する
-     * @returns {Object<string, number>} タグ名と件数のマップ
-     */
-    function countTags() {
-        const tagCounts = {};
-        ALL_QUOTES.forEach(quote => {
-            // tagsプロパティが存在し、配列であることを確認
-            if (Array.isArray(quote.tags)) {
-                quote.tags.forEach(tag => {
-                    // タグ名を正規化（トリミングなど）
-                    const normalizedTag = tag.trim(); 
-                    tagCounts[normalizedTag] = (tagCounts[normalizedTag] || 0) + 1;
-                });
-            }
-        });
-        return tagCounts;
-    }
-
-    /**
-     * タグ索引一覧をHTMLにレンダリングする
-     */
-    function renderTagIndex() {
-        const tagCounts = countTags();
-        // タグ名を五十音順でソート
-        const tags = Object.keys(tagCounts).sort((a, b) => a.localeCompare(b, 'ja')); 
-        const container = document.getElementById('tag-list-container');
-        
-        let htmlContent = '';
-        tags.forEach(tag => {
-            const count = tagCounts[tag];
-            // クリック時にindex.htmlに戻り、メインアプリのJSでフィルタリングが行われる想定
-            // タグ付きURLパラメータを付与
-            const url = `index.html?tag=${encodeURIComponent(tag)}`; 
-            
-            htmlContent += `
-                <a href="${url}" class="block bg-indigo-50 hover:bg-indigo-100 p-4 rounded-xl shadow-md transition duration-200 transform hover:scale-[1.02] border border-indigo-200">
-                    <div class="flex justify-between items-center">
-                        <h3 class="text-lg font-semibold text-indigo-700"># ${tag}</h3>
-                        <span class="text-2xl font-bold text-indigo-500">${count}</span>
-                    </div>
-                    <p class="text-sm text-gray-500 mt-1">
-                        関連する教訓が${count}件あります。クリックして表示
-                    </p>
-                </a>
-            `;
-        });
-
-        container.innerHTML = htmlContent;
-    }
-
-    document.addEventListener('DOMContentLoaded', renderTagIndex);
-</script>
-
+  </footer>
 </body>
 </html>

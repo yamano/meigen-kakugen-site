@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://meigen-kakugen.com/sitemap.xml
