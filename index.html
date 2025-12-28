@@ -1,803 +1,195 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>【日替わり】名言・格言集｜人生・成功の教訓と深掘り解説</title>
-    
-    <!-- ファビコンの追加 -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💡</text></svg>">
-    
-    <!-- メタタグ（Description, Keywords）の追加 -->
-    <meta name="description" content="厳選された歴史上の名言と、その背景・意味を深く解説。毎日を豊かにする教訓が見つかります。">
-    <meta name="keywords" content="名言,格言,自己啓発,人生,成功,仕事術,習慣化,モチベーション,リーダーシップ,深掘り解説,日めくり,タグ検索,著者">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>名言の読み解きノート｜背景・出典・実践まで落とし込む</title>
+  <meta name="description" content="名言を“読むだけ”で終わらせず、背景・出典・解釈・実践ワークまで整理する学びのノート。運営者情報・編集方針・問い合わせ先を明示し、読みやすい導線を整備しています。" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
 
-    <!-- OGPタグ（SNSシェア最適化）の追加 -->
-    <meta property="og:title" content="【今日の教訓】日替わり名言・格言集と徹底解説">
-    <meta property="og:description" content="厳選名言を深掘り解説。モチベーション向上、自己啓発に。">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://meigen-kakugen.com/index.html"> 
-    <meta property="og:image" content="https://placehold.co/1200x630/4f46e5/ffffff?text=MEIGEN">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@meigen_bot"> 
-    
-    <!-- Tailwind CSS CDNをロード -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts (UI用のInter, 名言用のNoto Serif JP) -->
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Noto+Serif+JP:wght@400;700&display=swap');
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f1f5f9; /* Slate 100 */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
-        .main-container {
-            max-width: 48rem; /* 幅を広げ、より多くの情報を表示 */
-            width: 100%;
-        }
+  <meta property="og:title" content="名言の読み解きノート" />
+  <meta property="og:description" content="背景・出典・解釈・実践まで落とし込む、名言の学びサイト。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://meigen-kakugen.com/index.html" />
+  <meta property="og:image" content="https://placehold.co/1200x630/4f46e5/ffffff?text=MEIGEN+NOTE" />
 
-        /* 名言用のフォントを適用 */
-        #quote-text {
-            font-family: 'Noto Serif JP', serif;
-            font-size: 1.5rem; /* 24px */
-            line-height: 2.25rem; /* 36px */
-            font-weight: 400;
-            min-height: 100px; 
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            min-height: 120px; /* CLS対策 */
-        }
-        
-        /* 著者用のフォント */
-        #quote-author {
-            font-family: 'Inter', sans-serif;
-            font-size: 1rem; /* 16px */
-        }
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Noto+Serif+JP:wght@400;700&display=swap');
+    body { font-family: Inter, sans-serif; background:#f1f5f9; }
+    .serif { font-family: "Noto Serif JP", serif; }
+  </style>
 
-        /* フッターを下に固定 */
-        footer {
-            margin-top: auto;
-            width: 100%;
-            max-width: 48rem;
-            padding-top: 20px;
-            text-align: center;
-        }
-
-        /* トランジションのカスタムクラス */
-        .fade-in {
-            transition: opacity 0.3s ease-in-out;
-        }
-
-        /* 通知ボックスのスタイル */
-        #notification-box {
-            transition: opacity 0.3s ease-in-out;
-        }
-        
-        /* CLS対策: 解説エリアの最低高さを確保 */
-        #explanation-area {
-            min-height: 150px; 
-        }
-
-        /* 広告コンテナのスタイル */
-        .ad-unit-container {
-            margin-top: 24px; 
-            margin-bottom: 24px;
-            padding: 12px 0; 
-            text-align: center;
-            border-top: 1px dashed #e5e7eb; 
-            border-bottom: 1px dashed #e5e7eb;
-        }
-        
-        #generate-btn {
-            margin-top: 32px; 
-        }
-
-        /* 静的リスト用のスタイル */
-        .static-quote-card {
-            border: 1px solid #e5e7eb; 
-            border-radius: 0.75rem; 
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-            background-color: #f9fafb; 
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
-        }
-        .static-quote-text {
-            font-family: 'Noto Serif JP', serif;
-            font-size: 1.125rem; 
-            font-weight: 700; 
-            color: #1f2937; 
-            margin-bottom: 0.5rem;
-        }
-        .static-author-text {
-            font-size: 0.875rem; 
-            color: #4b5563; 
-            text-align: right;
-            margin-bottom: 0.75rem;
-        }
-        .static-explanation-text {
-            font-size: 0.875rem; 
-            color: #374151; 
-            line-height: 1.6;
-        }
-    </style>
-    
-    <!-- Google AdSense認証スクリプト (HEAD内) -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6721819057047925"
-     crossorigin="anonymous"></script>
-     
-    <!-- Google CMP 同意管理コード -->
-    <script async src="https://fundingchoicesmessages.google.com/i/pub-6721819057047925?cmp_v=2" nonce=""></script>
-    <script>
-        (function() {
-            function handleGmpu() {
-                if (!window.frames['__gmpuframe']) {
-                    var iframe = document.createElement('iframe');
-                    iframe.style.display = 'none';
-                    iframe.name = '__gmpuframe';
-                    document.body.appendChild(iframe);
-                }
-            }
-            handleGmpu();
-        })();
-    </script>
-    
-    <!-- JSON-LD 構造化データの追加 -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      "name": "【日替わり】名言・格言集｜人生・成功の教訓と深掘り解説",
-      "description": "厳選された名言と、その背景・意味を深く解説。毎日を豊かにする教訓が見つかります。",
-      "url": "https://meigen-kakugen.com/index.html", 
-      "inLanguage": "ja",
-      "mainContentOfPage": {
-        "@type": "Article",
-        "headline": "名言・格言集",
-        "datePublished": "2024-01-01", 
-        "author": {
-          "@type": "Organization",
-          "name": "格言ジェネレーター"
-        }
-      }
-    }
-    </script>
-
+  <!-- 構造化データ（サイト情報） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "名言の読み解きノート",
+    "url": "https://meigen-kakugen.com/",
+    "inLanguage": "ja"
+  }
+  </script>
 </head>
 <body>
+  <a class="sr-only focus:not-sr-only focus:absolute focus:m-4 focus:p-3 focus:bg-white focus:rounded-lg focus:shadow" href="#main">本文へスキップ</a>
 
-<div class="main-container bg-white p-8 sm:p-12 rounded-2xl shadow-xl mb-4">
-    
-    <!-- H1タグ -->
-    <h1 class="text-3xl font-bold text-center mb-4 text-indigo-600">
-        日替わり 名言・格言集
-    </h1>
-    
-    <!-- 索引へのナビゲーション -->
-    <nav class="flex justify-center gap-4 text-sm mb-6 pb-2 border-b border-gray-100">
-        <a href="tag-index.html" class="text-indigo-600 hover:text-indigo-800 font-medium transition duration-200">
-            📚 テーマ別索引
-        </a>
-        <span class="text-gray-300">|</span>
-        <a href="author-index.html" class="text-indigo-600 hover:text-indigo-800 font-medium transition duration-200">
-            👤 著者別索引
-        </a>
-    </nav>
-    
-    <!-- 広告コードの挿入場所 2: トップバナー広告 -->
-    <div id="ad-container-top" class="ad-unit-container">
-        <p class="text-xs font-bold text-gray-400 mb-2">【スポンサーリンク】</p>
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-6721819057047925"
-             data-ad-slot="2834631640" 
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
+  <header class="w-full border-b bg-white">
+    <div class="max-w-5xl mx-auto px-4 py-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <p class="text-sm text-gray-500">名言を、背景・出典・解釈・実践へ。</p>
+        <h1 class="text-2xl sm:text-3xl font-bold text-indigo-600">名言の読み解きノート</h1>
+      </div>
+      <nav class="text-sm flex flex-wrap gap-x-4 gap-y-2">
+        <a class="text-gray-700 hover:text-indigo-700 font-medium" href="articles/how-to-read-quotes.html">読み方ガイド</a>
+        <a class="text-gray-700 hover:text-indigo-700 font-medium" href="tag-index.html">テーマ索引</a>
+        <a class="text-gray-700 hover:text-indigo-700 font-medium" href="author-index.html">著者索引</a>
+        <a class="text-gray-700 hover:text-indigo-700 font-medium" href="about.html">運営者情報</a>
+        <a class="text-gray-700 hover:text-indigo-700 font-medium" href="contact.html">お問い合わせ</a>
+      </nav>
     </div>
-    
-    <!-- 現在のフィルタリング状態を表示するエリア -->
-    <div id="filter-status" class="text-center mb-6 min-h-[30px]">
-        <span id="current-filter-tag" class="text-sm font-medium text-gray-500">
-            すべての教訓からランダムに表示中 <span class="text-xs text-gray-400">(タグをクリックで絞り込み)</span>
-        </span>
-    </div>
-    
-    <!-- 名言表示エリア -->
-    <div class="mb-8 min-h-[150px]">
-        <blockquote class="relative">
-            <!-- 引用符（左） -->
-            <span class="absolute -left-4 -top-6 text-8xl text-gray-200 opacity-50 select-none">“</span>
-            
-            <!-- 名言テキスト -->
-            <p id="quote-text" class="mb-4 text-gray-800 font-normal fade-in">
-                「今日の教訓を見る」ボタンを押して、新しい名言を表示しましょう。
-            </p>
-            
-            <!-- 引用符（右） -->
-            <span class="absolute -right-4 -bottom-10 text-8xl text-gray-200 opacity-50 select-none">”</span>
-        </blockquote>
-        
-        <!-- タグ表示エリア -->
-        <div id="tags-container" class="flex justify-center flex-wrap gap-2 mt-4 fade-in min-h-[28px]">
-            <!-- タグバッジがJavaScriptで挿入される -->
+  </header>
+
+  <main id="main" class="max-w-5xl mx-auto px-4 py-10">
+    <section class="bg-white rounded-2xl shadow p-6 sm:p-10">
+      <h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3">このサイトでできること</h2>
+      <p class="text-gray-700 leading-relaxed">
+        当サイトは「名言の寄せ集め」ではなく、<strong>言葉を意思決定や行動に落とし込む</strong>ための学習ノートです。
+        どのページも、背景（文脈）→解釈（誤読しやすい点）→実践（今日できる1つ）という形で整理します。
+      </p>
+      <ul class="mt-5 grid sm:grid-cols-3 gap-4 text-sm">
+        <li class="bg-slate-50 rounded-xl p-4 border">
+          <p class="font-bold text-gray-900 mb-1">独自の解説</p>
+          <p class="text-gray-700">自分の行動に接続するための要点・注意点・例を付けます。</p>
+        </li>
+        <li class="bg-slate-50 rounded-xl p-4 border">
+          <p class="font-bold text-gray-900 mb-1">運営情報の明示</p>
+          <p class="text-gray-700">運営者情報、編集方針、問い合わせ先を固定ページで公開します。</p>
+        </li>
+        <li class="bg-slate-50 rounded-xl p-4 border">
+          <p class="font-bold text-gray-900 mb-1">読みやすい導線</p>
+          <p class="text-gray-700">テーマ/著者索引、サイトマップで必要な情報に最短で到達できます。</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="mt-8 grid lg:grid-cols-3 gap-6">
+      <div class="lg:col-span-2 bg-white rounded-2xl shadow p-6 sm:p-8">
+        <h2 class="text-xl font-bold text-gray-900 mb-3">おすすめ記事</h2>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a class="block border rounded-xl p-4 hover:border-indigo-200 hover:bg-indigo-50 transition" href="articles/how-to-read-quotes.html">
+            <p class="text-sm text-gray-500">ガイド</p>
+            <p class="font-bold text-gray-900">名言の“読み解き方”：誤読を避けて行動につなげる手順</p>
+          </a>
+          <a class="block border rounded-xl p-4 hover:border-indigo-200 hover:bg-indigo-50 transition" href="articles/decision-making-with-quotes.html">
+            <p class="text-sm text-gray-500">実践</p>
+            <p class="font-bold text-gray-900">迷いが消える「判断の軸」づくり：言葉をチェックリスト化する</p>
+          </a>
+          <a class="block border rounded-xl p-4 hover:border-indigo-200 hover:bg-indigo-50 transition" href="articles/build-habits-slowly.html">
+            <p class="text-sm text-gray-500">習慣</p>
+            <p class="font-bold text-gray-900">急がずに、だが休まずに：小さく続けるための設計</p>
+          </a>
+          <a class="block border rounded-xl p-4 hover:border-indigo-200 hover:bg-indigo-50 transition" href="articles/resilience-not-perfection.html">
+            <p class="text-sm text-gray-500">回復力</p>
+            <p class="font-bold text-gray-900">転ばないより、起き上がる：レジリエンスの具体技術</p>
+          </a>
         </div>
+        <div class="mt-6 text-sm">
+          <a class="text-indigo-700 font-medium hover:underline" href="sitemap.html">サイトマップを見る</a>
+        </div>
+      </div>
 
-        <p id="quote-author" class="text-right text-gray-600 font-medium mt-4 pr-4 fade-in">
-            —
+      <aside class="bg-white rounded-2xl shadow p-6 sm:p-8">
+        <h2 class="text-xl font-bold text-gray-900 mb-3">今日の1フレーズ（学習用）</h2>
+        <p class="text-sm text-gray-600 mb-4">
+          ※当サイトは審査/品質改善のため、広告表示・アフィリエイト表示を一旦停止しています。
         </p>
-    </div>
-    
-    <!-- 操作ボタンエリア -->
-    <div class="flex flex-col sm:flex-row gap-4 mt-8 w-full">
-        <!-- 名言表示ボタン -->
-        <button id="generate-btn" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-full transition-all duration-300 transform hover:scale-[1.03] shadow-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 relative">
-            <span id="button-text">今日の教訓を見る</span>
+
+        <blockquote class="border-l-4 border-indigo-200 pl-4">
+          <p id="q-text" class="serif text-lg text-gray-900 leading-relaxed">ボタンを押すと、学習用の引用と解説が表示されます。</p>
+          <p id="q-author" class="text-sm text-gray-600 mt-2">—</p>
+          <p id="q-source" class="text-xs text-gray-500 mt-1"></p>
+        </blockquote>
+
+        <div class="mt-4">
+          <p class="text-sm font-bold text-gray-900 mb-2">今日の実践（1分）</p>
+          <p id="q-action" class="text-sm text-gray-700 leading-relaxed">—</p>
+        </div>
+
+        <button id="q-btn" class="mt-5 w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-xl shadow focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          表示する
         </button>
-        <!-- シェアボタン -->
-        <button id="share-btn" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-6 rounded-full transition-all duration-300 transform hover:scale-[1.03] shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50" disabled>
-            名言をシェア
-        </button>
+
+        <p class="text-xs text-gray-500 mt-4">
+          引用・出典と編集方針は <a class="text-indigo-700 hover:underline" href="editorial-policy.html">編集方針</a> にまとめています。
+        </p>
+      </aside>
+    </section>
+
+    <section class="mt-10 bg-white rounded-2xl shadow p-6 sm:p-10">
+      <h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3">初めての方へ：まず読む順番</h2>
+      <ol class="list-decimal ml-5 text-gray-700 space-y-2">
+        <li><a class="text-indigo-700 hover:underline font-medium" href="articles/how-to-read-quotes.html">名言の読み解き方ガイド</a>で「文脈→解釈→実践」の型を掴む</li>
+        <li>興味のある <a class="text-indigo-700 hover:underline font-medium" href="tag-index.html">テーマ索引</a> から記事を読む</li>
+        <li>気になる人物の <a class="text-indigo-700 hover:underline font-medium" href="author-index.html">著者索引</a> で関連ページを辿る</li>
+      </ol>
+    </section>
+  </main>
+
+  <footer class="max-w-5xl mx-auto px-4 pb-10 text-sm text-gray-600">
+    <div class="border-t pt-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+      <div class="flex flex-wrap gap-x-4 gap-y-2">
+        <a class="hover:underline text-indigo-700" href="about.html">運営者情報</a>
+        <a class="hover:underline text-indigo-700" href="contact.html">お問い合わせ</a>
+        <a class="hover:underline text-indigo-700" href="editorial-policy.html">編集方針</a>
+        <a class="hover:underline text-indigo-700" href="privacy.html">プライバシーポリシー</a>
+        <a class="hover:underline text-indigo-700" href="terms.html">利用規約</a>
+        <a class="hover:underline text-indigo-700" href="sitemap.html">サイトマップ</a>
+      </div>
+      <p class="text-xs text-gray-500">© <span id="y"></span> 名言の読み解きノート</p>
     </div>
-    
-    <!-- 解説エリア (H2タグ) -->
-    <div class="mt-4 pt-4 border-t border-gray-200">
-        <h2 class="text-xl font-semibold text-gray-700 mb-3 text-center">名言の深掘り解説</h2>
-        
-        <!-- 解説表示エリア -->
-        <div id="explanation-area" class="bg-gray-50 p-4 rounded-xl shadow-inner min-h-[150px] flex flex-col justify-center items-center">
-            <p id="explanation-text" class="text-gray-700 text-sm leading-relaxed text-left">
-                「今日の教訓を見る」ボタンを押すと、厳選された名言に対する解説文が表示されます。
-            </p>
-        </div>
-    </div>
-    
-    <!-- 関連情報エリア -->
-    <div id="recommendation-area" class="mt-8 pt-4 border-t border-gray-200 text-center hidden fade-in">
-        <p class="text-sm font-semibold text-gray-600 mb-3">今日の教訓をさらに深める：</p>
-        <!-- リンクはJavaScriptで動的に挿入されます -->
-        <div id="recommendation-links" class="flex flex-wrap justify-center gap-2">
-            <!-- 著者リンクとテーマ別リンクがここに入る -->
-        </div>
-    </div>
+  </footer>
 
-</div>
-
-<!-- 広告コードの挿入場所 3: 記事下/コンテンツ間広告 -->
-<div id="ad-container-bottom" class="main-container ad-unit-container">
-    <p class="text-xs font-bold text-gray-400 mb-2">【関連コンテンツ】</p>
-    <!-- AdSense広告ユニットコード: 名言格言下部バナー (正式なID: 3484248774) -->
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-6721819057047925"
-         data-ad-slot="3484248774"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-    <script>
-         (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-</div>
-<!-- /広告コードの挿入場所 3 -->
-
-<!-- 既存の静的コンテンツ (コンテンツ量強化) -->
-<div class="main-container bg-white p-8 sm:p-12 rounded-2xl shadow-xl mt-4">
-    <h2 class="text-2xl font-bold text-gray-800 mb-4 border-b pb-2 border-indigo-100">
-        💡 「今日の一言」が人生を変える理由
-    </h2>
-    <p class="text-gray-600 text-sm mb-4 leading-relaxed">
-        この名言・格言集は、歴史上の偉人や成功者たちが残した普遍的な知恵を厳選し、お届けします。
-        成功とは、一瞬の閃きではなく、毎日の小さな行動と正しいマインドセットの積み重ねによって達成されます。
-        私たちが提供する名言は、単なる言葉の羅列ではなく、その背景にある深い**教訓**と、それを**あなたの現代の生活や仕事に応用する方法**を徹底的に解説しています。
-        特に、**「なぜその名言が今も重要なのか」**という視点で、具体的な行動指針を提示しています。
-    </p>
-    <p class="text-gray-600 text-sm mb-4 leading-relaxed">
-        **【名言がもたらす具体的な効果】**
-        <ul class="list-disc list-inside ml-4 text-sm text-gray-700 space-y-1 mt-2">
-            <li>**モチベーションの再点火:** 偉人の言葉に触れることで、停滞した気持ちに火をつけ、行動へのエネルギーを再充電できます。</li>
-            <li>**意思決定の質の向上:** 困難な状況で、先人の知恵がブレない判断軸を提供してくれます。</li>
-            <li>**自己成長の加速:** 習慣化、失敗への向き合い方など、自己成長に直結する教訓を体系的に学べます。</li>
-        </ul>
-    </p>
-    <p class="text-gray-600 text-sm leading-relaxed italic border-t pt-3 mt-4">
-        毎朝、新しい名言に触れることで、あなたの思考はリフレッシュされ、行動へのエネルギーが生まれます。さあ、あなたも今日の教訓を見つけて、人生の新たな一歩を踏み出しましょう。
-    </p>
-</div>
-<!-- /既存の静的コンテンツ -->
-
-<!-- 静的名言一覧 (コンテンツ量大幅強化 / SEO対策) -->
-<div id="static-quotes-list" class="main-container bg-white p-8 sm:p-12 rounded-2xl shadow-xl mt-4">
-    <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b pb-2 border-indigo-100">
-        📚 収録名言・格言と深掘り解説（全33選）
-    </h2>
-    <!-- ここにJavaScriptで生成した静的リストを挿入する -->
-    <div id="all-quotes-list-content">
-        <!-- JavaScriptによってすべての名言がここにレンダリングされます -->
-    </div>
-</div>
-
-<footer>
-    <div class="text-sm text-gray-500 space-x-4">
-        <a href="privacy.html" class="hover:underline text-indigo-600">プライバシーポリシー</a>
-        <a href="terms.html" class="hover:underline text-indigo-600">利用規約</a>
-        <span class="text-gray-400">|</span>
-        <span class="text-gray-500">当サイトはAmazon.co.jpアソシエイトに参加しています。</span>
-    </div>
-</footer>
-
-<!-- 1. 通知ボックス (画面下中央に固定表示) -->
-<div id="notification-box" class="fixed bottom-5 left-1/2 transform -translate-x-1/2 p-3 bg-gray-900 text-white text-sm rounded-lg shadow-2xl opacity-0 transition-opacity duration-300 pointer-events-none z-50">
-    <span id="notification-message"></span>
-</div>
-
-<!-- 2. 共有モーダル (画面中央に表示) -->
-<div id="share-modal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-40 modal-leave-to" style="display: none;">
-    <div class="bg-white p-6 rounded-2xl shadow-2xl max-w-sm w-full mx-4 transform transition-all">
-        <h3 class="text-xl font-bold text-gray-800 mb-4 text-center">名言をシェアする</h3>
-        
-        <!-- モーダル内で共有テキストをプレビュー -->
-        <div class="bg-indigo-50 p-3 rounded-lg text-sm text-gray-700 mb-4 border border-indigo-200">
-            <p id="modal-quote-preview" class="font-medium italic text-center"></p>
-        </div>
-
-        <div class="flex flex-col gap-3">
-            <!-- Twitter 共有ボタン (JS制御) -->
-            <button id="share-twitter-btn" class="flex items-center justify-center gap-3 bg-blue-400 hover:bg-blue-500 text-white font-bold py-3 rounded-full transition duration-200 transform hover:scale-[1.02] shadow-md">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.901 1.153h3.586l-8.73 10.04h10.89l-14.61 9.92h-3.66l8.89-10.22h-10.89z"/></svg>
-                Twitter (X) でシェア
-            </button>
-
-            <!-- LINE 共有ボタン (JS制御) -->
-            <button id="share-line-btn" class="flex items-center justify-center gap-3 bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-full transition duration-200 transform hover:scale-[1.02] shadow-md">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11.96 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm4.332 17.618h-8.583c-.341 0-.616-.275-.616-.615v-8.583c0-.341.275-.616.616-.616h8.583c.341 0 .615.275.615.616v8.583c0 .341-.274.615-.615.615z"/></svg>
-                LINE で友だちに送る
-            </button>
-
-            <!-- テキストコピーボタン -->
-            <button id="copy-text-btn" class="flex items-center justify-center gap-3 bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 rounded-full transition duration-200 transform hover:scale-[1.02] shadow-md">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                【解説付き】全文をコピー
-            </button>
-        </div>
-
-        <button id="close-modal-btn" class="mt-4 w-full text-sm text-gray-500 hover:text-gray-800 transition duration-200">
-            閉じる
-        </button>
-    </div>
-</div>
-
-<script>
-    // ===================================
-    // 1. データとグローバル変数
-    // ===================================
-    
-    // 【重要】固定の名言データ配列 (全33個)
-    const ALL_QUOTES = [
-        { quote: "想像力は知識よりも重要だ。知識には限界があるが、想像力は世界を包み込む。", author: "アルベルト・アインシュタイン", tags: ["科学", "創造性"], explanation: "知識は過去の蓄積ですが、想像力は未来を創造する力です。アインシュタインは、限界のある知識を超えて、新しい可能性を見出すには自由な発想が不可欠であると説きました。イノベーションの源泉となる教えです。" },
-        { quote: "ハングリーであれ。愚かであれ。\n\n(Stay hungry, stay foolish.)", author: "スティーブ・ジョブズ", tags: ["ビジネス", "革新"], explanation: "現状に満足せず常に貪欲に学び続け、常識にとらわれない大胆な発想を持ち続けることの重要性を説いた言葉です。既成概念を打ち破り、新しい価値を創造するためのマインドセットです。" },
-        { quote: "夢見ることができれば、それは実現できる。", author: "ウォルト・ディズニー", tags: ["夢", "実現"], explanation: "ディズニーの創造の原点は、まず鮮明に夢を描くことにありました。ビジョンを明確に持ち、それを信じ抜くことが、現実を変える第一歩となるという力強いメッセージです。" },
-        { quote: "明日死ぬかのように生きよ。永遠に生きるかのように学べ。", author: "マハトマ・ガンディー", tags: ["人生", "学習"], explanation: "「今」を大切にする情熱と、未来への自己投資としての学習を両立させることの重要性を説いています。一日一日を全力で生きつつ、長期的な成長も怠らない姿勢が求められます。" },
-        { quote: "月が綺麗ですね。\n\n（I love you の日本的訳として）", author: "夏目漱石", tags: ["文学", "愛"], explanation: "直接的な言葉を使わず、情景を通して想いを伝える日本独特の奥ゆかしさを象徴する逸話です。言葉の裏にある感情や文脈を読み解く感性の大切さを教えてくれます。" },
-        { quote: "かけがえのない人間になるためには、常に人とは違っていなければならない。", author: "ココ・シャネル", tags: ["ファッション", "個性"], explanation: "流行を追うのではなく、自分だけのスタイルと価値観を貫くことの重要性を説いています。他者との違いを恐れず、独自の個性を磨き上げることが、唯一無二の存在になる道です。" },
-        { quote: "天才とは、1％のひらめきと99％の努力である。", author: "トーマス・エジソン", tags: ["努力", "成功"], explanation: "偉大な発明や成果は、一瞬の閃きだけでなく、それを形にするための膨大で地道な努力によって支えられているという教訓です。継続的な努力こそが成功への鍵です。" },
-        { quote: "深淵をのぞく時、深淵もまたこちらをのぞいているのだ。", author: "フリードリヒ・ニーチェ", tags: ["哲学", "心理"], explanation: "悪や困難な問題と対峙する際、自分自身もその影響を受け、変質してしまう危険性を示唆しています。常に自己を客観視し、闇に飲み込まれない強い精神力を持つことの重要性を説いています。" },
-        { quote: "失敗したところでやめてしまうから失敗になる。成功するところまで続ければ、それは成功になる。", author: "松下幸之助", tags: ["ビジネス", "不屈"], explanation: "失敗は結果ではなく、諦めた時点で確定するものです。成功するまで試行錯誤を続ければ、すべての失敗は成功へのプロセスの一部となるという、不屈の精神を説いています。" },
-        { quote: "愛の反対は憎しみではなく、無関心です。", author: "マザー・テレサ", tags: ["愛", "平和"], explanation: "人間関係において最も残酷なのは、相手に関心を持たないことです。憎しみよりも深い断絶を生む「無関心」を乗り越え、周囲の人々に愛と関心を持って接することの大切さを教えてくれます。" },
-        { quote: "生きるべきか、死ぬべきか、それが問題だ。\n\n(To be, or not to be)", author: "ウィリアム・シェイクスピア", tags: ["演劇", "苦悩"], explanation: "ハムレットの苦悩を通して、人生の岐路における決断の重さと、存在そのものの意味を問いかける言葉です。困難に立ち向かうか、逃れるか、究極の選択を迫られた時の人間の心理を描写しています。" },
-        { quote: "最も強い者が生き残るのではなく、最も賢い者が生き延びるのでもない。唯一生き残ることが出来るのは、変化できる者である。", author: "チャールズ・ダーウィン", tags: ["進化", "変化"], explanation: "環境の変化に適応する能力こそが、生存と繁栄の条件であるという進化論の教訓です。現代のビジネスや生活においても、変化を恐れず柔軟に対応する力が求められます。" },
-        { quote: "成功は99％の失敗の上に成り立っている。", author: "本田宗一郎", tags: ["ビジネス", "挑戦"], explanation: "多くの失敗と挑戦の積み重ねが、一つの成功を生み出すという事実を示しています。失敗を恐れて挑戦を避けるのではなく、失敗から学び続けることが成功への近道です。" },
-        { quote: "最大の栄光は、決して転ばないことにあるのではない。転ぶたびに起き上がり続けることにある。", author: "孔子", tags: ["思想", "儒教"], explanation: "失敗しないことよりも、失敗から立ち直る「回復力（レジリエンス）」にこそ人間の真価があるという教えです。何度転んでも立ち上がる不屈の精神が、人生を切り拓きます。" },
-        { quote: "世界で最も素晴らしく、最も美しいものは、目で見たり手で触れたりすることはできません。それは心で感じなければならないのです。", author: "ヘレン・ケラー", tags: ["人生", "希望"], explanation: "真に価値あるもの（愛、友情、希望など）は、物質的な形を持たず、心で感じるものであるという教訓です。目に見えるものだけでなく、内面的な豊かさを大切にすることの重要性を説いています。" },
-        { quote: "私は自分が何も知らないということを知っている。\n\n（無知の知）", author: "ソクラテス", tags: ["哲学", "知識"], explanation: "自分の知識の限界を自覚すること（無知の知）が、真の探求の始まりであるという教えです。謙虚さを持ち、常に学び続ける姿勢こそが、知恵への道を開きます。" },
-        { quote: "人間は恋と革命のために生まれて来たのだ。", author: "太宰治", tags: ["文学", "情熱"], explanation: "情熱的な恋愛と、社会を変革する革命こそが、人間が生きる根源的なエネルギーであるという太宰治の思想を表しています。現状に安住せず、情熱を持って生きることの意味を問いかけています。" },
-        { quote: "人民の、人民による、人民のための政治。", author: "リンカーン", tags: ["政治", "民主主義"], explanation: "民主主義の根本原理を簡潔に表現した言葉です。政治権力は国民に由来し、国民によって行使され、国民の利益のためにあるべきだという理想を示しています。" },
-        { quote: "人生はクローズアップで見れば悲劇だが、ロングショットで見れば喜劇だ。", author: "チャールズ・チャップリン", tags: ["映画", "人生観"], explanation: "目前の苦難も、長い人生の一部として俯瞰すれば、笑い話や喜劇の一部になり得るという視点の転換を教えてくれます。辛い時こそ、客観的な視点を持つことで心が軽くなります。" },
-        { quote: "芸術は爆発だ。", author: "岡本太郎", tags: ["芸術", "情熱"], explanation: "既存の枠組みを破壊し、内なるエネルギーを爆発させることこそが芸術の本質であるという主張です。常識にとらわれず、自己を全面的に表現する情熱の大切さを説いています。" },
-        { quote: "不可能（IMPOSSIBLE）なんて言葉はないわ。その言葉自体が言っているのよ、「私は可能（I'M POSSIBLE）」だって。", author: "オードリー・ヘップバーン", tags: ["前向き", "自信"], explanation: "言葉遊びを通して、不可能と思える状況でもポジティブな視点を持つことで、可能性を見出せるというメッセージです。自信と前向きな姿勢が、限界を突破する力を与えてくれます。" },
-        { quote: "日本を今一度、せんたく（洗濯）いたし申候。", author: "坂本龍馬", tags: ["歴史", "改革"], explanation: "当時の日本の古い体制や慣習を一新し、新しい国造りを目指すという龍馬の強い決意を表した言葉です。現状を打破し、大きな変革を成し遂げようとする改革者の精神を象徴しています。" },
-        { quote: "私の辞書に不可能という文字はない。", author: "ナポレオン・ボナパルト", tags: ["歴史", "自信"], explanation: "強い意志と行動力があれば、どんな困難も克服できるというナポレオンの絶対的な自信を表しています。限界を自分で決めつけず、可能性を信じて突き進むリーダーシップの精神です。" },
-        { quote: "我思う、ゆえに我あり。\n\n(Cogito, ergo sum)", author: "ルネ・デカルト", tags: ["哲学", "真理"], explanation: "あらゆるものを疑っても、疑っている自分自身の存在だけは疑いようがないという哲学的真理です。自己の意識と理性を基盤として、真実を探求する姿勢の重要性を示しています。" },
-        { quote: "雨ニモマケズ、風ニモマケズ。", author: "宮沢賢治", tags: ["文学", "忍耐"], explanation: "どんな困難や苦しみにも負けず、静かに強く生きる理想の姿を描いた詩の一節です。逆境においても利他的な精神を持ち続ける、日本的な忍耐と美徳の精神を表現しています。" },
-        { quote: "成功とは、意欲を失わずに失敗から失敗へと進む能力のことだ。", author: "ウィンストン・チャーチル", tags: ["リーダーシップ"], explanation: "失敗を恐れず、何度つまづいても情熱を持ち続けることが、最終的な成功への唯一の道であると説いています。リーダーにとって最も重要な資質は、逆境における不屈の精神です。" },
-        { quote: "水になれ。\n\n(Be water, my friend.)", author: "ブルース・リー", tags: ["武道", "柔軟性"], explanation: "水のように形にとらわれず、状況に応じて柔軟に変化し、適応することの強さを説いた教えです。固定観念を捨て、自由自在に動くことで、あらゆる障害を乗り越えることができます。" },
-        { quote: "あなたが「できる」と思おうと、「できない」と思おうと、どちらも正しい。", author: "ヘンリー・フォード", tags: ["経営", "マインド"], explanation: "結果は自分の信念によって決まるという法則です。できると信じれば方法は見つかり、できないと信じれば言い訳が見つかります。マインドセットが現実を創ることを教えてくれます。" },
-        { quote: "急がずに、だが休まずに。", author: "ヨハン・ヴォルフガング・フォン・ゲーテ", tags: ["人生", "継続"], explanation: "焦って結果を求めるのではなく、着実に一歩ずつ進み続けることの重要性を説いています。継続こそが力なり。長期的な視点で物事に取り組み、歩みを止めないことが大成への道です。" },
-        { quote: "人間は一本の葦（あし）にすぎない。自然の中で最も弱いものである。だが、それは考える葦である。", author: "ブレーズ・パスカル", tags: ["哲学", "人間"], explanation: "人間は自然界において脆く弱い存在ですが、思考する能力を持つことによって偉大さを獲得するという思想です。肉体的な強さではなく、知性と精神性こそが人間の尊厳であることを示しています。" },
-        { quote: "誰もがスターであり、輝く権利を持っている。", author: "マリリン・モンロー", tags: ["芸能", "自己肯定"], explanation: "すべての人には独自の魅力と才能があり、それを表現して輝く権利があるというエンパワーメントの言葉です。自分自身を信じ、ありのままの自分を肯定することの大切さを伝えています。" },
-        { quote: "小さいことを積み重ねるのが、とんでもないところへ行くただひとつの道。", author: "イチロー", tags: ["スポーツ", "努力"], explanation: "偉大な記録や成果は、魔法のような一撃ではなく、日々の地道な努力の積み重ねによってのみ達成されるという教訓です。毎日の小さな一歩を大切にすることが、やがて大きな到達点へと導きます。" },
-        { quote: "つまづいたっていいじゃないか にんげんだもの", author: "相田みつを", tags: ["詩", "癒やし"], explanation: "失敗や弱さも人間らしさの一部として受け入れ、自分を許すことの大切さを説いた言葉です。完璧でなくても良いというメッセージが、疲れた心に寄り添い、再び歩き出す勇気を与えてくれます。" }
+  <script>
+    // 審査・品質改善のため「出典が明確で、解説が主」の短い引用のみを扱う（引用は補助、解説が主）。
+    // ここは“学習の入口”として最小限にし、詳しい解説は記事ページに集約します。
+    const QUOTES = [
+      {
+        text: "急がずに、だが休まずに。",
+        author: "ヨハン・ヴォルフガング・フォン・ゲーテ",
+        source: "出典: 格言として広く知られる表現（学習用引用）",
+        action: "今日やる作業を1つだけ選び「5分だけ」着手して、終わったら明日の最初の一手をメモする。"
+      },
+      {
+        text: "我思う、ゆえに我あり。",
+        author: "ルネ・デカルト",
+        source: "出典: 『方法序説』等で知られる命題（学習用引用）",
+        action: "不安になっているテーマを紙に書き「事実/解釈/次の行動」に3分割して、事実だけを書き出す。"
+      },
+      {
+        text: "最大の栄光は、決して転ばないことにあるのではない。転ぶたびに起き上がり続けることにある。",
+        author: "孔子（伝）",
+        source: "出典: 伝承的に引用される言葉（学習用引用）",
+        action: "最近の失敗を1つ選び「学んだこと」を1行で言語化し、次の1回で試す改善を1つ決める。"
+      },
+      {
+        text: "私は自分が何も知らないということを知っている。",
+        author: "ソクラテス（伝）",
+        source: "出典: 伝承的に引用される表現（学習用引用）",
+        action: "いま詳しいつもりの分野について「まだ確認していない前提」を3つ書き、1つだけ調べ直す。"
+      }
     ];
 
-    let currentQuoteData = null; // 現在表示中の名言データ
-    let filteredQuotes = ALL_QUOTES; // フィルタリング後の名言リスト
-    let currentFilterTag = null; // 現在適用中のタグフィルタ
-    let currentFilterAuthor = null; // 現在適用中の著者フィルタ
-    let fullShareText = ''; // コピー用の長文テキスト
-    let shortShareText = ''; // Web Share API用の短文テキスト
-    
-    // DOM要素の取得
-    const quoteTextElement = document.getElementById('quote-text');
-    const quoteAuthorElement = document.getElementById('quote-author');
-    const generateBtn = document.getElementById('generate-btn');
-    const shareBtn = document.getElementById('share-btn');
-    const tagsContainer = document.getElementById('tags-container');
-    const explanationTextElement = document.getElementById('explanation-text');
-    const recommendationArea = document.getElementById('recommendation-area');
-    const recommendationLinks = document.getElementById('recommendation-links');
-    const filterStatusElement = document.getElementById('filter-status');
-    const allQuotesListContent = document.getElementById('all-quotes-list-content');
-    const notificationBox = document.getElementById('notification-box');
-    const notificationMessage = document.getElementById('notification-message');
-    
-    // モーダル関連要素
-    const shareModal = document.getElementById('share-modal');
-    const closeModalBtn = document.getElementById('close-modal-btn');
-    const shareTwitterBtn = document.getElementById('share-twitter-btn');
-    const shareLineBtn = document.getElementById('share-line-btn');
-    const copyTextBtn = document.getElementById('copy-text-btn');
-    const modalQuotePreview = document.getElementById('modal-quote-preview');
-    
-    // 固定の共有URL (実際のホスティングURLに置き換える)
-    const FIXED_SHARE_URL = "https://meigen-kakugen.com/index.html"; 
-
-
-    // ===================================
-    // 2. ユーティリティ関数
-    // ===================================
-    
-    /**
-     * 画面下部に通知メッセージを表示する
-     */
-    function showNotification(message) {
-        notificationMessage.textContent = message;
-        notificationBox.style.opacity = 1;
-        
-        setTimeout(() => {
-            notificationBox.style.opacity = 0;
-        }, 3000);
-    }
-    
-    /**
-     * レコメンドエリアを更新する
-     */
-    function updateRecommendation(quoteData) {
-        recommendationLinks.innerHTML = '';
-        const author = quoteData.author;
-        
-        // Wikipediaリンク
-        const wikipediaUrl = `https://ja.wikipedia.org/wiki/${encodeURIComponent(author)}`;
-        const wikipediaLink = document.createElement('a');
-        wikipediaLink.href = wikipediaUrl;
-        wikipediaLink.target = '_blank';
-        wikipediaLink.rel = 'noopener noreferrer';
-        wikipediaLink.className = 'inline-flex items-center text-sm text-gray-600 bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded-full transition duration-150';
-        wikipediaLink.innerHTML = `📚 ${author} をWikipediaで調べる`;
-        recommendationLinks.appendChild(wikipediaLink);
-
-        // Amazonリンク（著者名検索）
-        // アソシエイトタグは適宜変更してください
-        const amazonUrl = `https://www.amazon.co.jp/s?k=${encodeURIComponent(author)}&tag=yamano32010e-22`; 
-        const amazonLink = document.createElement('a');
-        amazonLink.href = amazonUrl;
-        amazonLink.target = '_blank';
-        amazonLink.rel = 'noopener noreferrer';
-        amazonLink.className = 'inline-flex items-center text-sm text-white bg-yellow-500 hover:bg-yellow-600 px-3 py-1 rounded-full transition duration-150 ml-2';
-        amazonLink.innerHTML = `🛒 Amazonで関連書籍を探す`;
-        recommendationLinks.appendChild(amazonLink);
-
-        recommendationArea.classList.remove('hidden');
-    }
-    
-    /**
-     * テキストをクリップボードにコピーする
-     */
-    async function copyToClipboard(text) {
-        // execCommandを使ったコピー処理 (互換性重視)
-        const tempInput = document.createElement('textarea');
-        tempInput.value = text;
-        tempInput.style.position = 'absolute';
-        tempInput.style.left = '-9999px';
-        document.body.appendChild(tempInput);
-        tempInput.select();
-        
-        try {
-            const successful = document.execCommand('copy');
-            if (successful) {
-                showNotification('名言と解説をコピーしました！');
-            } else {
-                showNotification('コピーに失敗しました。');
-            }
-        } catch (err) {
-            console.error('Copy failed:', err);
-            showNotification('コピーに失敗しました。');
-        } finally {
-            document.body.removeChild(tempInput);
-        }
-    }
-    
-    /**
-      * すべての名言を静的にHTMLにレンダリングする (クローラー対策)
-      */
-    function renderStaticQuotesList() {
-        let listHtml = '';
-        ALL_QUOTES.forEach((q, index) => {
-            // タグをクリック可能にするため、タグにフィルターリンクを付与
-            const tagsHtml = q.tags.map(tag => {
-                const tagLink = `?tag=${encodeURIComponent(tag)}`;
-                return `<a href="${tagLink}" class="inline-block bg-indigo-100 text-indigo-700 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full hover:bg-indigo-200 transition-colors">#${tag}</a>`;
-            }).join('');
-            
-            // 著者にフィルターリンクを付与
-            const authorLink = `?author=${encodeURIComponent(q.author)}`;
-
-            listHtml += `
-                <div class="static-quote-card">
-                    <h3 class="static-quote-text">
-                        ${index + 1}. 「${q.quote}」
-                    </h3>
-                    <p class="static-author-text">
-                        — <a href="${authorLink}" class="text-indigo-600 hover:text-indigo-800 underline">${q.author}</a>
-                    </p>
-                    <div class="mb-3">
-                        ${tagsHtml}
-                    </div>
-                    <p class="static-explanation-text">
-                        <strong class="text-indigo-600">【解説】</strong> ${q.explanation}
-                    </p>
-                </div>
-            `;
-        });
-        allQuotesListContent.innerHTML = listHtml;
+    function pick() {
+      const q = QUOTES[Math.floor(Math.random() * QUOTES.length)];
+      document.getElementById("q-text").textContent = q.text;
+      document.getElementById("q-author").textContent = `— ${q.author}`;
+      document.getElementById("q-source").textContent = q.source;
+      document.getElementById("q-action").textContent = q.action;
     }
 
-
-    // ===================================
-    // 3. コンテンツの表示とフィルタリング
-    // ===================================
-    
-    /**
-      * ランダムな名言を選択し、UIを更新する
-      */
-    function displayRandomQuote() {
-        // フィルタリングされたリスト、または全てのリストから選択
-        const quotesToDrawFrom = filteredQuotes.length > 0 ? filteredQuotes : ALL_QUOTES;
-
-        if (quotesToDrawFrom.length === 0) {
-            // 名言がない場合の処理
-            quoteTextElement.textContent = "この条件の名言は現在ありません。フィルタを解除してみてください。";
-            quoteAuthorElement.textContent = "—";
-            tagsContainer.innerHTML = '';
-            explanationTextElement.textContent = "フィルタリングされたリストに一致する名言がありませんでした。";
-            shareBtn.disabled = true;
-            recommendationArea.classList.add('hidden');
-            return;
-        }
-
-        // ランダムに名言を選択
-        const randomIndex = Math.floor(Math.random() * quotesToDrawFrom.length);
-        const quoteData = quotesToDrawFrom[randomIndex];
-        currentQuoteData = quoteData; 
-
-        // --- STEP 1: テキストの入れ替えと表示 ---
-        // 改行を<br>に変換して表示
-        quoteTextElement.innerHTML = quoteData.quote.replace(/\n/g, '<br>');
-        quoteAuthorElement.textContent = `— ${quoteData.author}`;
-        
-        // タグの表示 (フィルタ状態を反映)
-        displayTags(quoteData.tags);
-
-        // 解説文を表示
-        explanationTextElement.textContent = quoteData.explanation.trim();
-
-        // レコメンドリンクの更新
-        updateRecommendation(quoteData);
-        
-        // シェアテキストの更新
-        setupShareText(quoteData);
-
-        // フェードイン
-        quoteTextElement.style.opacity = 1;
-        quoteAuthorElement.style.opacity = 1;
-        tagsContainer.style.opacity = 1; 
-        recommendationArea.style.opacity = 1;
-        explanationTextElement.parentNode.style.opacity = 1; 
-        recommendationArea.classList.remove('hidden');
-        shareBtn.disabled = false;
-        
-        // フィルタリング中でない場合のみ通知
-        if (!currentFilterTag && !currentFilterAuthor) {
-            showNotification('今日の教訓を表示しました！');
-        }
-
-        // 広告リロード (AdSenseがある場合)
-        if (typeof adsbygoogle !== 'undefined') {
-            const adSlots = document.querySelectorAll('.adsbygoogle');
-            adSlots.forEach(slot => {
-                slot.innerHTML = '';
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            });
-        }
-    }
-    
-    /**
-     * 名言に付与されたタグをバッジとして表示する
-     */
-    function displayTags(tags) {
-        tagsContainer.innerHTML = ''; 
-        if (!tags || tags.length === 0) return;
-        tags.forEach(tag => {
-            const isCurrentFilter = tag === currentFilterTag;
-            const tagElement = document.createElement('span');
-            tagElement.textContent = `#${tag}`;
-            
-            let tagClass = 'text-xs font-semibold px-3 py-1 rounded-full shadow-sm whitespace-nowrap fade-in cursor-pointer transition duration-150 m-1';
-            
-            if (isCurrentFilter) {
-                tagClass += ' bg-indigo-600 text-white hover:bg-indigo-700';
-            } else {
-                tagClass += ' bg-indigo-100 text-indigo-700 hover:bg-indigo-200';
-            }
-            
-            tagElement.className = tagClass;
-            tagElement.addEventListener('click', () => filterQuotesByTag(tag));
-            tagsContainer.appendChild(tagElement);
-        });
-    }
-
-
-    /**
-     * タグでフィルタリング
-     */
-    function filterQuotesByTag(tag) {
-        if (tag === currentFilterTag) {
-            // 解除
-            currentFilterTag = null;
-            filteredQuotes = ALL_QUOTES;
-            filterStatusElement.textContent = "すべての教訓からランダムに表示中 (タグをクリックで絞り込み)";
-        } else {
-            // 適用
-            currentFilterTag = tag;
-            currentFilterAuthor = null; // 著者のフィルタは解除
-            filteredQuotes = ALL_QUOTES.filter(q => q.tags.includes(tag));
-            filterStatusElement.innerHTML = `タグ: <span class="font-bold text-indigo-600">#${tag}</span> で絞り込み中`;
-        }
-        displayRandomQuote();
-    }
-    
-    /**
-     * 著者でフィルタリング (URLパラメータ経由などで使用)
-     */
-    function filterQuotesByAuthor(author) {
-        if (author === currentFilterAuthor) {
-            currentFilterAuthor = null;
-            filteredQuotes = ALL_QUOTES;
-            filterStatusElement.textContent = "すべての教訓からランダムに表示中";
-        } else {
-            currentFilterAuthor = author;
-            currentFilterTag = null;
-            filteredQuotes = ALL_QUOTES.filter(q => q.author === author);
-            filterStatusElement.innerHTML = `著者: <span class="font-bold text-indigo-600">${author}</span> で絞り込み中`;
-        }
-        displayRandomQuote();
-    }
-
-    /**
-     * シェアテキストの生成
-     */
-    function setupShareText(quoteData) {
-        const { quote, author, explanation, tags } = quoteData;
-        const tagStrings = tags.map(tag => `#${tag}`).join(' ');
-        
-        fullShareText = `【今日の教訓】\n「${quote}」\n— ${author}\n\n【深掘り解説】\n${explanation}\n\n${tagStrings}\n👇続きはこちら\n${FIXED_SHARE_URL}`;
-        shortShareText = `「${quote}」\n— ${author}\n${tagStrings} #名言`;
-        
-        modalQuotePreview.textContent = `「${quote}」 — ${author}`;
-    }
-    
-    // ===================================
-    // 4. モーダル操作と共有処理
-    // ===================================
-
-    function handleMainShare() {
-        if (!currentQuoteData) return;
-
-        if (navigator.share) {
-            navigator.share({
-                title: '【日替わり：今日の教訓】',
-                text: shortShareText,
-                url: FIXED_SHARE_URL, 
-            }).catch((error) => {
-                if (error.name !== 'AbortError') {
-                    openShareModal(); 
-                }
-            });
-        } else {
-            openShareModal();
-        }
-    }
-
-    function openShareModal() {
-        if (!currentQuoteData) return;
-        setupShareText(currentQuoteData);
-        shareModal.style.display = 'flex';
-        setTimeout(() => shareModal.classList.remove('modal-leave-to'), 10);
-    }
-
-    function closeShareModal() {
-        shareModal.classList.add('modal-leave-to');
-        setTimeout(() => shareModal.style.display = 'none', 300);
-    }
-
-    function shareOnTwitter() {
-        const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shortShareText)}&url=${encodeURIComponent(FIXED_SHARE_URL)}`;
-        window.open(url, '_blank');
-        closeShareModal();
-    }
-
-    function shareOnLine() {
-        const text = `${shortShareText}\n${FIXED_SHARE_URL}`;
-        window.open(`https://line.me/R/msg/text/?${encodeURIComponent(text)}`, '_blank');
-        closeShareModal(); 
-    }
-
-    // ===================================
-    // 5. URLパラメータ処理
-    // ===================================
-
-    function checkUrlParameters() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const tag = urlParams.get('tag');
-        const author = urlParams.get('author');
-
-        if (tag) {
-            filterQuotesByTag(decodeURIComponent(tag));
-            return true;
-        }
-        if (author) {
-            filterQuotesByAuthor(decodeURIComponent(author));
-            return true;
-        }
-        return false;
-    }
-
-
-    // ===================================
-    // 6. 初期化
-    // ===================================
-
-    generateBtn.addEventListener('click', displayRandomQuote);
-    shareBtn.addEventListener('click', handleMainShare);
-    closeModalBtn.addEventListener('click', closeShareModal);
-    shareModal.addEventListener('click', (e) => {
-        if (e.target === shareModal) closeShareModal();
-    });
-    shareTwitterBtn.addEventListener('click', shareOnTwitter);
-    shareLineBtn.addEventListener('click', shareOnLine);
-    copyTextBtn.addEventListener('click', async () => {
-        await copyToClipboard(fullShareText);
-        closeShareModal();
-    });
-
-    document.addEventListener('DOMContentLoaded', () => {
-        renderStaticQuotesList(); 
-        
-        const didFilter = checkUrlParameters();
-        if (!didFilter) {
-            displayRandomQuote();
-        }
-    });
-</script>
-
+    document.getElementById("q-btn").addEventListener("click", pick);
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
