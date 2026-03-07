@@ -26,15 +26,18 @@
   </header>
 
   <main class="max-w-5xl mx-auto px-4 py-10">
-    <section class="bg-white rounded-2xl shadow p-6 sm:p-10">
+    <section class="bg-white rounded-2xl shadow p-6 sm:p-10 border-t-4 border-indigo-600">
       <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">サイトマップ</h1>
-      <p class="text-gray-700">主要ページと記事へのリンクをまとめています。</p>
+      <p class="text-gray-700">主要ページと記事へのリンクをまとめています。名言を「読むだけ」で終わらせず、人生の資産に変えるための高品質なコンテンツを提供します。</p>
     </section>
 
     <section class="mt-8 grid md:grid-cols-2 gap-6">
       <div class="bg-white rounded-2xl shadow p-6">
-        <h2 class="text-lg font-bold text-gray-900 mb-3">主要ページ</h2>
-        <ul class="list-disc ml-5 space-y-2 text-gray-700">
+        <h2 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+          <span class="w-1 h-5 bg-indigo-600 rounded-full"></span>
+          主要ページ
+        </h2>
+        <ul class="list-disc ml-5 space-y-2 text-gray-700 text-sm">
           <li><a class="text-indigo-700 hover:underline" href="index.html">トップページ</a></li>
           <li><a class="text-indigo-700 hover:underline" href="tag-index.html">テーマ索引</a></li>
           <li><a class="text-indigo-700 hover:underline" href="author-index.html">著者索引</a></li>
@@ -47,31 +50,59 @@
       </div>
 
       <div class="bg-white rounded-2xl shadow p-6">
-        <h2 class="text-lg font-bold text-gray-900 mb-3">記事</h2>
-        <ul class="list-disc ml-5 space-y-2 text-gray-700">
-          <li><a class="text-indigo-700 hover:underline" href="articles/how-to-read-quotes.html">名言の“読み解き方”：誤読を避けて行動につなげる手順</a></li>
+        <h2 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+          <span class="w-1 h-5 bg-indigo-600 rounded-full"></span>
+          学習ガイド・思考法
+        </h2>
+        <ul class="list-disc ml-5 space-y-2 text-gray-700 text-sm">
+          <li><a class="text-indigo-700 hover:underline" href="articles/how-to-read-quotes.html">名言の“読み解き方”：誤読を避けて行動につなげる4ステップ</a></li>
           <li><a class="text-indigo-700 hover:underline" href="articles/source-hunting.html">名言の出典の探し方：一次資料にたどり着くための手順</a></li>
-          <li><a class="text-indigo-700 hover:underline" href="articles/decision-making-with-quotes.html">迷いが消える「判断の軸」づくり：言葉をチェックリスト化する</a></li>
+          <li><a class="text-indigo-700 hover:underline" href="articles/reading-notes-system.html">読書を成果に変えるノート術：要約→問い→行動の3段階</a></li>
+          <li><a class="text-indigo-700 hover:underline" href="articles/write-better-questions.html">答えを探す前に「問い」を整える：質問の質が思考の質を決める</a></li>
           <li><a class="text-indigo-700 hover:underline" href="articles/cognitive-biases-checklist.html">判断ミスを減らす「認知バイアス」チェックリスト：7つの落とし穴</a></li>
-          <li><a class="text-indigo-700 hover:underline" href="articles/build-habits-slowly.html">急がずに、だが休まずに：小さく続けるための設計</a></li>
+        </ul>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow p-6">
+        <h2 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+          <span class="w-1 h-5 bg-indigo-600 rounded-full"></span>
+          意思決定・目標達成
+        </h2>
+        <ul class="list-disc ml-5 space-y-2 text-gray-700 text-sm">
+          <li><a class="text-indigo-700 hover:underline" href="articles/decision-making-with-quotes.html">迷いが消える「判断の軸」づくり：言葉をチェックリスト化する</a></li>
+          <li><a class="text-indigo-700 hover:underline" href="articles/eisenhower-matrix-priority.html">優先順位を「4事象」で整理する：アイゼンハワー・マトリクス</a></li>
+          <li><a class="text-indigo-700 hover:underline" href="articles/growth-mindset-dweck.html">能力は伸ばせると信じる：グロース・マインドセットの本質</a></li>
+          <li><a class="text-indigo-700 hover:underline" href="articles/stockdale-paradox.html">残酷な現実を直視し、最後には勝つ：ストックデールのパラドックス</a></li>
+          <li><a class="text-indigo-700 hover:underline" href="articles/ikigai-lifestyle-design.html">人生の「生きがい」を見つける：4つの円の重なりを設計する</a></li>
+        </ul>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow p-6">
+        <h2 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+          <span class="w-1 h-5 bg-indigo-600 rounded-full"></span>
+          習慣・継続・回復力
+        </h2>
+        <ul class="list-disc ml-5 space-y-2 text-gray-700 text-sm">
+          <li><a class="text-indigo-700 hover:underline" href="articles/build-habits-slowly.html">急がずに、だが休まずに：小さく続けるための行動設計</a></li>
+          <li><a class="text-indigo-700 hover:underline" href="articles/tiny-habits-bj-fogg.html">努力感ゼロで人生を変える：タイニー・ハビット（小さな習慣）の科学</a></li>
           <li><a class="text-indigo-700 hover:underline" href="articles/prevent-burnout-sustainable-pace.html">燃え尽きを防ぐ「持続可能なペース」設計：やめないための3条件</a></li>
           <li><a class="text-indigo-700 hover:underline" href="articles/resilience-not-perfection.html">転ばないより、起き上がる：レジリエンスの具体技術</a></li>
           <li><a class="text-indigo-700 hover:underline" href="articles/after-action-review.html">失敗を“経験”で終わらせない：AAR（振り返り）で学びを残す4問</a></li>
           <li><a class="text-indigo-700 hover:underline" href="articles/controllables-stoicism.html">「変えられること」と「変えられないこと」を分ける：ストア派の実践手順</a></li>
           <li><a class="text-indigo-700 hover:underline" href="articles/deep-work-focus.html">集中を設計する：深い作業（Deep Work）を1日30分つくる方法</a></li>
-          <li><a class="text-indigo-700 hover:underline" href="articles/reading-notes-system.html">読書を成果に変えるノート術：要約→問い→行動の3段階</a></li>
-          <li><a class="text-indigo-700 hover:underline" href="articles/write-better-questions.html">答えを探す前に「問い」を整える：質問の質が思考の質を決める</a></li>
         </ul>
       </div>
     </section>
   </main>
 
-  <footer class="max-w-5xl mx-auto px-4 pb-10 text-sm text-gray-600">
-    <div class="border-t pt-6 flex flex-wrap gap-x-4 gap-y-2">
-      <a class="hover:underline text-indigo-700" href="index.html">トップ</a>
-      <a class="hover:underline text-indigo-700" href="about.html">運営者情報</a>
-      <a class="hover:underline text-indigo-700" href="contact.html">お問い合わせ</a>
-      <a class="hover:underline text-indigo-700" href="editorial-policy.html">編集方針</a>
+  <footer class="max-w-5xl mx-auto px-4 pb-12 text-sm text-gray-500">
+    <div class="border-t border-gray-200 pt-8 flex flex-wrap gap-x-6 gap-y-3 justify-center sm:justify-between">
+      <div class="flex flex-wrap gap-x-6 gap-y-3">
+        <a class="hover:text-indigo-600 transition" href="index.html">トップ</a>
+        <a class="hover:text-indigo-600 transition" href="about.html">運営者情報</a>
+        <a class="hover:text-indigo-600 transition" href="contact.html">お問い合わせ</a>
+        <a class="hover:text-indigo-600 transition" href="editorial-policy.html">編集方針</a>
+      </div>
     </div>
   </footer>
 </body>

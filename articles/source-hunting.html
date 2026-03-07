@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>名言の出典の探し方：一次資料にたどり着くための手順｜名言の読み解きノート</title>
-  <meta name="description" content="誤引用を減らすための「出典の探し方」ガイド。一次資料・二次資料・伝承の違い、原文と訳、版情報の確認手順を具体的にまとめます。" />
+  <title>名言の出典の探し方：一次資料にたどり着くための実践手順｜名言の読み解きノート</title>
+  <meta name="description" content="ネット上の誤引用や曖昧な情報を排し、名言の原典（一次資料）を特定するための調査手順を解説。言語の特定、媒体の確認、版の検証など、情報の確度を高めるための具体的なステップを紹介します。" />
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Noto+Serif+JP:wght@400;700&display=swap');
@@ -29,80 +29,97 @@
     <article class="bg-white rounded-2xl shadow p-6 sm:p-10">
       <p class="text-sm text-indigo-700 font-bold mb-2">出典</p>
       <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">名言の出典の探し方：一次資料にたどり着くための手順</h1>
-      <p class="text-sm text-gray-500 mb-8">最終更新日：2025-12-28</p>
+      <p class="text-sm text-gray-500 mb-8">最終更新日：2026-01-05</p>
 
       <section class="space-y-4 text-gray-700 leading-relaxed">
         <p>
-          名言は短いぶん、<strong>「誰が言ったか」「何を指しているか」</strong>が曖昧になりやすいです。
-          さらに、翻訳・要約・意訳・再編集が重なると、原文とまったく違う意味になってしまうことがあります。
+          「アインシュタインはこう言った」「ニーチェの言葉によれば……」。ネット上には魅力的な名言が溢れていますが、その多くは<strong>出典が不明確であったり、あるいは全くの誤引用（フェイク・クオート）</strong>であったりします。
         </p>
         <p>
-          ここでは、ネット検索のテクニックではなく、<strong>一次資料（原典）に近づくための確認手順</strong>を整理します。
+          名言は短いぶん、翻訳や要約の過程で元の意味が削ぎ落とされ、原典とは全く違うニュアンスで広まってしまうことが珍しくありません。言葉を正しく人生の糧にするためには、可能な限り「一次資料（原典）」に近づき、著者の真意を確認する姿勢が求められます。
+        </p>
+        <p>
+          ここでは、単なるネット検索を超えて、情報の確度を自ら検証するための<strong>「出典探索の手順」</strong>を整理します。
         </p>
       </section>
 
       <section class="mt-10">
-        <h2 class="text-xl font-bold text-gray-900 mb-3">0. まず「確度」を決める</h2>
-        <p class="text-gray-700 leading-relaxed">
-          当サイトは <a class="text-indigo-700 hover:underline" href="../editorial-policy.html">編集方針</a> に基づき、引用に確度ラベルを付けます。
-          出典を探す前に「A（一次）/B（二次）/C（伝承）」を仮決めし、必要な深さを決めます。
+        <h2 class="text-xl font-bold text-gray-900 mb-3">手順0：情報の「確度レベル」を意識する</h2>
+        <p class="text-gray-700 leading-relaxed mb-4">
+          当サイトでは <a class="text-indigo-700 hover:underline" href="../editorial-policy.html">編集方針</a> に基づき、引用に以下の確度ラベルを想定しています。調査を始める前に、いま手にしている情報がどの段階にあるかを意識しましょう。
         </p>
+        <div class="grid gap-4 text-sm">
+          <div class="border rounded-xl p-4 bg-green-50">
+            <p class="font-bold text-green-900 mb-1">確度A：一次資料（Primary Source）</p>
+            <p class="text-green-800">本人の著作、書簡、日記、録音された演説など。本人が直接発信したことが確実なもの。</p>
+          </div>
+          <div class="border rounded-xl p-4 bg-blue-50">
+            <p class="font-bold text-blue-900 mb-1">確度B：二次資料（Secondary Source）</p>
+            <p class="text-blue-800">信頼できる研究者による評伝、同時代人の証言、全集の解説など。検証を経て引用されているもの。</p>
+          </div>
+          <div class="border rounded-xl p-4 bg-red-50">
+            <p class="font-bold text-red-900 mb-1">確度C：伝承・要確認（Tertiary Source / Lore）</p>
+            <p class="text-red-800">ネット上の名言集、出所不明のSNSの投稿、格言としての流布。真偽の検証が必要なもの。</p>
+          </div>
+        </div>
       </section>
 
       <section class="mt-10">
-        <h2 class="text-xl font-bold text-gray-900 mb-3">1. 原文（言語）を特定する</h2>
+        <h2 class="text-xl font-bold text-gray-900 mb-3">手順1：原文（言語）を特定する</h2>
         <p class="text-gray-700 leading-relaxed">
-          日本語の名言は、原文の言語が英語・フランス語・ドイツ語・ラテン語など様々です。
-          原文が分からないと、同じ意味の訳が複数存在し、誤引用が増えます。
+          日本語訳だけを見ていては、いつまでも原典にはたどり着けません。まず、その人物が何語で話し、書いたのかを特定します（英語、ドイツ語、フランス語、ラテン語、漢文など）。
         </p>
-        <div class="mt-4 border rounded-xl p-4 bg-slate-50 text-sm text-gray-700">
-          <p class="font-bold text-gray-900 mb-1">チェック</p>
-          <ul class="list-disc ml-5 space-y-1">
-            <li>原文の言語は何か？（英/独/仏/羅…）</li>
-            <li>短い日本語訳の背後に、長い原文がないか？（前後の文が省略されていないか）</li>
-            <li>有名な意訳が、原文と一致しているか？</li>
+        <div class="mt-4 border rounded-xl p-6 bg-slate-50 text-sm text-gray-700 leading-relaxed">
+          <p class="font-bold text-gray-900 mb-2">チェックポイント</p>
+          <ul class="list-disc ml-5 space-y-2">
+            <li><strong>逆翻訳による検索</strong>：日本語のフレーズを英語などに訳し、`"quote" author` で検索します。</li>
+            <li><strong>原文の断片を探す</strong>：有名な言葉なら、WikiQuoteなどの引用データベースに原文が掲載されていることが多いです。</li>
+            <li><strong>意訳の疑い</strong>：あまりにも現代的な表現や、リズムが良すぎる日本語の場合、大幅な意訳や要約が含まれている可能性を疑います。</li>
           </ul>
         </div>
       </section>
 
       <section class="mt-10">
-        <h2 class="text-xl font-bold text-gray-900 mb-3">2. 「作品名」と「媒体」を押さえる</h2>
+        <h2 class="text-xl font-bold text-gray-900 mb-3">手順2：媒体と時期を絞り込む</h2>
         <p class="text-gray-700 leading-relaxed">
-          次に、その言葉がどの媒体に載っているかを確認します。典型は<strong>著作</strong>、<strong>書簡</strong>、<strong>演説</strong>、<strong>インタビュー</strong>です。
+          「誰が言ったか」の次は「どの媒体で言ったか」を探します。主な媒体は以下の4つです。
         </p>
-        <ul class="list-disc ml-5 space-y-2 text-gray-700 mt-3">
-          <li>著作：書名・章（可能なら節）</li>
-          <li>書簡：宛先・日付</li>
-          <li>演説：イベント名・日付・録音/速記の有無</li>
-          <li>インタビュー：掲載誌・掲載日（映像なら番組名）</li>
+        <ul class="list-disc ml-5 space-y-3 text-gray-700 mt-4">
+          <li><strong>著作</strong>：書名だけでなく、章や節まで特定を試みます。</li>
+          <li><strong>書簡（手紙）</strong>：誰に宛てた、いつの日付の手紙か。全集に収録されているか。</li>
+          <li><strong>演説・講義</strong>：いつ、どこで開催されたイベントでの発言か。公式な速記記録はあるか。</li>
+          <li><strong>インタビュー・対話</strong>：どの雑誌や番組での発言か。聞き手は誰か。</li>
         </ul>
       </section>
 
       <section class="mt-10">
-        <h2 class="text-xl font-bold text-gray-900 mb-3">3. 版（エディション）を確認する</h2>
+        <h2 class="text-xl font-bold text-gray-900 mb-3">手順3：版（エディション）と翻訳者の確認</h2>
         <p class="text-gray-700 leading-relaxed">
-          同じ作品でも、編集版・全集・後年の再編集で表現が変わることがあります。
-          <strong>版（edition）</strong>や<strong>翻訳者</strong>を明示することで、検証可能性が上がります。
+          原典が古い場合、校訂版や全集によって表現が異なることがあります。また、日本語訳の場合は<strong>「誰の翻訳か」</strong>によって意味が大きく変わります。
+        </p>
+        <p class="text-gray-700 leading-relaxed mt-4">
+          可能であれば複数の翻訳を比較し、共通して流れている意図（コア）を抽出します。
         </p>
       </section>
 
       <section class="mt-10">
-        <h2 class="text-xl font-bold text-gray-900 mb-3">4. 文脈（前後）を読む</h2>
+        <h2 class="text-xl font-bold text-gray-900 mb-3">手順4：文脈（前後）を徹底的に読む</h2>
         <p class="text-gray-700 leading-relaxed">
-          名言は切り抜きで意味が変わります。最低でも前後数段落を確認し、次の3点をメモします。
+          名言の多くは、長い文章の中から「美味しいところ」だけを切り取ったものです。出典を特定したら、必ずその前後数ページ（あるいは数章）を読みます。
         </p>
-        <ol class="list-decimal ml-5 space-y-2 text-gray-700 mt-3">
-          <li>何に対して言っているか（対象）</li>
-          <li>何を促したいのか（意図）</li>
-          <li>誤読しやすい方向（反例）</li>
-        </ol>
+        <div class="mt-4 border rounded-xl p-6 bg-indigo-50 text-sm text-gray-700 leading-relaxed">
+          <ol class="list-decimal ml-5 space-y-2">
+            <li><strong>対象の確認</strong>：その言葉は、誰に対して発せられたものか？</li>
+            <li><strong>前提の確認</strong>：その言葉が成立するための「条件」は何か？</li>
+            <li><strong>対比の確認</strong>：その言葉の直前で否定されている考え方は何か？</li>
+          </ol>
+        </div>
       </section>
 
       <section class="mt-10">
-        <h2 class="text-xl font-bold text-gray-900 mb-3">5. 不明な場合の扱い（伝承）</h2>
+        <h2 class="text-xl font-bold text-gray-900 mb-3">特定できない場合の誠実な扱い</h2>
         <p class="text-gray-700 leading-relaxed">
-          原典が特定できない場合は、無理に断定せず「伝承（要確認）」として注記します。
-          当サイトでは、伝承フレーズを扱う場合でも、主役は<strong>解説と実践</strong>に置き、引用の比重を下げます。
+          どれほど探しても、原典が特定できない場合があります。その際は、無理に「アインシュタインの言葉」と断定せず、<strong>「アインシュタインの言葉として流布しているが、原典は不明である」</strong>と正直に注記することが、情報の受け手に対する誠実さであり、当サイトの誇りです。
         </p>
       </section>
 
@@ -115,7 +132,7 @@
           </a>
           <a class="block border rounded-xl p-4 hover:border-indigo-200 hover:bg-indigo-50 transition" href="../editorial-policy.html">
             <p class="text-gray-500">方針</p>
-            <p class="font-bold text-gray-900">編集方針（引用・出典・訂正）</p>
+            <p class="font-bold text-gray-900">編集方針：引用・出典・訂正の考え方</p>
           </a>
         </div>
       </section>
