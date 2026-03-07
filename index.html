@@ -15,12 +15,21 @@
 
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Noto+Serif+JP:wght@400;700&display=swap');
-    body { font-family: Inter, sans-serif; background:#f1f5f9; }
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+JP:wght@400;700&family=Noto+Serif+JP:wght@400;700&display=swap');
+    body { font-family: 'Inter', 'Noto Sans JP', sans-serif; background:#f8fafc; color: #1e293b; }
     .serif { font-family: "Noto Serif JP", serif; }
+    .quote-fade {
+      animation: fadeIn 0.5s ease-out;
+      transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .card-hover { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.1); }
   </style>
 
-  <!-- 構造化データ（サイト情報） -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -31,187 +40,253 @@
   }
   </script>
 </head>
-<body>
-  <a class="sr-only focus:not-sr-only focus:absolute focus:m-4 focus:p-3 focus:bg-white focus:rounded-lg focus:shadow" href="#main">本文へスキップ</a>
+<body class="antialiased">
+  <a class="sr-only focus:not-sr-only focus:absolute focus:m-4 focus:p-3 focus:bg-white focus:rounded-lg focus:shadow z-50" href="#main">本文へスキップ</a>
 
-  <header class="w-full border-b bg-white">
-    <div class="max-w-5xl mx-auto px-4 py-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-      <div>
-        <p class="text-sm text-gray-500">名言を、背景・出典・解釈・実践へ。</p>
-        <h1 class="text-2xl sm:text-3xl font-bold text-indigo-600">名言の読み解きノート</h1>
+  <header class="w-full bg-white/80 backdrop-blur-md sticky top-0 z-40 border-b border-slate-100">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+      <div class="flex items-center gap-3">
+        <div class="bg-indigo-600 text-white p-2 rounded-lg shadow-indigo-200 shadow-lg">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+          </svg>
+        </div>
+        <h1 class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-violet-600">名言の読み解きノート</h1>
       </div>
-      <nav class="text-sm flex flex-wrap gap-x-4 gap-y-2">
-        <a class="text-gray-700 hover:text-indigo-700 font-medium" href="articles/how-to-read-quotes.html">読み方ガイド</a>
-        <a class="text-gray-700 hover:text-indigo-700 font-medium" href="articles/source-hunting.html">出典の探し方</a>
-        <a class="text-gray-700 hover:text-indigo-700 font-medium" href="tag-index.html">テーマ索引</a>
-        <a class="text-gray-700 hover:text-indigo-700 font-medium" href="author-index.html">著者索引</a>
-        <a class="text-gray-700 hover:text-indigo-700 font-medium" href="about.html">運営者情報</a>
-        <a class="text-gray-700 hover:text-indigo-700 font-medium" href="contact.html">お問い合わせ</a>
+      <nav class="text-sm flex flex-wrap gap-x-6 gap-y-2 font-medium">
+        <a class="text-slate-600 hover:text-indigo-600 transition-colors" href="tag-index.html">テーマ索引</a>
+        <a class="text-slate-600 hover:text-indigo-600 transition-colors" href="author-index.html">著者索引</a>
+        <a class="text-slate-600 hover:text-indigo-600 transition-colors" href="about.html">運営情報</a>
+        <a class="text-slate-600 hover:text-indigo-600 transition-colors" href="contact.html">お問い合わせ</a>
       </nav>
     </div>
   </header>
 
-  <main id="main" class="max-w-5xl mx-auto px-4 py-10">
-    <section class="bg-white rounded-2xl shadow p-6 sm:p-10 border-t-4 border-indigo-600">
-      <h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3">言葉を「資産」に変えるノート術</h2>
-      <p class="text-gray-700 leading-relaxed">
-        当サイトは単なる名言の寄せ集めではありません。先人の知恵を<strong>現代の意思決定や行動に接続する</strong>ための学習システムです。
-        すべての記事において、背景（Context）→解釈（Interpretation）→実践（Practice）の3ステップを徹底し、あなたの人生を前進させる具体的なツールを提供します。
-      </p>
-      <ul class="mt-8 grid sm:grid-cols-3 gap-6 text-sm">
-        <li class="bg-indigo-50 rounded-xl p-5 border border-indigo-100">
-          <p class="font-bold text-indigo-900 mb-2">① 独自性の高い深い解説</p>
-          <p class="text-gray-700 leading-relaxed">表層的な理解に留まらず、心理学や行動科学の知見を交えた多角的な分析を行います。</p>
-        </li>
-        <li class="bg-indigo-50 rounded-xl p-5 border border-indigo-100">
-          <p class="font-bold text-indigo-900 mb-2">② 検証可能な出典明示</p>
-          <p class="text-gray-700 leading-relaxed">情報の確度をA〜Cでランク付け。一次資料へのアクセスを容易にし、情報の信頼性を担保します。</p>
-        </li>
-        <li class="bg-indigo-50 rounded-xl p-5 border border-indigo-100">
-          <p class="font-bold text-indigo-900 mb-2">③ 今日から変わる実践ワーク</p>
-          <p class="text-gray-700 leading-relaxed">「良い話だった」で終わらせない。読後5分以内に着手できる最小行動をすべての記事に付与します。</p>
-        </li>
-      </ul>
-    </section>
-
-    <section class="mt-12 grid lg:grid-cols-3 gap-8">
-      <div class="lg:col-span-2 space-y-8">
-        <div>
-          <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-            <span class="w-1.5 h-6 bg-indigo-600 rounded-full"></span>
-            厳選：人生をアップデートする新着記事
-          </h2>
-          <div class="grid sm:grid-cols-2 gap-4">
-            <a class="block border rounded-xl p-5 hover:border-indigo-200 hover:bg-indigo-50 transition shadow-sm bg-white" href="articles/growth-mindset-dweck.html">
-              <p class="text-xs text-indigo-600 font-bold mb-1">学習 / 思考</p>
-              <p class="font-bold text-gray-900 mb-2 leading-snug">能力は伸ばせると信じる：グロース・マインドセットの本質</p>
-              <p class="text-xs text-gray-500 leading-relaxed line-clamp-2">才能ではなく努力と戦略に注目し、失敗を成長の糧に変える思考の技術を解説。</p>
-            </a>
-            <a class="block border rounded-xl p-5 hover:border-indigo-200 hover:bg-indigo-50 transition shadow-sm bg-white" href="articles/stockdale-paradox.html">
-              <p class="text-xs text-indigo-600 font-bold mb-1">逆境 / 思考</p>
-              <p class="font-bold text-gray-900 mb-2 leading-snug">残酷な現実を直視し、最後には勝つ：ストックデールのパラドックス</p>
-              <p class="text-xs text-gray-500 leading-relaxed line-clamp-2">過酷な環境を生き抜くための、楽観主義を超えた真の希望の持ち方。</p>
-            </a>
-            <a class="block border rounded-xl p-5 hover:border-indigo-200 hover:bg-indigo-50 transition shadow-sm bg-white" href="articles/ikigai-lifestyle-design.html">
-              <p class="text-xs text-indigo-600 font-bold mb-1">人生観 / キャリア</p>
-              <p class="font-bold text-gray-900 mb-2 leading-snug">人生の「生きがい」を見つける：4つの円の重なりを設計する</p>
-              <p class="text-xs text-gray-500 leading-relaxed line-clamp-2">好き・得意・需要・報酬のバランスを可視化し、充実した日々を再構成する。</p>
-            </a>
-            <a class="block border rounded-xl p-5 hover:border-indigo-200 hover:bg-indigo-50 transition shadow-sm bg-white" href="articles/tiny-habits-bj-fogg.html">
-              <p class="text-xs text-indigo-600 font-bold mb-1">習慣 / 行動科学</p>
-              <p class="font-bold text-gray-900 mb-2 leading-snug">努力感ゼロで人生を変える：タイニー・ハビット（小さな習慣）の科学</p>
-              <p class="text-xs text-gray-500 leading-relaxed line-clamp-2">意志の力を使わずに、脳の仕組みをハックして習慣を定着させるフォッグ式メソッド。</p>
-            </a>
-            <a class="block border rounded-xl p-5 hover:border-indigo-200 hover:bg-indigo-50 transition shadow-sm bg-white" href="articles/eisenhower-matrix-priority.html">
-              <p class="text-xs text-indigo-600 font-bold mb-1">生産性 / 意思決定</p>
-              <p class="font-bold text-gray-900 mb-2 leading-snug">優先順位を「4事象」で整理する：アイゼンハワー・マトリクス</p>
-              <p class="text-xs text-gray-500 leading-relaxed line-clamp-2">忙しさに殺されないために。「重要だが緊急でない」領域を死守する時間術。</p>
-            </a>
-            <a class="block border rounded-xl p-5 hover:border-indigo-200 hover:bg-indigo-50 transition shadow-sm bg-white" href="articles/how-to-read-quotes.html">
-              <p class="text-xs text-indigo-600 font-bold mb-1">ガイド</p>
-              <p class="font-bold text-gray-900 mb-2 leading-snug">名言の“読み解き方”：誤読を避けて行動につなげる4ステップ</p>
-              <p class="text-xs text-gray-500 leading-relaxed line-clamp-2">言葉の毒を中和し、薬に変えるための当サイト標準の読解メソッド。</p>
-            </a>
-          </div>
+  <main id="main">
+    <!-- Hero Section: Today's Quote -->
+    <section class="bg-gradient-to-b from-white to-slate-50 border-b border-slate-100 overflow-hidden">
+      <div class="max-w-6xl mx-auto px-4 py-12 md:py-20 relative">
+        <div class="absolute top-0 right-0 -translate-y-12 translate-x-12 opacity-5 pointer-events-none">
+          <svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M100 100C150 50 250 50 300 100C350 150 350 250 300 300C250 350 150 350 100 300C50 250 50 150 100 100Z" fill="#4F46E5"/>
+          </svg>
         </div>
 
-        <div>
-          <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-            <span class="w-1.5 h-6 bg-indigo-600 rounded-full"></span>
-            思考と行動の道具箱
-          </h2>
-          <div class="grid sm:grid-cols-2 gap-4">
-            <a class="block border rounded-xl p-5 hover:border-indigo-200 hover:bg-indigo-50 transition shadow-sm bg-white" href="articles/decision-making-with-quotes.html">
-              <p class="text-xs text-gray-500 mb-1">実践</p>
-              <p class="font-bold text-gray-900">迷いが消える「判断の軸」づくり</p>
-            </a>
-            <a class="block border rounded-xl p-5 hover:border-indigo-200 hover:bg-indigo-50 transition shadow-sm bg-white" href="articles/cognitive-biases-checklist.html">
-              <p class="text-xs text-gray-500 mb-1">意思決定</p>
-              <p class="font-bold text-gray-900">判断ミスを減らす「認知バイアス」チェックリスト</p>
-            </a>
-            <a class="block border rounded-xl p-5 hover:border-indigo-200 hover:bg-indigo-50 transition shadow-sm bg-white" href="articles/controllables-stoicism.html">
-              <p class="text-xs text-gray-500 mb-1">感情整理</p>
-              <p class="font-bold text-gray-900">「変えられること」と「変えられないこと」を分ける</p>
-            </a>
-            <a class="block border rounded-xl p-5 hover:border-indigo-200 hover:bg-indigo-50 transition shadow-sm bg-white" href="articles/deep-work-focus.html">
-              <p class="text-xs text-gray-500 mb-1">集中</p>
-              <p class="font-bold text-gray-900">集中を設計する：深い作業（Deep Work）を1日30分つくる方法</p>
-            </a>
-          </div>
-          <div class="mt-6 text-sm">
-            <a class="text-indigo-700 font-bold hover:underline inline-flex items-center gap-1" href="sitemap.html">
-              すべての記事を見る
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <span class="inline-block px-4 py-1.5 bg-indigo-50 text-indigo-700 text-xs font-bold rounded-full mb-4 tracking-widest uppercase">Pick of the Day</span>
+          <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4 tracking-tight">今日のワンフレーズ</h2>
+          <p class="text-slate-600">古今東西の知恵を、あなたの「次の一歩」に変えるための問いかけ。</p>
+        </div>
+
+        <div class="relative z-10 max-w-4xl mx-auto">
+          <div id="q-card" class="bg-white rounded-3xl shadow-xl shadow-indigo-100/50 border border-indigo-50 p-8 md:p-12 text-center transition-all duration-500">
+            <div id="q-content" class="quote-fade">
+              <div class="flex justify-center mb-8">
+                <svg class="h-10 w-10 text-indigo-200" fill="currentColor" viewBox="0 0 32 32"><path d="M10 8v8h6v-8h-6zM22 8v8h6v-8h-6zM10 18h6v8h-6v-8zM22 18h6v8h-6v-8z"/></svg>
+              </div>
+              <blockquote class="mb-10">
+                <p id="q-text" class="serif text-2xl md:text-3xl lg:text-4xl text-slate-900 leading-relaxed font-medium">ボタンを押すと、知恵の言葉が表示されます。</p>
+                <footer id="q-author" class="text-lg text-indigo-600 mt-6 font-semibold">—</footer>
+                <p id="q-source" class="text-xs text-slate-400 mt-2 italic tracking-wide uppercase"></p>
+              </blockquote>
+
+              <div class="max-w-xl mx-auto bg-slate-50 rounded-2xl p-6 mb-10 border border-slate-100">
+                <p class="text-[10px] font-bold text-slate-400 mb-2 uppercase tracking-[0.2em]">Next Small Step</p>
+                <p id="q-action" class="text-slate-700 leading-relaxed">—</p>
+              </div>
+            </div>
+
+            <button id="q-btn" class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-10 rounded-2xl shadow-lg shadow-indigo-200 transition-all active:scale-95 focus:outline-none focus:ring-4 focus:ring-indigo-100">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
               </svg>
-            </a>
+              新しい知恵を得る
+            </button>
           </div>
         </div>
       </div>
+    </section>
 
-      <aside class="space-y-8">
-        <div class="bg-white rounded-2xl shadow-sm p-6 sm:p-8 border border-gray-100">
-          <h2 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-            <span class="w-1 h-5 bg-indigo-600 rounded-full"></span>
-            今日の1フレーズ
-          </h2>
-          <p class="text-xs text-gray-500 mb-6 leading-relaxed">
-            ※当サイトは品質改善のため、広告表示・アフィリエイト表示を現在停止し、コンテンツの純粋な学習体験を優先しています。
-          </p>
-
-          <blockquote class="border-l-4 border-indigo-200 pl-4 py-1">
-            <p id="q-text" class="serif text-lg text-gray-900 leading-relaxed">ボタンを押すと、学習用の引用と解説が表示されます。</p>
-            <p id="q-author" class="text-sm text-gray-600 mt-3 font-medium">—</p>
-            <p id="q-source" class="text-xs text-gray-400 mt-1 italic"></p>
-          </blockquote>
-
-          <div class="mt-6 p-4 bg-slate-50 rounded-xl">
-            <p class="text-xs font-bold text-indigo-700 mb-2 uppercase tracking-wider">Today's Practice</p>
-            <p id="q-action" class="text-sm text-gray-700 leading-relaxed">—</p>
+    <!-- Site Concept -->
+    <section class="max-w-6xl mx-auto px-4 py-16">
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 card-hover">
+          <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+            </svg>
           </div>
+          <h3 class="font-bold text-slate-900 mb-3 text-lg">独自性の高い深い解説</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">表層的な理解に留まらず、心理学や行動科学の知見を交えた多角的な分析を行います。</p>
+        </div>
+        <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 card-hover">
+          <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04 inter t-4.016A11.955 11.955 0 0012 21.056a11.955 11.955 0 008.618-12.112z" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-slate-900 mb-3 text-lg">検証可能な出典明示</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">情報の確度をA〜Cでランク付け。一次資料へのアクセスを容易にし、情報の信頼性を担保します。</p>
+        </div>
+        <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 card-hover">
+          <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-slate-900 mb-3 text-lg">今日から変わる実践ワーク</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">「良い話だった」で終わらせない。読後5分以内に着手できる最小行動をすべての記事に付与します。</p>
+        </div>
+      </div>
+    </section>
 
-          <button id="q-btn" class="mt-6 w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3.5 px-4 rounded-xl shadow-md transition-all active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-            新しい知恵を得る
-          </button>
+    <!-- Content Sections -->
+    <div class="max-w-6xl mx-auto px-4 pb-24 grid lg:grid-cols-3 gap-12">
+      <div class="lg:col-span-2 space-y-12">
+        <!-- New Articles -->
+        <section>
+          <div class="flex items-center justify-between mb-8">
+            <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-3">
+              <span class="w-2 h-8 bg-indigo-600 rounded-full"></span>
+              厳選記事
+            </h2>
+            <a href="sitemap.html" class="text-sm font-semibold text-indigo-600 hover:text-indigo-700 transition-colors">すべての記事へ →</a>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-6">
+            <a href="articles/growth-mindset-dweck.html" class="group bg-white rounded-2xl border border-slate-100 p-6 shadow-sm card-hover">
+              <p class="text-[10px] font-bold text-indigo-500 uppercase tracking-widest mb-2">学習 / 思考</p>
+              <h3 class="font-bold text-slate-900 mb-2 leading-snug group-hover:text-indigo-600 transition-colors">グロース・マインドセットの本質</h3>
+              <p class="text-xs text-slate-500 leading-relaxed line-clamp-2">才能ではなく努力と戦略に注目し、失敗を成長の糧に変える思考の技術。</p>
+            </a>
+            <a href="articles/stockdale-paradox.html" class="group bg-white rounded-2xl border border-slate-100 p-6 shadow-sm card-hover">
+              <p class="text-[10px] font-bold text-indigo-500 uppercase tracking-widest mb-2">逆境 / 思考</p>
+              <h3 class="font-bold text-slate-900 mb-2 leading-snug group-hover:text-indigo-600 transition-colors">ストックデールのパラドックス</h3>
+              <p class="text-xs text-slate-500 leading-relaxed line-clamp-2">過酷な環境を生き抜くための、楽観主義を超えた真の希望の持ち方。</p>
+            </a>
+            <a href="articles/ikigai-lifestyle-design.html" class="group bg-white rounded-2xl border border-slate-100 p-6 shadow-sm card-hover">
+              <p class="text-[10px] font-bold text-indigo-500 uppercase tracking-widest mb-2">人生観 / キャリア</p>
+              <h3 class="font-bold text-slate-900 mb-2 leading-snug group-hover:text-indigo-600 transition-colors">人生の「生きがい」を設計する</h3>
+              <p class="text-xs text-slate-500 leading-relaxed line-clamp-2">好き・得意・需要・報酬のバランスを可視化し、充実した日々を再構成する。</p>
+            </a>
+            <a href="articles/tiny-habits-bj-fogg.html" class="group bg-white rounded-2xl border border-slate-100 p-6 shadow-sm card-hover">
+              <p class="text-[10px] font-bold text-indigo-500 uppercase tracking-widest mb-2">習慣 / 行動科学</p>
+              <h3 class="font-bold text-slate-900 mb-2 leading-snug group-hover:text-indigo-600 transition-colors">タイニー・ハビット（小さな習慣）</h3>
+              <p class="text-xs text-slate-500 leading-relaxed line-clamp-2">意志の力を使わずに、脳の仕組みをハックして習慣を定着させるメソッド。</p>
+            </a>
+          </div>
+        </section>
 
-          <p class="text-xs text-gray-400 mt-6 leading-relaxed">
-            引用・出典と編集方針の詳細は <a class="text-indigo-400 hover:underline" href="editorial-policy.html">編集方針</a> にまとめています。
-          </p>
+        <!-- Toolbox -->
+        <section>
+          <div class="flex items-center justify-between mb-8">
+            <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-3">
+              <span class="w-2 h-8 bg-violet-600 rounded-full"></span>
+              思考と行動の道具箱
+            </h2>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <a href="articles/decision-making-with-quotes.html" class="flex items-center p-4 bg-white rounded-xl border border-slate-100 card-hover shadow-sm">
+              <div class="w-10 h-10 rounded-lg bg-slate-50 flex items-center justify-center mr-4 text-slate-400">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+              </div>
+              <p class="font-bold text-slate-800 text-sm">迷いが消える「判断の軸」づくり</p>
+            </a>
+            <a href="articles/cognitive-biases-checklist.html" class="flex items-center p-4 bg-white rounded-xl border border-slate-100 card-hover shadow-sm">
+              <div class="w-10 h-10 rounded-lg bg-slate-50 flex items-center justify-center mr-4 text-slate-400">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+              </div>
+              <p class="font-bold text-slate-800 text-sm">「認知バイアス」チェックリスト</p>
+            </a>
+            <a href="articles/controllables-stoicism.html" class="flex items-center p-4 bg-white rounded-xl border border-slate-100 card-hover shadow-sm">
+              <div class="w-10 h-10 rounded-lg bg-slate-50 flex items-center justify-center mr-4 text-slate-400">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+              </div>
+              <p class="font-bold text-slate-800 text-sm">「変えられること」を分ける</p>
+            </a>
+            <a href="articles/deep-work-focus.html" class="flex items-center p-4 bg-white rounded-xl border border-slate-100 card-hover shadow-sm">
+              <div class="w-10 h-10 rounded-lg bg-slate-50 flex items-center justify-center mr-4 text-slate-400">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+              </div>
+              <p class="font-bold text-slate-800 text-sm">深い作業（Deep Work）の設計</p>
+            </a>
+          </div>
+        </section>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="space-y-8">
+        <div class="bg-indigo-900 rounded-3xl p-8 text-white shadow-xl shadow-indigo-200">
+          <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            はじめての方へ
+          </h2>
+          <p class="text-indigo-200 text-sm leading-relaxed mb-6">当サイトの「背景→解釈→実践」の型を最も効率よく学ぶためのガイドです。</p>
+          <nav class="space-y-4">
+            <a href="articles/how-to-read-quotes.html" class="group block p-4 bg-white/10 hover:bg-white/20 rounded-2xl transition-all border border-white/10">
+              <span class="block text-[10px] font-bold text-indigo-300 uppercase mb-1">Step 01</span>
+              <span class="font-bold text-sm group-hover:text-indigo-100">読み解き方ガイド</span>
+            </a>
+            <a href="tag-index.html" class="group block p-4 bg-white/10 hover:bg-white/20 rounded-2xl transition-all border border-white/10">
+              <span class="block text-[10px] font-bold text-indigo-300 uppercase mb-1">Step 02</span>
+              <span class="font-bold text-sm group-hover:text-indigo-100">テーマから探す</span>
+            </a>
+            <a href="articles/reading-notes-system.html" class="group block p-4 bg-white/10 hover:bg-white/20 rounded-2xl transition-all border border-white/10">
+              <span class="block text-[10px] font-bold text-indigo-300 uppercase mb-1">Step 03</span>
+              <span class="font-bold text-sm group-hover:text-indigo-100">読書ノートの書き方</span>
+            </a>
+          </nav>
         </div>
 
-        <div class="bg-indigo-900 rounded-2xl p-6 sm:p-8 text-white">
-          <h2 class="text-lg font-bold mb-3">はじめての方へ</h2>
-          <p class="text-xs text-indigo-200 leading-relaxed mb-4">当サイトの型（文脈→解釈→実践）を最も効率よく学ぶためのガイドです。</p>
-          <ol class="text-sm space-y-3">
-            <li class="flex gap-3">
-              <span class="text-indigo-400 font-bold">01</span>
-              <a class="hover:text-indigo-300 underline underline-offset-4 decoration-indigo-700" href="articles/how-to-read-quotes.html">名言の読み解き方ガイド</a>
-            </li>
-            <li class="flex gap-3">
-              <span class="text-indigo-400 font-bold">02</span>
-              <a class="hover:text-indigo-300 underline underline-offset-4 decoration-indigo-700" href="tag-index.html">興味のあるテーマから探す</a>
-            </li>
-            <li class="flex gap-3">
-              <span class="text-indigo-400 font-bold">03</span>
-              <a class="hover:text-indigo-300 underline underline-offset-4 decoration-indigo-700" href="articles/reading-notes-system.html">読書ノートの書き方を学ぶ</a>
-            </li>
-          </ol>
+        <div class="bg-white rounded-3xl p-8 border border-slate-100 shadow-sm">
+          <h2 class="text-lg font-bold text-slate-900 mb-4">編集方針</h2>
+          <p class="text-slate-600 text-sm leading-relaxed mb-4">
+            当サイトは情報の信頼性を重視し、すべての引用に出典と確度ランクを付与しています。
+          </p>
+          <a href="editorial-policy.html" class="text-indigo-600 font-bold text-sm hover:underline">詳しく見る →</a>
         </div>
       </aside>
-    </section>
+    </div>
   </main>
 
-  <footer class="max-w-5xl mx-auto px-4 pb-12 text-sm text-gray-500">
-    <div class="border-t border-gray-200 pt-8 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-      <div class="flex flex-wrap gap-x-6 gap-y-3">
-        <a class="hover:text-indigo-600 transition" href="about.html">運営者情報</a>
-        <a class="hover:text-indigo-600 transition" href="contact.html">お問い合わせ</a>
-        <a class="hover:text-indigo-600 transition" href="editorial-policy.html">編集方針</a>
-        <a class="hover:text-indigo-600 transition" href="privacy.html">プライバシーポリシー</a>
-        <a class="hover:text-indigo-600 transition" href="terms.html">利用規約</a>
-        <a class="hover:text-indigo-600 transition" href="sitemap.html">サイトマップ</a>
+  <footer class="bg-slate-900 text-slate-400 py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex flex-col md:flex-row justify-between gap-12 mb-12">
+        <div class="max-w-sm">
+          <h2 class="text-white font-bold text-lg mb-4">名言の読み解きノート</h2>
+          <p class="text-sm leading-relaxed">
+            言葉を「読むだけ」で終わらせない。背景を学び、解釈を深め、今日の実践に落とし込むための学習システム。
+          </p>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-8">
+          <div>
+            <h3 class="text-white font-bold text-sm mb-4 uppercase tracking-widest">Index</h3>
+            <ul class="space-y-2 text-sm">
+              <li><a href="tag-index.html" class="hover:text-white transition-colors">テーマ索引</a></li>
+              <li><a href="author-index.html" class="hover:text-white transition-colors">著者索引</a></li>
+              <li><a href="sitemap.html" class="hover:text-white transition-colors">サイトマップ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-white font-bold text-sm mb-4 uppercase tracking-widest">Policy</h3>
+            <ul class="space-y-2 text-sm">
+              <li><a href="editorial-policy.html" class="hover:text-white transition-colors">編集方針</a></li>
+              <li><a href="privacy.html" class="hover:text-white transition-colors">プライバシー</a></li>
+              <li><a href="terms.html" class="hover:text-white transition-colors">利用規約</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-white font-bold text-sm mb-4 uppercase tracking-widest">About</h3>
+            <ul class="space-y-2 text-sm">
+              <li><a href="about.html" class="hover:text-white transition-colors">運営者情報</a></li>
+              <li><a href="contact.html" class="hover:text-white transition-colors">お問い合わせ</a></li>
+            </ul>
+          </div>
+        </div>
       </div>
-      <p class="text-xs">© <span id="y"></span> 名言の読み解きノート 編集部</p>
+      <div class="border-t border-slate-800 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <p class="text-xs">© <span id="y"></span> 名言の読み解きノート 編集部</p>
+        <p class="text-[10px] text-slate-600 uppercase tracking-widest">Built for Actionable Wisdom</p>
+      </div>
     </div>
   </footer>
 
@@ -220,43 +295,171 @@
       {
         text: "Je pense, donc je suis.",
         author: "ルネ・デカルト",
-        source: "出典: 『方法序説』（Discours de la méthode, 1637）で知られる命題",
-        confidence: "確度A（一次資料）",
+        source: "『方法序説』（1637）",
+        confidence: "確度A",
         action: "頭の中の不安を1つだけ紙に書き「事実/解釈/次の行動」に分け、事実だけを3行で書く。"
       },
       {
         text: "If I have seen further it is by standing on the shoulders of Giants.",
         author: "アイザック・ニュートン",
-        source: "出典: フック宛書簡（1675/1676頃の書簡として知られる表現）",
-        confidence: "確度A（一次資料）",
+        source: "ロバート・フック宛書簡（1675）",
+        confidence: "確度A",
         action: "参考にした人/資料を3つ書き、今日学ぶ範囲を「その続きの1段」だけに限定する。"
       },
       {
         text: "Ipsa scientia potestas est.",
         author: "フランシス・ベーコン",
-        source: "出典: 『Meditationes Sacrae』（1597）の一句として知られる表現（ラテン語）",
-        confidence: "確度B（二次資料）",
+        source: "『Meditationes Sacrae』（1597）",
+        confidence: "確度B",
         action: "いま欲しい知識を1つ決め「5分で読める一次情報（公式/原典/仕様）」に当たる。"
       },
       {
+        text: "What gets measured gets improved.",
+        author: "ピーター・ドラッカー",
+        source: "マネジメント論の基本原則",
+        confidence: "確度A",
+        action: "今日改善したい数値を1つだけ決め（例：集中した時間）、手帳の端に記録し始める。"
+      },
+      {
+        text: "Between stimulus and response there is a space.",
+        author: "ヴィクトール・フランクル",
+        source: "『夜と霧』に関連する思想的要約",
+        confidence: "確度B",
+        action: "イラッとしたとき、反論する前に「3秒だけ」深く息を吐き、反応を選び直す空間を作る。"
+      },
+      {
+        text: "Stay hungry, Stay foolish.",
+        author: "スティーブ・ジョブズ",
+        source: "スタンフォード大学卒業式祝辞（2005）",
+        confidence: "確度A",
+        action: "「自分はこれを知っている」という思い込みを捨て、専門外の分野の記事を1つだけ読む。"
+      },
+      {
+        text: "We suffer more often in imagination than in reality.",
+        author: "セネカ",
+        source: "『ルキリウスへの倫理書簡集』",
+        confidence: "確度A",
+        action: "心配事の「最悪のシナリオ」を書き出し、それが実際に起きる確率を客観的に見積もる。"
+      },
+      {
+        text: "We are what we repeatedly do. Excellence, then, is not an act, but a habit.",
+        author: "アリストテレス（ウィル・デュラントによる要約）",
+        source: "『哲学の物語』",
+        confidence: "確度B",
+        action: "「理想の自分」なら取るであろう小さな行動（例：靴を揃える）を1つだけ今すぐ行う。"
+      },
+      {
+        text: "A goal without a plan is just a wish.",
+        author: "アントワーヌ・ド・サン＝テグジュペリ",
+        source: "（伝承/名言集より）",
+        confidence: "確度C",
+        action: "大きな目標を、今日2分で終わる「具体的すぎるタスク」に分解して書き出す。"
+      },
+      {
+        text: "Give me six hours to chop down a tree and I will spend the first four sharpening the axe.",
+        author: "アブラハム・リンカーン",
+        source: "（伝承）",
+        confidence: "確度C",
+        action: "作業を始める前に、デスクトップの整理や資料の配置など「準備」に10分だけ当てる。"
+      },
+      {
+        text: "The impediment to action advances action. What stands in the way becomes the way.",
+        author: "マルクス・アウレリウス",
+        source: "『自省録』",
+        confidence: "確度A",
+        action: "いま直面している「障害」を、「これがあるからこそできる訓練は何か？」と捉え直す。"
+      },
+      {
+        text: "Whether you think you can, or you think you can't – you're right.",
+        author: "ヘンリー・フォード",
+        source: "（伝承/名言集より）",
+        confidence: "確度B",
+        action: "「できない」と口にしそうになったら、「どうすればできるか？」に言葉を置き換える。"
+      },
+      {
+        text: "A journey of a thousand miles begins with a single step.",
+        author: "老子",
+        source: "『道徳経』第64章",
+        confidence: "確度B",
+        action: "長年後回しにしていることに対し、メールを1通書くだけ、等の「最初の一歩」を打つ。"
+      },
+      {
+        text: "The secret of getting ahead is getting started.",
+        author: "マーク・トウェイン",
+        source: "（伝承/要確認）",
+        confidence: "確度C",
+        action: "やる気が出るのを待つのをやめ、タイマーを2分だけセットして作業を開始する。"
+      },
+      {
+        text: "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+        author: "ウィンストン・チャーチル",
+        source: "（伝承/スピーチ要約）",
+        confidence: "確度B",
+        action: "今日の「うまくいかなかったこと」を1つ選び、そこから得た教訓を1つだけメモする。"
+      },
+      {
+        text: "I fear not the man who has practiced 10,000 kicks once, but I fear the man who has practiced one kick 10,000 times.",
+        author: "ブルース・リー",
+        source: "（伝承/名言集より）",
+        confidence: "確度B",
+        action: "新しいことに手を広げる前に、すでに持っているスキルの「基礎」を15分だけ反復する。"
+      },
+      {
+        text: "Optimism is the faith that leads to achievement. Nothing can be done without hope and confidence.",
+        author: "ヘレン・ケラー",
+        source: "『Optimism』（1903）",
+        confidence: "確度A",
+        action: "今日起きた「良かったこと」を3つ書き出し、自分ならできると1回だけ声に出す。"
+      },
+      {
+        text: "Knowing is not enough; we must apply. Willing is not enough; we must do.",
+        author: "ヨハン・ヴォルフガング・フォン・ゲーテ",
+        source: "『格言と省察』",
+        confidence: "確度A",
+        action: "今日読んだ本や記事の内容を、誰かに教えるか、SNS等で1行だけアウトプットする。"
+      },
+      {
+        text: "Live as if you were to die tomorrow. Learn as if you were to live forever.",
+        author: "マハトマ・ガンディー",
+        source: "（伝承/スピーチ要約）",
+        confidence: "確度B",
+        action: "「一生かけて学びたいこと」を1つ決め、それに関連する本のタイトルを1つだけ調べる。"
+      },
+      {
         text: "Festina lente.",
-        author: "格言（ラテン語）",
-        source: "出典: 古くから伝わる標語（解釈・出典は諸説あり）",
-        confidence: "確度C（伝承/要確認）",
-        action: "やることを1つに絞り、速さではなく「止まらない最小ペース」を決める（例：毎日10分）。"
+        author: "ラテン語の格言",
+        source: "アウグストゥスが好んだとされる標語",
+        confidence: "確度C",
+        action: "焦りを感じたときこそ、動作をあえて「ゆっくり、正確に」行う時間を3分作る。"
       }
     ];
 
     function pick() {
-      const q = QUOTES[Math.floor(Math.random() * QUOTES.length)];
-      document.getElementById("q-text").textContent = q.text;
-      document.getElementById("q-author").textContent = `— ${q.author}`;
-      document.getElementById("q-source").textContent = `${q.confidence ? q.confidence + " / " : ""}${q.source}`;
-      document.getElementById("q-action").textContent = q.action;
+      const card = document.getElementById("q-card");
+      const content = document.getElementById("q-content");
+
+      // Animation out
+      content.style.opacity = "0";
+      content.style.transform = "translateY(-10px)";
+
+      setTimeout(() => {
+        const q = QUOTES[Math.floor(Math.random() * QUOTES.length)];
+        document.getElementById("q-text").textContent = q.text;
+        document.getElementById("q-author").textContent = `— ${q.author}`;
+        document.getElementById("q-source").textContent = `${q.confidence ? q.confidence + " / " : ""}${q.source}`;
+        document.getElementById("q-action").textContent = q.action;
+
+        // Animation in
+        content.style.opacity = "1";
+        content.style.transform = "translateY(0)";
+      }, 300);
     }
 
     document.getElementById("q-btn").addEventListener("click", pick);
     document.getElementById("y").textContent = new Date().getFullYear();
+
+    // Initial pick
+    window.onload = pick;
   </script>
 </body>
 </html>
