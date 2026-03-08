@@ -73,7 +73,7 @@
         </div>
 
         <div class="text-center max-w-3xl mx-auto mb-12">
-          <span id="q-category" class="inline-block px-4 py-1.5 bg-indigo-50 text-indigo-700 text-xs font-bold rounded-full mb-4 tracking-widest uppercase">Pick of the Day</span>
+          <a id="q-category-link" href="tag-index.html"><span id="q-category" class="inline-block px-4 py-1.5 bg-indigo-50 text-indigo-700 text-xs font-bold rounded-full mb-4 tracking-widest uppercase hover:bg-indigo-100 transition-colors">Pick of the Day</span></a>
           <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4 tracking-tight">今日のワンフレーズ</h2>
           <p class="text-slate-600">古今東西の知恵を、あなたの「次の一歩」に変えるための問いかけ。</p>
         </div>
@@ -86,7 +86,7 @@
               </div>
               <blockquote class="mb-10">
                 <p id="q-text" class="serif text-2xl md:text-3xl lg:text-4xl text-slate-900 leading-relaxed font-medium">ボタンを押すと、知恵の言葉が表示されます。</p>
-                <footer id="q-author" class="text-lg text-indigo-600 mt-6 font-semibold">—</footer>
+                <footer class="mt-6"><a id="q-author-link" href="author-index.html" class="text-lg text-indigo-600 font-semibold hover:underline decoration-2 underline-offset-4"><span id="q-author">—</span></a></footer>
                 <p id="q-source" class="text-xs text-slate-400 mt-2 italic tracking-wide uppercase"></p>
                 <div class="mt-6 flex flex-wrap justify-center gap-3">
                   <a id="q-wiki" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-6 rounded-xl shadow-md transition-all active:scale-95 text-sm">
@@ -300,129 +300,8 @@
     </div>
   </footer>
 
+  <script src="js/quotes.js"></script>
   <script>
-    const QUOTES = [
-      // Learning & Thinking
-      { text: "Je pense, donc je suis.", author: "ルネ・デカルト", source: "『方法序説』（1637）", confidence: "確度A", category: "思考", action: "頭の中の不安を1点に絞り、「事実」か「想像」かを明確に切り分ける。" },
-      { text: "困難は分割せよ。", author: "ルネ・デカルト", source: "『方法序説』", confidence: "確度A", category: "思考", action: "今抱えている最大のタスクを、5分以内で終わる小さな作業に3つ分解する。" },
-      { text: "Ipsa scientia potestas est. (知識は力なり)", author: "フランシス・ベーコン", source: "『聖論集』（1597）", confidence: "確度B", category: "学習", action: "今日学ぶべきキーワードを1つ選び、それに関する専門用語を3つ書き出す。" },
-      { text: "真の知識とは、自分の無知の程度を知ることである。", author: "ソクラテス", source: "（伝承/プラトン著作など）", confidence: "確度B", category: "学習", action: "「わかったつもり」になっていることを1つ挙げ、それについて子供に説明するつもりで話し出す。" },
-      { text: "学びて思わざれば則ち罔し、思いて学ばざれば則ち殆し。", author: "孔子", source: "『論語』", confidence: "確度A", category: "学習", action: "読書を15分したら、本を閉じて5分間「自分の経験とどう繋がるか」を自問する。" },
-      { text: "If I have seen further it is by standing on the shoulders of Giants.", author: "アイザック・ニュートン", source: "ロバート・フック宛書簡（1675）", confidence: "確度A", category: "思考", action: "今進めている仕事が、過去の誰のどの知恵に基づいているかを確認し、感謝する。" },
-      { text: "過ちを改めざる、これを過ちという。", author: "孔子", source: "『論語』", confidence: "確度A", category: "成長", action: "今日したミスを1つ認め、明日同じことをしないための「物理的な仕組み」を1つ作る。" },
-      { text: "Knowing is not enough; we must apply. Willing is not enough; we must do.", author: "ヨハン・ヴォルフガング・フォン・ゲーテ", source: "『格言と省察』", confidence: "確度A", category: "行動", action: "「いつかやる」リストから1つ選び、今すぐ2分間だけ手をつける。" },
-      { text: "他人の本で自己を改善せよ。他人が苦労して得たもので、自分を容易に改善できる。", author: "ソクラテス", source: "（伝承）", confidence: "確度C", category: "学習", action: "現在直面している問題の解決策が書かれていそうな本を1冊、書店や図書館で手に取る。" },
-      { text: "一歩一歩、着実に。それが最も速く目的地に着く方法だ。", author: "ルネ・デカルト", source: "（思想的要約）", confidence: "確度B", category: "習慣", action: "「早く終わらせたい」という焦りを感じたら、あえて動作をゆっくり丁寧に行う。" },
-
-      // Leadership & Management
-      { text: "What gets measured gets improved.", author: "ピーター・ドラッカー", source: "マネジメント論の基本原則", confidence: "確度A", category: "マネジメント", action: "今日、改善したい習慣（例：歩数）を1つ決め、数値で記録し始める。" },
-      { text: "最も重要なことから始めなさい。", author: "ピーター・ドラッカー", source: "『経営者の条件』", confidence: "確度A", category: "リーダーシップ", action: "明日の朝、一番最初に取り組む「最も重要な1件事」を今夜のうちに決める。" },
-      { text: "Management is doing things right; leadership is doing the right things.", author: "ピーター・ドラッカー", source: "（要約）", confidence: "確度B", category: "リーダーシップ", action: "今の作業が「やり方」の改善なのか、「目的」への前進なのかを問い直す。" },
-      { text: "部下を育てるには、自分が手本になるしかない。", author: "山本五十六", source: "（伝承）", confidence: "確度B", category: "リーダーシップ", action: "他人に求めている行動を、まず自分自身が1回だけ完璧にやってみせる。" },
-      { text: "やってみせ、言って聞かせて、させてみせ、ほめてやらねば、人は動かじ。", author: "山本五十六", source: "（伝承）", confidence: "確度A", category: "リーダーシップ", action: "誰かに何かを頼む際、まず自分が手本を見せる時間を5分確保する。" },
-      { text: "一人の力には限界があるが、チームの力には限界がない。", author: "ヘンリー・フォード", source: "（思想的要約）", confidence: "確度C", category: "リーダーシップ", action: "自分一人で抱え込んでいる作業を、誰かに「助けてほしい」と一言伝える。" },
-      { text: "リーダーとは、希望を配る人のことだ。", author: "ナポレオン・ボナパルト", source: "（伝承）", confidence: "確度B", category: "リーダーシップ", action: "今日、周囲の人に対して「将来の明るい可能性」を1つだけ言葉にする。" },
-      { text: "最も優れたリーダーは、人々に「自分たちがやったのだ」と言わせる。", author: "老子", source: "『道徳経』", confidence: "確度B", category: "リーダーシップ", action: "誰かの成功を称える際、自分の助言については触れず、相手の努力のみを称賛する。" },
-      { text: "信頼して任せることが、人を最も成長させる。", author: "スティーブン・R・コヴィー", source: "『7つの習慣』", confidence: "確度B", category: "マネジメント", action: "権限委譲する際、やり方ではなく「期待する結果」のみを明確に伝える。" },
-      { text: "時間は最も希少な資源であり、管理できなければ、他の何も管理できない。", author: "ピーター・ドラッカー", source: "『経営者の条件』", confidence: "確度A", category: "マネジメント", action: "今日1日の時間の使い方を15分単位で記録し、無駄な時間を1つ特定する。" },
-
-      // Adversity & Resilience
-      { text: "We suffer more often in imagination than in reality.", author: "セネカ", source: "『ルキリウスへの倫理書簡集』", confidence: "確度A", category: "逆境", action: "不安なことを紙に書き出し、それが実際に起きる確率を1〜100%で客観的に見積もる。" },
-      { text: "The impediment to action advances action. What stands in the way becomes the way.", author: "マルクス・アウレリウス", source: "『自省録』", confidence: "確度A", category: "逆境", action: "今直面している障害を、「これがあるからこそ可能な訓練」として捉え直す。" },
-      { text: "It's not what happens to you, but how you react to it that matters.", author: "エピクテトス", source: "（伝承/ストア派思想）", confidence: "確度B", category: "逆境", action: "不快な出来事が起きた際、反応する前に一呼吸置き、「最善の反応」を自分で選ぶ。" },
-      { text: "困難な時にこそ、人間の真価が問われる。", author: "セネカ", source: "『怒りについて』", confidence: "確度B", category: "逆境", action: "トラブルが起きた時、慌てる自分を客観的に観察し、「今の自分は冷静か？」と問う。" },
-      { text: "冬来たりなば春遠からじ。", author: "パーシー・ビッシュ・シェリー", source: "『西風に寄せる歌』", confidence: "確度A", category: "逆境", action: "辛い現状の中で、確実に良くなっている小さな兆しを1つだけ探す。" },
-      { text: "叩け、さらば開かれん。", author: "新約聖書", source: "『マタイによる福音書』", confidence: "確度A", category: "逆境", action: "行き詰まっていることに対して、新しい窓口や方法を1つだけ試す。" },
-      { text: "失敗は成功のもと。", author: "トーマス・エジソン", source: "（伝承/要約）", confidence: "確度C", category: "逆境", action: "失敗した理由を3つ挙げ、次の試行で改善するポイントを1つに絞る。" },
-      { text: "七転び八起き。", author: "日本の諺", source: "（古伝）", confidence: "確度A", category: "逆境", action: "挫折を感じたら、とりあえず立ち上がってコップ一杯の水を飲む。" },
-      { text: "Between stimulus and response there is a space.", author: "ヴィクトール・フランクル", source: "（思想的要約）", confidence: "確度B", category: "精神", action: "刺激を受けた後、反応するまでの時間を3秒だけ引き延ばす練習をする。" },
-      { text: "ストックデールのパラドックス：残酷な現実を直視しつつ、勝利を確信する。", author: "ジェームズ・ストックデール", source: "『ビジョナリー・カンパニー2』", confidence: "確度A", category: "逆境", action: "現状の「最悪の事実」を1つ認め、その上で「最終的に勝つ」ための条件を書く。" },
-
-      // Habits & Action
-      { text: "We are what we repeatedly do. Excellence, then, is not an act, but a habit.", author: "アリストテレス（要約）", source: "『哲学の物語』", confidence: "確度B", category: "習慣", action: "「理想の自分」なら今日必ず行うであろう最小の行動を1つだけ実行する。" },
-      { text: "Stay hungry, Stay foolish.", author: "スティーブ・ジョブズ", source: "スタンフォード大学卒業式祝辞", confidence: "確度A", category: "創造性", action: "自分の専門外のニュースや記事を1つだけ読み、新鮮な視点を取り入れる。" },
-      { text: "A journey of a thousand miles begins with a single step.", author: "老子", source: "『道徳経』", confidence: "確度B", category: "行動", action: "ずっと先送りにしている計画について、Google検索で1分だけ調べる。" },
-      { text: "The secret of getting ahead is getting started.", author: "マーク・トウェイン", source: "（伝承）", confidence: "確度C", category: "行動", action: "やる気が出るのを待たず、タイマーを5分だけセットして作業を開始する。" },
-      { text: "Festina lente (ゆっくり急げ)。", author: "アウグストゥス", source: "（標語）", confidence: "確度B", category: "行動", action: "急いでいる時こそ、足元を確認し、呼吸を整えてから動き出す。" },
-      { text: "昨日より今日、今日より明日、より良くなろうとする姿勢が大切だ。", author: "近江商人の家訓", source: "（伝承）", confidence: "確度C", category: "成長", action: "今日1日の自分を100点満点で採点し、+1点するために何ができるか考える。" },
-      { text: "行動はすべての成功の基本的な鍵である。", author: "パブロ・ピカソ", source: "（伝承）", confidence: "確度B", category: "行動", action: "頭で考えるのを止め、1分間でできる「物理的な一歩」を踏み出す。" },
-      { text: "成功とは、情熱を失わずに、失敗から失敗へと突き進むことである。", author: "ウィンストン・チャーチル", source: "（伝承）", confidence: "確度B", category: "成長", action: "失敗を「データ収集」と呼び替え、次のテストプランを1つ立てる。" },
-      { text: "Small habits make a big difference.", author: "ジェームズ・クリアー", source: "『ジェームズ・クリアー式 複利で伸びる1つの習慣』", confidence: "確度A", category: "習慣", action: "既存の習慣（例：歯磨き）の直後に、新しい習慣（例：スクワット1回）をくっつける。" },
-      { text: "一日の終わりに、その日にできたことを3つ書き出す。", author: "（心理学的プラクティス）", source: "ポジティブ心理学の知見", confidence: "確度A", category: "幸福", action: "就寝前に、感謝したい出来事や達成したことを3つ手帳に書く。" },
-
-      // Creativity & Innovation
-      { text: "Creativity is just connecting things.", author: "スティーブ・ジョブズ", source: "（インタビュー）", confidence: "確度B", category: "創造性", action: "全く関係ない2つの単語をランダムに選び、それらを組み合わせた新商品を妄想する。" },
-      { text: "Good artists copy, great artists steal.", author: "パブロ・ピカソ", source: "（伝承）", confidence: "確度C", category: "創造性", action: "尊敬する人の手法を1つ選び、自分の仕事にそのまま当てはめてみる。" },
-      { text: "The best way to have a good idea is to have a lot of ideas.", author: "ライナス・ポーリング", source: "（伝承）", confidence: "確度B", category: "創造性", action: "課題に対して、実現可能性を無視してアイデアを10個、1分で書き出す。" },
-      { text: "Think different.", author: "スティーブ・ジョブズ", source: "（Apple広告キャンペーン）", confidence: "確度A", category: "創造性", action: "当たり前だと思っている業界の常識を1つ疑い、「もし逆だったら？」と考えてみる。" },
-      { text: "完璧を恐れるな。完璧になどなれないのだから。", author: "サルバドール・ダリ", source: "（伝承）", confidence: "確度B", category: "創造性", action: "「未完成でも良い」と自分に言い聞かせ、とりあえず形にしたものを誰かに見せる。" },
-      { text: "好奇心は、知的な生命の活力である。", author: "サミュエル・ジョンソン", source: "（伝承）", confidence: "確度B", category: "創造性", action: "道端に咲いている花の名前や、看板のフォントなど、些細なことに「なぜ？」と問う。" },
-      { text: "常識とは、十八歳までに身につけた偏見のコレクションのことをいう。", author: "アルベルト・アインシュタイン", source: "（伝承）", confidence: "確度B", category: "思考", action: "自分が「正しい」と強く信じていることの反対意見を、あえて真剣に調べてみる。" },
-      { text: "イマジネーションは知識よりも重要だ。", author: "アルベルト・アインシュタイン", source: "（インタビュー）", confidence: "確度A", category: "創造性", action: "10年後の理想の1日を、細部までイメージして3分間目を閉じる。" },
-      { text: "失敗したことがない人間は、新しいことに挑戦したことがない人間だ。", author: "アルベルト・アインシュタイン", source: "（伝承）", confidence: "確度B", category: "成長", action: "今日、初めてやることを1つだけ選んで実行する（例：通ったことのない道を通る）。" },
-      { text: "人生とは、自分を見つけることではない。自分を創ることだ。", author: "バーナード・ショー", source: "（伝承）", confidence: "確度B", category: "創造性", action: "今日、自分が「なりたい自分」らしい振る舞いを1つだけ意図的に行う。" },
-
-      // Relationships & Empathy
-      { text: "他人を理解しようとする前に、まず自分を理解せよ。", author: "ソクラテス", source: "（思想的要約）", confidence: "確度B", category: "人間関係", action: "自分が何に対して怒りや喜びを感じるのか、その「トリガー」を1つ特定する。" },
-      { text: "Most people do not listen with the intent to understand; they listen with the intent to reply.", author: "スティーブン・R・コヴィー", source: "『7つの習慣』", confidence: "確度A", category: "人間関係", action: "相手の話が終わるまで、反論や自分の話を一切挟まずに「聞く」ことに徹する。" },
-      { text: "愛の反対は憎しみではなく、無関心だ。", author: "マザー・テレサ", source: "（伝承）", confidence: "確度B", category: "人間関係", action: "身近な人に対して、最近頑張っていることを1つ見つけて褒める。" },
-      { text: "人に対して、自分がされたいと思うように接しなさい。", author: "新約聖書（黄金律）", source: "『マタイによる福音書』", confidence: "確度A", category: "人間関係", action: "店員さんや駅員さんに対して、目を見て「ありがとうございます」と伝える。" },
-      { text: "幸福になりたいのなら、まず他人を幸福にせよ。", author: "アルフレッド・アドラー", source: "（思想的要約）", confidence: "確度B", category: "幸福", action: "今日、誰か一人のために、見返りを求めない小さな親切を1つ行う。" },
-      { text: "他人の靴を履いて歩いてみるまで、その人を批判してはならない。", author: "インディアンの格言", source: "（伝承）", confidence: "確度B", category: "人間関係", action: "苦手な人の視点に立ち、その人がなぜそのような行動をとるのか、正当な理由を3つ考える。" },
-      { text: "言葉は、心の鏡である。", author: "セネカ", source: "（思想的要約）", confidence: "確度C", category: "人間関係", action: "自分がよく使っているネガティブな口癖を1つ探し、ポジティブな言葉に変換する。" },
-      { text: "礼儀は、人間関係の潤滑油である。", author: "思想的要約", source: "（一般教養）", confidence: "確度C", category: "人間関係", action: "挨拶を、普段より少しだけ明るいトーンで行う。" },
-      { text: "自分自身を愛せない者に、他人を愛することはできない。", author: "（一般的心理学）", source: "エリック・フロム『愛するということ』等", confidence: "確度B", category: "人間関係", action: "今日頑張った自分のために、好きな飲み物や休息を5分間プレゼントする。" },
-      { text: "議論に勝つ唯一の方法は、議論を避けることだ。", author: "デール・カーネギー", source: "『人を動かす』", confidence: "確度A", category: "人間関係", action: "意見が食い違った時、勝ち負けを競うのを止め、相手の意見の「正しい部分」を1つ見つける。" },
-
-      // Happiness & Mindset
-      { text: "Happiness depends upon ourselves.", author: "アリストテレス", source: "（思想的要約）", confidence: "確度B", category: "幸福", action: "外的な状況に関わらず、今この瞬間に感じられる「小さな幸せ」を1つ見つける。" },
-      { text: "明日を良くする唯一の方法は、今日を良くすることだ。", author: "（思想的要約）", source: "（一般教養）", confidence: "確度C", category: "幸福", action: "「将来の不安」のために今を犠牲にするのを止め、今やりたいことを1つだけやる。" },
-      { text: "人生は、近くで見ると悲劇だが、遠くから見れば喜劇だ。", author: "チャーリー・チャップリン", source: "（思想的要約）", confidence: "確度B", category: "幸福", action: "今抱えている深刻な悩みを、10年後の自分が見たらどう笑い飛ばすか想像する。" },
-      { text: "持てるものに感謝せよ。そうすれば、もっと多くのものが与えられる。", author: "オプラ・ウィンフリー", source: "（思想的要約）", confidence: "確度B", category: "幸福", action: "今持っているもの（健康、家、友など）の中から、当たり前だと思っていることを3つ感謝する。" },
-      { text: "Live as if you were to die tomorrow. Learn as if you were to live forever.", author: "マハトマ・ガンディー", source: "（伝承）", confidence: "確度B", category: "成長", action: "もし今日が人生最後の日だとしたら、絶対に伝えておきたい言葉を誰かに送る。" },
-      { text: "幸福の鍵は、自由である。自由の鍵は、勇気である。", author: "トゥキディデス", source: "『戦史』", confidence: "確度B", category: "精神", action: "他人の目を気にしてやめていたことを、1つだけ勇気を持って実行してみる。" },
-      { text: "今、ここを生きよ。", author: "（禅の教え）", source: "（仏教思想）", confidence: "確度A", category: "幸福", action: "食事中、スマホを見ずに、食べ物の味や食感だけに意識を100%集中させる。" },
-      { text: "楽天家は、困難の中にチャンスを見出す。", author: "ウィンストン・チャーチル", source: "（伝承）", confidence: "確度B", category: "幸福", action: "不運だと思った出来事から得られた「隠れたメリット」を無理やり1つ捻り出す。" },
-      { text: "足るを知る者は富む。", author: "老子", source: "『道徳経』", confidence: "確度A", category: "幸福", action: "新しいものを買う前に、今持っているものを手入れして大切に使う時間を5分持つ。" },
-      { text: "不幸の種を蒔くのは自分であり、幸福の種を蒔くのも自分である。", author: "（思想的要約）", source: "（一般教養）", confidence: "確度C", category: "幸福", action: "不平不満を言うのを1日だけ禁止し、感謝の言葉だけを口にする。" },
-
-      // Discipline & Time Management
-      { text: "A goal without a plan is just a wish.", author: "アントワーヌ・ド・サン＝テグジュペリ", source: "（伝承）", confidence: "確度C", category: "習慣", action: "大きな目標を、カレンダーに書き込める具体的な「予定」に1つ落とし込む。" },
-      { text: "Give me six hours to chop down a tree and I will spend the first four sharpening the axe.", author: "アブラハム・リンカーン", source: "（伝承）", confidence: "確度C", category: "生産性", action: "作業を始める前に、机の上の不要なものを全て片付け、集中できる環境を整える。" },
-      { text: "Early to bed and early to rise, makes a man healthy, wealthy, and wise.", author: "ベンジャミン・フランクリン", source: "『貧しいリチャードの暦』", confidence: "確度A", category: "習慣", action: "今夜はいつもより30分早く布団に入り、スマホを別の部屋に置く。" },
-      { text: "時間は、あなたが持っている最も貴重な通貨だ。", author: "カール・サンドバーグ", source: "（思想的要約）", confidence: "確度B", category: "生産性", action: "何となく眺めているSNSの通知を、主要なもの以外全てオフにする。" },
-      { text: "重要なのは、時計を見ることではなく、コンパスを見ることだ。", author: "スティーブン・R・コヴィー", source: "『7つの習慣』", confidence: "確度B", category: "リーダーシップ", action: "忙しさに追われた時、「自分は今、正しい方向（北）へ向かっているか？」を再確認する。" },
-      { text: "もし何もしなければ、何も変わらない。", author: "（一般的格言）", source: "（一般教養）", confidence: "確度C", category: "行動", action: "「どうしよう」と悩む時間を5分で切り上げ、サイコロを振るように行動を決める。" },
-      { text: "集中とは、NOと言うことだ。", author: "スティーブ・ジョブズ", source: "（インタビュー）", confidence: "確度B", category: "生産性", action: "今日頼まれたことの中から、自分の本来の目的と合わないものに丁寧にNOを言う。" },
-      { text: "完璧主義は、前進の敵である。", author: "（一般的格言）", source: "（一般教養）", confidence: "確度C", category: "行動", action: "資料や成果物を「60点」の出来で一度完成させ、提出または公開する。" },
-      { text: "一日は、朝の時間の使い方で決まる。", author: "（一般的格言）", source: "（一般教養）", confidence: "確度C", category: "習慣", action: "朝起きて最初の1時間は、仕事のメールやSNSをチェックせず、自分のために使う。" },
-      { text: "忙しいことは、怠惰の一種である。", author: "（思想的要約）", source: "セネカ『人生の短さについて』等", confidence: "確度B", category: "生産性", action: "「忙しい」と口に出しそうになったら、何に時間を奪われているのかを3つ書き出す。" },
-
-      // Courage & Self-Belief
-      { text: "Whether you think you can, or you think you can't – you're right.", author: "ヘンリー・フォード", source: "（伝承）", confidence: "確度B", category: "成長", action: "「自分には無理だ」という言葉を、「今の自分にはまだ練習が必要だ」に言い換える。" },
-      { text: "The only thing we have to fear is fear itself.", author: "フランクリン・D・ルーズベルト", source: "（大統領就任演説）", confidence: "確度A", category: "精神", action: "今恐れていることの正体を、紙に書き出して「見える化」する。" },
-      { text: "勇気とは、恐怖がないことではなく、恐怖に立ち向かうことだ。", author: "ネルソン・マンデラ", source: "（伝承）", confidence: "確度B", category: "精神", action: "少し緊張するけれど、やりたいと思っていたことに1つだけ挑戦する。" },
-      { text: "自分を信じろ。そうすれば、生きる道が見えてくる。", author: "ヨハン・ヴォルフガング・フォン・ゲーテ", source: "『ファウスト』", confidence: "確度A", category: "精神", action: "過去に自分が成し遂げた小さな成功体験を1つ思い出し、自分を褒める。" },
-      { text: "翼を持たずに生まれてきたのなら、翼を生やすのを邪魔してはいけない。", author: "ココ・シャネル", source: "（思想的要約）", confidence: "確度B", category: "創造性", action: "自分の可能性を制限している思い込みを1つ捨て、「もし何でもできるなら？」と考える。" },
-      { text: "あなたの時間は限られている。だから、他人の人生を生きて無駄にしてはいけない。", author: "スティーブ・ジョブズ", source: "スタンフォード大学卒業式祝辞", confidence: "確度A", category: "幸福", action: "世間体や周囲の期待を一度脇に置き、自分が本当にやりたかったことを1つ実行する。" },
-      { text: "何事も成功するまでは不可能に思えるものだ。", author: "ネルソン・マンデラ", source: "（伝承）", confidence: "確度B", category: "成長", action: "「無理だ」と言われたことにこそ、改善の余地がないか1つだけ探してみる。" },
-      { text: "自らを愛することは、一生続くロマンスの始まりである。", author: "オスカー・ワイルド", source: "（伝承）", confidence: "確度B", category: "幸福", action: "鏡の中の自分に向かって、一言だけ「お疲れ様、よくやってるよ」と声をかける。" },
-      { text: "運命は勇者に味方する。", author: "ウェルギリウス", source: "『アエネーイス』", confidence: "確度A", category: "行動", action: "リスクを恐れず、自分が正しいと信じる道を一歩だけ進む。" },
-      { text: "最も困難なことは、決断することだ。後はただ実行あるのみだ。", author: "アメリア・イアハート", source: "（伝承）", confidence: "確度B", category: "意思決定", action: "3日以上悩んでいることに対し、今ここで「やる」か「やらない」かを決める。" },
-
-      // Wisdom for Living
-      { text: "Nature does nothing in vain.", author: "アリストテレス", source: "『政治学』", confidence: "確度A", category: "哲学", action: "自分に起きている「無駄だと思える出来事」に、あえて意味を見出してみる。" },
-      { text: "Life is what happens when you're busy making other plans.", author: "ジョン・レノン", source: "『Beautiful Boy』", confidence: "確度A", category: "幸福", action: "予定外のハプニングが起きた時、それを「人生の醍醐味」として楽しむ余裕を1分だけ作る。" },
-      { text: "沈黙は金、雄弁は銀。", author: "（イギリスの格言）", source: "（一般教養）", confidence: "確度C", category: "人間関係", action: "余計な一言を言いそうになったら、口を閉じて3秒待つ。" },
-      { text: "足元を照らせ。", author: "（禅の教え「脚下照顧」）", source: "（仏教）", confidence: "確度A", category: "習慣", action: "外出から戻ったら、靴を揃え、身の回りの整理整頓を3分だけ行う。" },
-      { text: "水は方円の器に従う。", author: "（日本の格言）", source: "（一般教養）", confidence: "確度C", category: "環境", action: "自分の周りにいる5人の顔ぶれを思い浮かべ、良い影響を受けているか確認する。" },
-      { text: "人は城、人は石垣、人は堀。", author: "武田信玄", source: "（伝承）", confidence: "確度B", category: "リーダーシップ", action: "道具や仕組みを改善する前に、一緒に働く「人」との対話を5分増やす。" },
-      { text: "一期一会。", author: "千利休（に由来）", source: "『茶の湯』の精神", confidence: "確度B", category: "人間関係", action: "今、目の前にいる人との会話が「一生に一度きり」だと思って誠実に接する。" },
-      { text: "情けは人のためならず。", author: "（日本の格言）", source: "（一般教養）", confidence: "確度A", category: "人間関係", action: "巡り巡って自分に返ってくると信じ、誰かのために良い行いを1つ見えないところでする。" },
-      { text: "初心忘るべからず。", author: "世阿弥", source: "『風姿花伝』", confidence: "確度A", category: "成長", action: "今の仕事を始めたばかりの時の、純粋な情熱や謙虚な気持ちを1つ思い出す。" },
-      { text: "It's always morning somewhere.", author: "（英語の格言）", source: "（一般教養）", confidence: "確度C", category: "幸福", action: "どん底だと感じた時、地球のどこかでは新しい日が始まっていることに思いを馳せる。" }
-    ];
-
     function pick() {
       const card = document.getElementById("q-card");
       const content = document.getElementById("q-content");
@@ -447,6 +326,10 @@
 
         wikiLink.href = `https://ja.wikipedia.org/wiki/${encodeURIComponent(cleanAuthor)}`;
         amazonLink.href = `https://www.amazon.co.jp/s?k=${encodeURIComponent(cleanAuthor)}&tag=yamano32010e-22`;
+
+        // Update Internal Links
+        document.getElementById("q-category-link").href = `tag-index.html#${encodeURIComponent(q.category)}`;
+        document.getElementById("q-author-link").href = `author-index.html#${encodeURIComponent(cleanAuthor)}`;
 
         // Animation in
         content.style.opacity = "1";
